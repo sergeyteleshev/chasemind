@@ -1,0 +1,2552 @@
+@font-face {
+    font-family: 'Century Gothic';
+    src: url('../fonts/GOTHIC.TTF');
+}
+
+@font-face {
+    font-family: 'rouble';
+    src: url('../fonts/rouble.ttf');
+}
+
+.emailResponce
+{
+    color: white;
+    font-size: 20px;
+    text-decoration: underline;
+    font-family: 'century gothic';
+    margin: 30px auto;
+    margin-bottom: 0px;
+}
+
+.priceMobile
+{
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+    color: #3a3a3a;
+}
+
+.priceMobile span
+{
+    font-weight: regular;
+    font-family: "rouble";
+}
+
+.minButtonMobile, .optButtonMobile, .medButtonMobile
+{
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: "Century Gothic";
+    margin-top: 20px;
+    width: 100%;
+    background: white;
+}
+
+.gardientMinMobile, .gardientMedMobile, .gardientOptMobile
+{
+    margin-top: -40px;
+    height: 50px;
+}
+
+.gardientOptMobile
+{
+    background: linear-gradient(to top, #acc8e9, #FFFFFF);
+}
+
+.gardientMedMobile
+{
+    background: linear-gradient(to top, #ffec97, #FFFFFF);
+}
+
+.gardientMinMobile
+{
+    background: linear-gradient(to top, #e9acaf, #FFFFFF);
+}
+
+.subVariantsMobile
+{
+    display: none;
+    margin: 40px auto;
+    width: 86vw;
+    margin-top: 30px;
+}
+
+.monthMobile
+{
+    font-weight: bold;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    color: #009393;
+    font-size: 41px;
+}
+
+.minButtonHeaderMobile
+{
+    padding-top: 10px;
+    margin-left: 20px;
+    font-size: 24px;
+    color: #3a3a3a;
+}
+
+.discrBookDiscr p input[type="submit"]
+{
+    background: #009393;
+    border: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 4px;
+    font-size: 20px;
+    font-family: "century gothic";
+    color: white;
+}
+
+.discrBookHeader
+{
+    color: black;
+    font-size: 32px;
+    text-align: right;
+}
+
+
+.discrBookDiscr p
+{
+    margin-top: 25px;
+}
+
+.discrBookDiscr span
+{
+    color: #009393;
+}
+
+.discrBookDiscr
+{
+    text-align: right;
+    color: #3a3a3a;
+    font-size: 21px;
+    margin-top: 40px;
+}
+
+.discrBookRightPart
+{
+    font-family: "century gothic";
+    padding-top: 50px;
+}
+
+.discrBook
+{
+    display: flex;
+
+}
+
+.discrBook .main
+{
+    min-height: 0;
+    margin: 100px auto;
+    display: inline-flex;
+}
+
+.discrBookLeftPart img
+{
+    text-align: right;
+}
+
+
+.discrBookLeftPart, .discrBookRightPart
+{
+    width: 50%;
+}
+
+.menuTest, .navigation
+{
+    background: rgba(59,59,59, 0.85);
+}
+
+.menu a
+{
+    text-decoration: none;
+}
+
+.menuTest
+{
+    display: none;
+}
+
+.chooseObjectWrapper
+{
+    display: inline-flex;
+    align-items: center;
+    font-size: 25px;
+}
+
+.subOnMailingHeader, .subOnMailingDiscr, .subOnMailingEmail
+{
+    font-family: "century gothic";
+    color: white;
+    text-align: center;
+}
+
+.subOnMailingEmail input[type="text"]::-webkit-input-placeholder
+{
+    color: white;
+}
+
+.subOnMailingEmail input[type="text"]::-moz-placeholder
+{
+    color: white;
+}
+
+.subOnMailingEmail input[type="text"]
+{
+    width: 300px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 18px;
+    border-radius: 4px;
+    border: solid 1px white;
+    font-family: "century gothic";
+    color: white;
+    background: none;
+}
+
+.subOnMailingSubmit input[type="submit"]
+{
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5); /* Параметры тени */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 18px;
+    border-radius: 4px;
+    border: solid 1px white;
+    font-family: "century gothic";
+    color: #009393;
+    background: white;
+}
+
+.lastStepSubmit button
+{
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 18px;
+    border-radius: 4px;
+    border: solid 1px #009393;
+    font-family: "century gothic";
+    color: white;
+    background: #009393;
+}
+
+.lastStep
+{
+    margin: 100px auto;
+    text-align: center;
+    font-family: "century gothic";
+    color: #3a3a3a;
+}
+
+.lastStepDiscr
+{
+    font-size: 21px;
+    margin-top: 40px;
+}
+
+.lastStepSubmit
+{
+    margin-top: 40px;
+}
+
+.lastStepHeader
+{
+    font-size: 32px;
+}
+
+.object
+{
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.subOnMailingSubmit
+{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.subOnMailingEmail
+{
+    margin-top: 30px;
+}
+
+.subOnMailingDiscr
+{
+    margin-top: 40px;
+    font-size: 18px;
+}
+
+.subOnMailingHeader
+{
+    font-size: 32px;
+}
+
+.subOnMailingWrapper
+{
+    display: block;
+    justify-content: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.newBooksWrapper
+{
+    display: block;
+    justify-content: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.subOnMailing
+{
+    background: #009393 url("../img/BG_4.png");
+    justify-content: center;
+    display: flex;
+    background-blend-mode: multiply;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;;
+    background-repeat: no-repeat;
+}
+
+.newBooksDiscr
+{
+    margin-top: 40px;
+    font-size: 21px;
+    font-family: "century gothic";
+    color: white;
+    text-align: center;
+}
+
+.newBook:first-child
+{
+    margin-left: 0;
+}
+
+.newBookTitle
+{
+    text-align: center;
+    font-size: 21px;
+    font-family: "century gothic";
+    color: white;
+}
+
+.newBook
+{
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.newBooksCourusel
+{
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 60px;
+    display: inline-flex;
+}
+
+.newBookImg
+{
+    text-align: center;
+}
+
+.newBookImg img
+{
+    width: 170px;
+    height: 250px;
+}
+
+.newBooksHeader
+{
+    font-size: 32px;
+    font-family: "century gothic";
+    color: white;
+    text-align: center;
+}
+
+.newBooks
+{
+    background: #fffffe url("../img/subBG.png");
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+.chooseObject
+{
+    padding-top: 100px;
+    color: white;
+    font-family: "century gothic";
+}
+
+.chooseObjectRightPart
+{
+    margin-left: 15px;
+}
+
+.buySubButton
+{
+    margin-left: 40px;
+}
+
+.buySubButton input[type="submit"]
+{
+    background: none;
+    text-decoration: underline;
+}
+
+.reasonsWrapper
+{
+    margin: 100px auto;
+    display: inline-flex;
+}
+
+.reason
+{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.reasonImg img
+{
+    width: 170px;
+}
+
+
+.reasonImg
+{
+    text-align: center;
+}
+
+.reasonHeader
+{
+    font-size: 21px;
+}
+
+.reasonDiscr
+{
+    margin-top: 8px;
+    font-size: 16px;
+}
+
+.bookButtonsMobile
+{
+    display: none;
+}
+
+.reasonHeader, .reasonDiscr
+{
+    text-align: center;
+    color: white;
+    font-family: "century gothic";
+}
+
+.reasonsToJoin
+{
+    width: 100%;
+    background-blend-mode: multiply;
+    background: #009393 url("../img/BG_4.png");
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    display: inline-flex;
+}
+
+.buySubButton input[type="submit"], .tryFreeButton button
+{
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: white;
+    border: none;
+    font-family: "century gothic";
+    font-size: 16px;
+}
+
+.tryFreeButton button
+{
+    cursor: pointer;
+    background: #009393;
+    border-radius: 7px;
+    font-size: 20px;
+}
+
+.chooseObjectButtons
+{
+    margin-bottom: 80px;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.chooseObjectRightPart ul li
+{
+    text-decoration: underline;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+.chooseObject .main
+{
+    min-height: auto;
+    margin-bottom: 0;
+}
+
+.useTime
+{
+    font-size: 16px;
+    margin-top: 30px;
+}
+
+.mainTop
+{
+    background: url("../img/BG_1.png");
+    background-position: bottom;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;;
+    background-repeat: no-repeat;
+}
+
+.signOutTest, .quitButton
+{
+    background: #009393;
+    border-radius: 4px;
+}
+
+.navigation nav
+{
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    display: none;
+}
+
+.navigation nav ul li:hover
+{
+    background: #545454;
+}
+
+.navigation nav ul li
+{
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+}
+
+.navigation
+{
+    color: white;
+    font-family: 'century gothic';
+}
+
+.navigation nav ul li a
+{
+    color: white;
+    font-size: 20px;
+    font-family: 'century gothic';
+    text-decoration: none;
+}
+
+.menuTestImg
+{
+    cursor: pointer;
+}
+
+.menuTestVar
+{
+    display: inline-flex;
+}
+
+.nickname , .signInTest
+{
+    margin-right: 10px;
+}
+
+.signOutTest, .signInTest, .nickname, .quitButton
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    cursor: pointer;
+    font-size: 12px;
+    color: white;
+}
+
+.signOutTest
+{
+    margin-right: 0;
+}
+
+.signInTest
+{
+    border-bottom: 3px solid #009393;
+}
+
+.menuTestImg img
+{
+    width: 40px;
+}
+
+.modalAnswer
+{
+    text-decoration: underline;
+    margin-top: 5%;
+}
+
+.underlineLib img
+{
+    width: 100%;
+    text-align: center;
+}
+
+.modalAnswer input
+{
+    margin-top: 2%;
+    text-decoration: none;
+}
+
+.headerFormModal
+{
+    color: #3b3b3b;
+    font-family: 'Century Gothic';
+    font-size: 25px;
+}
+
+.closeModalBar img
+{
+    width: 20px;
+    cursor: pointer;
+}
+
+.closeModalBar
+{
+    color: #009393;
+    padding-left: 88%;
+    padding-top: 1.2%;
+    font-weight: bold;
+    font-size: 32px;
+    font-family: 'Century Gothic';
+    text-align: right;
+    display: block;
+    width: 5%;
+    height: 100%;
+}
+
+.modalBar
+{
+    height: 40px;
+    width: 100%;
+    background: white;
+    border-radius: 30px 30px 0 0;
+}
+
+.formModalWindow a
+{
+    text-decoration: none;
+    color: white;
+}
+
+.modalWindowText span
+{
+    font-weight: bold;
+}
+
+.loginLink a, .subLink a
+{
+    color: #8a8a8a;
+    text-decoration: underline;
+}
+
+.subLink a span
+{
+    font-weight: bold;
+}
+
+.formModalWindow input[type="submit"]
+{
+    text-align: center;
+    box-shadow: 0 7px 0 rgba(221,219,222,0.9);
+    width: 220px;
+    background: #009393;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-family: 'Century Gothic';
+    border-radius: 5px;
+    padding: 12px 3px;
+    margin: 10px auto;
+    display: block;
+}
+
+.modalWindow
+{
+    display: none;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modalWindowContent a
+{
+    padding: 10px;
+    margin: 5px 15px;
+    display: inline-block;
+}
+
+.modalWindowContent
+{
+    font-size: 18px;
+    padding: 15px;
+}
+
+.formModalWindow
+{
+    color: #3b3b3b;
+    font-size: 20px;
+    font-family: 'Century Gothic';
+    padding-bottom: 1%;
+    opacity: 1;
+    width: 600px;
+    margin: 100px auto;
+    background: white;
+}
+
+.aHeader
+{
+    text-decoration: none;
+    color: black;
+}
+
+.objectOfBook input:hover, .bookObject input:hover, .aHeader:hover
+{
+    text-decoration: underline;
+}
+
+.subVariants
+{
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.subMin, .subOpt, .subMed
+{
+    display: inline-block;
+}
+
+.minButton, .optButton, .medButton
+{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.minButton input[type="submit"], .optButton input[type="submit"], .medButton input[type="submit"]
+{
+    font-family: 'Century Gothic';
+    border: none;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    font-size: 21px;
+    background-color: #009393;
+    color: white;
+}
+
+.medPrice
+{
+    text-align: center;
+    font-family: 'Century Gothic';
+    font-size: 76px;
+    padding-top: 18%;
+    padding-bottom: 18%;
+    font-weight: bold;
+}
+
+.minPrice, .optPrice
+{
+    text-align: center;
+    font-family: 'Century Gothic';
+    font-size: 61px;
+    padding-top: 18%;
+    padding-bottom: 18%;
+    font-weight: bold;
+}
+
+.subMinMid, .subOptMid, .subMedMid
+{
+    margin: -40px;
+    text-align: center;
+}
+
+.subMinMid img, .subOptMid img, .subMedMid img
+{
+    width: 85px;
+}
+
+.minPrice span, .optPrice span, .medPrice span
+{
+    font-size: 61px;
+    font-weight: normal;
+    font-family: 'rouble';
+}
+
+.medPrice span
+{
+    font-size: 72px;
+}
+
+.subMed
+{
+    width: 250px;
+}
+
+.subMin, .subOpt, .subMed
+{
+    margin: 30px;
+    vertical-align: top;
+}
+
+.subMin, .subOpt
+{
+    width: 230px;
+}
+
+.subMinTop, .subOptTop, .subMedTop
+{
+    background: white;
+    border-radius: 20px;
+    width: 100%;
+}
+
+.chooseHeader
+{
+    color: black;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Century Gothic';
+    font-size: 32px;
+}
+
+
+.minHeader, .optHeader, .medHeader
+{
+    text-align: center;
+    padding: 2%;
+    font-family: 'Century Gothic';
+    font-size: 32px;
+}
+
+.minMonth span, .optMonth span, .medMonth span
+{
+    font-size: 21px;
+    display: block;
+    font-weight: normal;
+}
+
+.medMonth
+{
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    padding: 2%;
+    font-family: 'Century Gothic';
+    font-size: 108px;
+    background: #009393;
+}
+
+.minMonth, .optMonth
+{
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    padding: 2%;
+    font-family: 'Century Gothic';
+    font-size: 96px;
+    background: #009393;
+}
+
+.footer
+{
+    box-shadow: 10px 0 15px rgba(0,0,0,0.3); /* Параметры тени */
+    background: white;
+    width: 100%;
+    display: flex;
+}
+
+.footer span
+{
+    text-decoration: underline;
+}
+
+body .main
+{
+    min-height: 90vh;
+    margin-bottom: 20px;
+}
+
+.subHeader
+{
+    margin: 0 auto;
+    color: white;
+    font-family: 'Century Gothic';
+    font-size: 38px;
+    text-align: center;
+    margin-top: 3%;
+}
+
+.subHeader span
+{
+    font-size: 18px;
+}
+
+.subFirstRow
+{
+    margin: 0 auto;
+    width: 700px;
+    display: block;
+    text-align: center;
+}
+
+.subFirstRow
+{
+    margin-top: 2%;
+}
+
+.subOneAdvantage
+{
+    vertical-align: top;
+    padding: 9px;
+    width: 200px;
+    display: inline-block;
+}
+
+.subOneAdvantage img
+{
+    width: 120px;
+}
+
+.subOneAdvantage:last-child img
+{
+    width: 60%;
+}
+
+
+.subAdvantages
+{
+    line-height: 18px;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.subOneAdvantageText
+{
+    text-shadow: 4px 1px 4px rgba(0,0,0, 0.5);
+    color: white;
+    font-family: 'Century Gothic';
+    font-size: 16px;
+}
+
+input[type=submit]:hover
+{
+    cursor: pointer;
+}
+
+.subBackground
+{
+    background-blend-mode: multiply;
+    background: url("/img/subBG.png");
+    background-position: bottom;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-repeat: no-repeat;
+    padding-bottom: 100px;
+}
+
+.footer .main
+{
+    width: 86vw;
+    min-height: 0vh;
+    margin-bottom: 0;
+}
+
+.rightPart
+{
+    align-items: flex-end;
+}
+
+.headerLeftPart
+{
+    font-family: "Century Gothic";
+    font-size: 26px;
+}
+
+.imagesLeftPart
+{
+    display: inline-flex;
+    padding-top: 5px;
+}
+
+.footerImg:first-child
+{
+    margin-left: 0px;
+}
+
+.footerImg
+{
+    margin-left: 14px;
+}
+
+.imagesLeftPart img
+{
+    width: 29px;
+}
+
+.imagesLeftPart img:first-child
+{
+    margin-left: 0px;
+}
+
+.footer .main
+{
+    margin: 20px auto;
+}
+
+.forContact
+{
+    padding-top: 10px;
+    font-family: "Century Gothic";
+    font-size: 16px;
+}
+
+
+.linksRightPart li:last-child
+{
+    margin-right: 0;
+}
+
+.linksRightPart li
+{
+    margin-right: 20px;
+    display: inline-block;
+}
+
+.linksRightPart li a
+{
+    font-family: "Century Gothic";
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.linksRightPart li a:hover
+{
+    text-decoration: underline;
+}
+
+.imagesLeftPart, .forContact
+{
+    margin-top: 1%;
+}
+
+.leftPart, .rightPart
+{
+    display: inline-flex;
+    flex-direction: column;
+    width: 49%;
+}
+
+.s_login
+{
+    color: white;
+}
+
+.nobooks
+{
+    margin-top: 5%;
+    font-size: 40px;
+    color: #3b3b3b;
+}
+
+.wrapperOfBook
+{
+    width: 100%;
+}
+
+.bookButtons, .topOfBook, .bookButtonsMobile
+{
+    display: inline-block;
+}
+
+.topOfBook
+{
+    width: 70%;
+    margin-top: 5%;
+    font-family: 'Century Gothic';
+}
+
+.bookButtons, .bookButtonsMobile
+{
+    vertical-align: top;
+    margin-top: 50px;
+}
+
+.objectOfBook input:hover
+{
+    cursor: pointer;
+}
+
+.bookButtons input[type="submit"], .bookButtonsMobile input[type="submit"]
+{
+    height: 50px;
+    box-shadow: 0 7px 0 rgba(221,219,222,0.9); /* Параметры тени */
+    width: 170px;
+    background: #009393;
+    border: none;
+    color: white;
+    font-size: 25px;
+    font-family: 'Century Gothic';
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.middleOfBookPages, .middleOfBookAdvantage
+{
+    display: inline-block;
+}
+
+.secondRow
+{
+    margin-top: 20px;
+    font-size: 21px;
+}
+
+.firstRow
+{
+    display: block;
+    font-size: 21px;
+}
+
+.firstRow span, .secondRow span
+{
+    margin-left: 20px;
+    color: #009393;
+    font-size: 30px;
+}
+
+.middleOfBook
+{
+    margin-top: 2%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.bottomOfBook
+{
+    width: 100%;
+    margin-top: 4%;
+}
+
+.bottomOfBookHeader
+{
+    margin-top: 70px;
+    font-size: 32px;
+}
+
+.bottomOfBookDiscription
+{
+    line-height: 20px;
+    font-size: 16px;
+    margin-top: 20px;
+    width: 80%;
+    margin-bottom: 15px;
+}
+
+.middleOfBookAdvantage
+{
+    margin-left: 40px;
+    text-align: center;
+    font-size: 60px;
+    font-weight: bold;
+    color: #009393;
+}
+
+.middleOfBookAdvantage span
+{
+    display: block;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.topOfBookHeader
+{
+    font-size: 32px;
+}
+
+.topOfBookText
+{
+    margin-left: 4%;
+}
+
+.topOfBookSlogan, .topOfBookSloganEng, .topOfBookAuthor
+{
+    line-height: 20px;
+    font-size: 16px;
+}
+
+.topOfBookSlogan
+{
+    margin-top: 2%;
+}
+
+.topOfBookSloganEng
+{
+    margin-top: 3%;
+}
+
+.topOfBookAuthor
+{
+    margin-top: 6%;
+}
+
+.topOfBookPublisher
+{
+    margin-top: 1%;
+}
+
+.topOfBookImg, .topOfBookText, .topOfBookButtons
+{
+    vertical-align: top;
+    display: inline-block;
+}
+
+.topOfBookText
+{
+    width: 60%;
+}
+
+.topOfBookImg img
+{
+    width: 200px;
+}
+
+.topOfBookButtons input
+{
+    display: block;
+}
+
+.response
+{
+    margin: 4% auto;
+    font-family: 'Century Gothic';
+}
+
+.menuWrapper
+{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.menu
+{
+    height: 47px;
+    width: 100%;
+    background: rgba(59,59,59, 0.85);
+}
+
+.book input
+{
+    padding-left: 0px;
+    font-size: 14px;
+    background: none;
+    border: none;
+    font-family: 'Century Gothic';
+    color: #009393;
+}
+
+.object input[type="submit"]
+{
+    font-family: 'Century Gothic';
+    background: none;
+    border: none;
+    font-size: 19px;
+    font-weight: normal;
+}
+
+.objectOfBook
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-family: 'Century Gothic';
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+}
+
+
+.menuMobile, menuMobileImg
+{
+    background: #3b3b3b;
+    color: white;
+    font-family: 'Century Gothic';
+}
+
+.menuMobile
+{
+    display: none;
+}
+
+.menuMobile a, menuMobileImg
+{
+    font-family: 'Century Gothic';
+    color: white;
+    text-decoration: none;
+}
+
+.path
+{
+    font-family: 'Century Gothic';
+    font-size: 16px;
+    margin-top: 5%;
+}
+
+.logo
+{
+    align-items: center;
+    display: inline-flex;
+    color: white;
+    font-family: 'Century Gothic';
+    font-size: 18px;
+}
+
+.navigation
+{
+    display: none;
+}
+
+.logo img
+{
+    margin-right: 5px;
+    width: 40px;
+}
+
+.pages
+{
+    color: white;
+    font-family: 'Century Gothic';
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.pages li
+{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 14px;
+    padding-bottom: 15px;
+    display: inline-flex;
+}
+
+.pages ul
+{
+    margin: auto 0;
+    display: flex;
+}
+
+.pages a
+{
+    color: white;
+    text-decoration: none;
+}
+
+.pages a:hover
+{
+    background: #545454;
+}
+
+.signOut table td:first-child, .nickname
+{
+    border-bottom: 3px solid #009393;
+}
+
+
+.signOut table td:first-child:hover, .signInTest:hover, .nickname:hover
+{
+    border-bottom: 3px solid #00c0c0;
+}
+
+.signOut table td:last-child
+{
+    border-radius: 3px;
+    background: #009393;
+    padding-top: 14px;
+    padding-bottom: 15px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.signOut table td:last-child:hover, .quitButton:hover, .signOutTest:hover
+{
+    background: #00c0c0;
+}
+
+.menuTable td
+{
+    width: 33%;
+}
+
+.menuTable td:last-child
+{
+    text-align: center;
+}
+
+.auth
+{
+    align-items: center;
+    justify-content: flex-end;
+    display: inline-flex;
+    color: white;
+    font-family: 'Century Gothic';
+    font-size: 18px;
+    min-width: 215px;
+}
+
+.authLeft, .authRight
+{
+    cursor: pointer;
+}
+
+.authLeft:hover
+{
+    border-bottom: 3px solid #00c0c0;
+}
+
+.authRight:hover
+{
+    background: #00c0c0;
+}
+
+.authRight
+{
+    border-radius: 4px;
+    background: #009393;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 15px;
+    padding-bottom: 14px;
+}
+
+.authLeft
+{
+    padding-top: 13px;
+    padding-bottom: 12px;
+    border-bottom: solid 3px #009393;
+    margin-right: 25px;
+}
+
+.books
+{
+    font-family: 'Century Gothic';
+    text-align: CENTER;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.book
+{
+    font-family: 'Century Gothic';
+    background: white;
+    width: 190px;
+    height: 315px;
+    vertical-align: top;
+}
+
+.bookImg:hover
+{
+    cursor: pointer;
+}
+
+.bookImg
+{
+    padding-top: 7%;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin: 0 auto;
+    text-align: center;
+    width: 155px;
+    height: 220px;
+}
+
+.bookImg img
+{
+    width: 100%;
+    height: 100%;
+}
+
+
+.bookHeader
+{
+    font-size: 14px;
+    margin-top: 6%;
+    height: 40px;
+    text-align: left;
+    padding-left: 5%;
+    font-family: 'Century Gothic';
+}
+
+.auth a
+{
+    color: white;
+    text-decoration: none;
+}
+
+.bookObject input:hover
+{
+    cursor: pointer;
+}
+
+.bookObject
+{
+    text-align: left;
+    padding-left: 5%;
+    font-size: 16px;
+    height: 40px;
+    padding-bottom: 7%;
+    font-family: 'Century Gothic';
+    color: #009393;
+    text-decoration: underline;
+    width: 100%;
+}
+
+.main
+{
+    width: 86vw;
+    margin: 0 auto;
+}
+
+.mainWrapper
+{
+    min-height: 80vh;
+    width: 100%;
+
+}
+
+.formRegButton
+{
+    margin-top: 10px;
+}
+
+.formRegButton input
+{
+    border: none;
+    background: #009393;
+    padding: 10px;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    font-family: 'Century Gothic';
+    box-shadow: 0 5px 0 rgba(221,219,222,0.9);
+    font-size: 16px;
+
+}
+
+.formReg
+{
+    margin: 40px auto;
+    text-align: center;
+}
+
+.formRegText
+{
+    font-family: 'Century Gothic';
+    font-size: 16px;
+    color: #212121;
+}
+
+body
+{
+    background: #f1f1f1;
+    background-size: 70px 417px;
+    background-repeat: repeat-x;
+    background-position: bottom, left;
+}
+
+.text
+{
+    padding-top: 100px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Century Gothic';
+}
+
+.header
+{
+    font-size: 32px;
+}
+
+.headerLib
+{
+    margin-top: 20px;
+    font-size: 32px;
+    text-align: center;
+    font-family: 'Century Gothic';
+}
+
+.signInPart
+{
+    margin-top: 70px;
+    margin-bottom: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.formRegText, .signInPart
+{
+    color: #212121;
+}
+
+.signInPart a
+{
+    font-size: 16px;
+    color: #212121;
+    font-family: 'Century Gothic';
+    border-bottom: 1px solid #212121;
+    text-decoration: none;
+}
+
+.discription
+{
+    margin: 0 auto;
+    color: #212121;
+    width: 70%;
+    font-family: 'Century Gothic';
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.form
+{
+    padding: 2% 0;
+    background: white;
+    margin: 5% auto;
+    display: block;
+    width: 500px;
+    text-align: center;
+    font-family: 'Century Gothic';
+}
+
+.formContact textarea
+{
+    resize: none;
+    height: 150px;
+}
+
+.tableSignIn
+{
+    margin-top: 20px;
+}
+
+.tableSignIn table td a
+{
+    color: #212121;
+}
+
+.formContact input[type="submit"]
+{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 140px;
+    margin-top: 5%;
+    background : #009393;
+    color: white;
+    font-family: 'Century Gothic';
+}
+
+
+.submitContact input[type="submit"]
+{
+    box-shadow: 0 4px 0 rgba(221,219,222,0.7);
+    width: 170px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 18px;
+}
+
+.formContact
+{
+    padding: 2% 0;
+    background: white;
+    margin: 2% auto;
+    display: block;
+    width: 350px;
+    text-align: center;
+    font-family: 'Century Gothic';
+}
+
+.formContact table
+{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.formContact input, .formContact textarea
+{
+    border-radius: 5px;
+    border: 1px solid #009393;
+    font-size: 16px;
+    font-family: 'Century Gothic';
+    padding: 2%;
+    width: 90%;
+    margin: 4%;
+}
+
+.form td
+{
+    font-family: 'Century Gothic';
+    padding: 4% 4%;
+}
+
+.form
+{
+    font-size: 20px;
+}
+
+.form input
+{
+    line-height: 28px;
+    border-radius: 5px;
+    border: 2px solid #009393;
+    font-size: 20px;
+}
+
+.book
+{
+    margin-top: 35px;
+    margin-left: 12.5px;
+    margin-right: 12.5px;
+    display: inline-block;
+}
+
+.row
+{
+    text-align: center;
+    margin: 5px auto;
+    display: block;
+}
+
+.form table
+{
+    margin: 0 auto;
+}
+
+.agreement
+{
+    font-family: 'Century Gothic';
+    text-align: right;
+    padding-right: 7%;
+    font-size: 1.2vw;
+}
+
+.agreement a
+{
+    color: black;
+}
+
+.agreement a:hover
+{
+    color: #009393;
+}
+
+.form input[type="submit"]
+{
+    font-family: 'Century Gothic';
+    margin: 5%;
+    border: none;
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border-radius: 10px;
+    font-size: 36px;
+    background-color: #009393;
+    color: white;
+}
+
+.objecOfBook td input, .tableSignIn table tr td:last-child, .discription, .bookHeader, .path, .topOfBookSlogan, .topOfBookPublisher, .topOfBookSloganEng, .topOfBookAuthor, .firstRow, .secondRow, .bottomOfBookDiscription
+{
+    color: #3a3a3a;
+}
+
+.bookButtonsMobile
+{
+    display: none;
+}
+
+
+@media screen and (max-width: 960px)
+{
+
+    .firstRow span, .secondRow span
+    {
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    .topOfBook
+    {
+        margin: 20px auto;
+    }
+
+    .useTime
+    {
+        text-align: center;
+    }
+
+    .reasonImg img
+    {
+        width: 100px;
+    }
+
+    .newBooksHeader
+    {
+        font-size: 32px;
+    }
+
+    .newBooksDiscr
+    {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    .newBookImg img
+    {
+        width: 100px;
+        height: 173px;
+    }
+
+    .newBookTitle
+    {
+        font-size: 14px;
+    }
+
+    .reasonsWrapper
+    {
+        margin: 40px auto;
+        display: block;
+        text-align: center;
+        width: 86vw;
+    }
+
+    .reasonHeader
+    {
+        font-size: 16px;
+    }
+
+    .reasonDiscr
+    {
+        font-size: 14px;
+    }
+
+    .reason
+    {
+        text-align: center;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .chooseObjectLeftPart, .chooseObjectRightPart ul li
+    {
+        font-size: 18px;
+    }
+
+    .discrBookDiscr p input[type="submit"]
+    {
+        font-size: 14px;
+    }
+
+    .main
+    {
+        margin: 0 auto;
+        width: 100vw;
+    }
+
+    .topOfBookSlogan, .topOfBookSloganEng, .topOfBookAuthor, .topOfBookPublisher
+    {
+        text-align: center;
+    }
+
+    .discrBook .main
+    {
+        margin: 40px auto;
+    }
+
+    .formModalWindow
+    {
+        margin-top: 15px;
+        width: 88vw;
+        font-size: 18px;
+    }
+
+    .discrBookLeftPart
+    {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .discrBookLeftPart
+    {
+        display: none;
+    }
+
+    .minPrice, .optPrice
+    {
+        font-size: 8vw;
+    }
+
+    .medPrice
+    {
+        font-size: 9vw;
+    }
+
+    .headerFormModal
+    {
+        font-size: 40px;
+    }
+
+    .subOpt, .subMin
+    {
+        width: 28%;
+    }
+
+    .subMed
+    {
+        width: 33%;
+    }
+
+    .subVariants
+    {
+        margin-left: auto;
+        margin-right: auto;
+        width: 89%;
+    }
+
+    body .main
+    {
+        margin-bottom: 50px;
+    }
+
+    .footer .main
+    {
+        margin-bottom: 0%;
+    }
+
+    .linksRightPart li a
+    {
+        font-size: 11px;
+    }
+
+    .minButton, .optButton, .medButton
+    {
+        margin-top: 25px;
+    }
+
+    .minButton input[type="submit"], .optButton input[type="submit"], .medButton input[type="submit"]
+    {
+        padding: 5% 12%;
+        font-size: 3vw;
+    }
+
+    .imagesLeftPart img
+    {
+        width: 13px;
+    }
+
+    .footer .main
+    {
+        padding: 3%;
+    }
+
+    .forContact
+    {
+        margin-right: 5px;
+        font-size: 10px;
+    }
+
+    .headerLeftPart
+    {
+        font-size: 16px;
+    }
+
+    .subOnMailingDiscr
+    {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    .subOnMailingHeader
+    {
+        font-size: 32px;
+    }
+
+    .emailInput
+    {
+        width: 90%;
+        font-size: 14px;
+    }
+
+    .medMonth
+    {
+        font-size: 14vw;
+    }
+
+    .minMonth, .optMonth
+    {
+        font-size: 11vw;
+    }
+
+    .minMonth span, .optMonth span
+    {
+        font-size: 5vw;
+    }
+
+    .book
+    {
+        height: 280px;
+    }
+
+    .topOfBook, .bookButtons, .bookButtonsMobile
+    {
+        display: block;
+        width: 86vw;
+    }
+
+    .bookImg
+    {
+        height: 190px;
+        width: 130px;
+    }
+
+    .topOfBookImg
+    {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    .path
+    {
+        font-size: 20px;
+    }
+
+    .middleOfBook, .bottomOfBook
+    {
+        margin-left: 4%;
+    }
+
+    .middleOfBookAdvantage
+    {
+        display: block;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .topOfBookText, .middleOfBook, .bottomOfBook
+    {
+        display: block;
+        width: 94%;
+    }
+
+    .bottomOfBookHeader, .bottomOfBookDiscription
+    {
+        width: 100%;
+    }
+
+    .bottomOfBookDiscription
+    {
+        text-align: left;
+    }
+
+    .bookButtons, .bookButtonsMobile
+    {
+        text-align: center;
+    }
+
+    .signOut img, .signIn img, .register img
+    {
+        width: 20%;
+    }
+
+    .newBooksCourusel
+    {
+        margin-top: 0px;
+    }
+
+    .register
+    {
+        position: absolute; /* блок занимает ширину содержимого, max-width её ограничивает */
+        right: 15%;
+        margin-right: 2%;
+        text-align: right;
+    }
+
+    .signIn, .signOut
+    {
+        font-size: 20px;
+        position: absolute; /* блок занимает ширину содержимого, max-width её ограничивает */
+        right: 0;
+        margin-left: auto;
+        margin-right: 2%;
+        text-align: right;
+    }
+
+    .topOfBookHeader, .bottomOfBookHeader, .middleOfBookPages
+    {
+        width: 100%;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .bookButtons input[type="submit"], .bookButtonsMobile input[type="submit"]
+    {
+        font-size: 20px;
+        margin: 4% auto;
+        width: 80vw;
+    }
+
+    .subMinMid, .subOptMid, .subMedMid
+    {
+        margin: -20%;
+        text-align: center;
+    }
+
+    .newBooksWrapper
+    {
+        width: 86vw;
+        margin: 40px auto;
+    }
+
+    .subMinMid img, .subOptMid img, .subMedMid img
+    {
+        width: 14vw;
+    }
+
+    .objectOfBook
+    {
+        text-align: left;
+        font-size: 7vw;
+    }
+
+    .menuMobileImg img
+    {
+        margin-left: 2.6vw;
+        width: 18%;
+    }
+
+    .chooseObjectWrapper
+    {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .lastStep
+    {
+        margin: 40px auto;
+        width: 86vw;
+    }
+
+    .menuMobileImg, .signIn, .signOut, .register
+    {
+        width: 50%;
+        display: inline-block;
+    }
+
+    .menu
+    {
+        display: none;
+    }
+
+    .nav li
+    {
+        padding-bottom: 3%;
+    }
+
+    .nav a:hover
+    {
+        color: #b3b3b2;
+    }
+
+    .buySubButton input[type="submit"], .tryFreeButton button
+    {
+        font-size: 14px;
+    }
+
+    .nav
+    {
+        padding-left: 2%;
+    }
+
+    .navigation
+    {
+        padding: 0;
+        display: block;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+    }
+
+    .lastStepSubmit
+    {
+        margin-top: 25px;
+    }
+
+    .path
+    {
+        padding-left: 5%;
+    }
+
+    .form input[type="submit"]
+    {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .header, .headerLib
+    {
+        font-size: 10vw;
+    }
+
+    .discription
+    {
+        font-size: 4vw;
+    }
+
+    .subOnMailingEmail
+    {
+        margin-top: 20px;
+    }
+
+    .signOut table
+    {
+        border-spacing: 30px 0px; /* Расстояние между границ */
+        border-collapse: separate;
+    }
+
+    .form input
+    {
+        font-family: 'Century Gothic';
+        font-size: 4.1vw;
+    }
+
+    .form, .formContact
+    {
+        margin-top: 20px;
+        font-size: 4vw;
+        width: 86vw;
+    }
+
+    .objectOfBook input
+    {
+        font-size: 6vw;
+    }
+
+    .topOfBookSloganEng, .topOfBookAuthor, .topOfBookPublisher
+    {
+        display: none;
+    }
+
+    .bookButtonsMobile
+    {
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    .bookButtonsMobile input[type="submit"]
+    {
+        text-align: center;
+    }
+
+    .bookButtons
+    {
+        display: none;
+    }
+
+    .discrBookRightPart
+    {
+        padding-bottom: 0px;
+        padding-top: 0px;
+        margin: 0 auto;
+        width: 86vw;
+        text-align: center;
+    }
+
+    .discrBookHeader
+    {
+        font-size: 32px;
+    }
+
+    .text
+    {
+        padding-top: 60px;
+    }
+
+    .discrBookDiscr
+    {
+        margin-top: 20px;
+        font-size: 16px;
+    }
+
+    .newBook
+    {
+        margin-top: 30px;
+        margin-left: 0;
+    }
+
+    .minHeader, .optHeader, .medHeader
+    {
+        font-size: 5vw;
+    }
+
+    .book
+    {
+        width: 150px;
+    }
+
+    .subAdvantages
+    {
+        width: 100%;
+    }
+
+    .subOneAdvantage
+    {
+        width: 33vw;
+    }
+
+    .subMinTop, .subOptTop, .subMedTop
+    {
+        border-radius: 2vw;
+    }
+
+    .book
+    {
+        margin-top: 15px;
+        margin-left: 2.5px;
+        margin-right: 2.5px;
+        display: inline-block;
+    }
+
+    .subOneAdvantageText
+    {
+        font-size: 14px;
+    }
+
+    .subFirstRow
+    {
+        width: 90%;
+    }
+
+    .signOut
+    {
+        height: 10vw;
+    }
+
+    .signOut table tr td
+    {
+        cursor: pointer;
+        height: 100%;
+        font-size: 3.7vw;
+    }
+
+    .discrBookHeader, .discrBookDiscr
+    {
+        text-align: center;
+    }
+
+    .buySubButton
+    {
+        margin-left: 0;
+        font-size: 14px;
+    }
+
+    .chooseObject
+    {
+        padding-top: 40px;
+    }
+
+    .footer
+    {
+        display: none;
+    }
+
+    .auth table td:last-child, .signOut table td:last-child
+    {
+        padding-top: 2.5vw;
+        padding-bottom: 2.5vw;
+    }
+
+    .subOnMailingWrapper
+    {
+        margin: 40px auto;
+        width: 86vw;
+    }
+
+    .subBackground
+    {
+        padding-bottom: 40px;
+    }
+
+    .menuTestWrapper
+    {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 86vw;
+    }
+
+    .navigationWrapper
+    {
+        width: 86vw;
+        margin: 0 auto;
+    }
+
+    .menuTest
+    {
+        display: flex;
+        justify-content: center;
+        width: 100vw;
+        height: 60px;
+        font-family: "century gothic";
+    }
+
+    .subVariantsMobile
+    {
+        display: block;
+    }
+
+    .lastStepDiscr
+    {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    .subVariants
+    {
+        display: none;
+    }
+
+    .subOneAdvantage:last-child
+    {
+        display: none;
+    }
+
+    .chooseObjectButtons
+    {
+        width: 100%;
+        margin: 40px auto;
+        justify-content: space-around;
+    }
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+input[type="submit"],
+input[type="submit"]:active,
+input[type="submit"]:focus {
+    outline: none;
+}
