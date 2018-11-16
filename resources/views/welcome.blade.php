@@ -11,8 +11,8 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div id="main"></div>
+        <div id="root"></div>
         <script src="/js/app.js"></script>
-        {{--<link rel="stylesheet" href="/css/app.css">--}}
+        <link rel="stylesheet" href="/css/login.css">
     </body>
 </html>

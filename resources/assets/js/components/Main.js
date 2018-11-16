@@ -5,7 +5,7 @@ export default class Main extends Component {
     render() {
         return (
             <div className="container">
-                <link rel="stylesheet" href="css/login.css"/>
+                {/*<link rel="stylesheet" href="css/login.css"/>*/}
 
                     <section className="modalWindow">
                         <section className="formModalWindow">
@@ -350,6 +350,6 @@ export default class Main extends Component {
     }
 }
 
-if (document.getElementById('main')) {
-    ReactDOM.render(<Main />, document.getElementById('main'));
+if (document.getElementById('root')) {
+    ReactDOM.render(<Main />, document.getElementById('root'));
 }
