@@ -8,10 +8,10 @@ export default class Main extends Component {
                 <section className="menu">
                     <section className="main">
                         <section className="menuWrapper">
-                            <a href="/main">
+                            <a href="/">
                                 <section className="logo">
                                     <section className="logoImg">
-                                        <img src="../../../localhost/img/logoWhite.png"/>
+                                        <img src="/img/logoWhite.png"/>
                                     </section>
                                     <section className="logoText">CHASE MIND</section>
                                 </section>
@@ -52,7 +52,7 @@ export default class Main extends Component {
                 <section className="menuTest">
                     <section className="menuTestWrapper">
                         <section className="menuTestImg">
-                            <img src="../../../localhost/img/menu_sandwich.svg"/>
+                            <img src="/img/menu_sandwich.svg"/>
                         </section>
 
                         <section className="menuTestVar">
@@ -66,7 +66,7 @@ export default class Main extends Component {
                     <section className="navigationWrapper">
                         <nav>
                             <ul>
-                                <li><a href="/main">Главная</a></li>
+                                <li><a href="/">Главная</a></li>
                                 <li><a href="/sub">Подписка</a></li>
                                 <li><a href="https://vk.com/chasemind">Блог</a></li>
                                 <li><a href="/lib">Библиотека</a></li>
@@ -90,7 +90,7 @@ export default class Main extends Component {
                     </section>
 
                     <section className="underlineLib">
-                        <img src="../../../localhost/img/underline.png"/>
+                        <img src="/img/underline.png"/>
                     </section>
 
                     <section className="books">
@@ -107,17 +107,17 @@ export default class Main extends Component {
 
                             <section className="imagesLeftPart">
                                 <section className="footerImg">
-                                    <a href="https://vk.com/chasemind"><img src="../../../localhost/img/vk.svg"/></a>
+                                    <a href="https://vk.com/chasemind"><img src="/img/vk.svg"/></a>
                                 </section>
 
                                 <section className="footerImg">
                                     <a href="https://www.instagram.com/chasemind/"><img
-                                        src="../../../localhost/img/instagram.svg"/></a>
+                                        src="/img/instagram.svg"/></a>
                                 </section>
 
                                 <section className="footerImg">
                                     <a href="https://www.youtube.com/channel/UCL0UdndbjzmEKtyoktusfbA"><img
-                                        src="../../../localhost/img/youtube.svg"/></a>
+                                        src="/img/youtube.svg"/></a>
                                 </section>
                             </section>
                         </section>
@@ -141,8 +141,4 @@ export default class Main extends Component {
             </div>
         );
     }
-}
-
-if (document.getElementById('root')) {
-    ReactDOM.render(<Main />, document.getElementById('root'));
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
-export default class Login extends Component {
+export default class Contact extends Component {
     render() {
         return (
             <div>
@@ -11,7 +10,7 @@ export default class Login extends Component {
                             <a href="/">
                                 <section className="logo">
                                     <section className="logoImg">
-                                        <img src="/img/logoWhite.png"/>
+                                        <img src="img/logoWhite.png"/>
                                     </section>
                                     <section className="logoText">CHASE MIND</section>
                                 </section>
@@ -20,16 +19,16 @@ export default class Login extends Component {
                             <section className="pages">
                                 <nav className="nav">
                                     <ul>
-                                        <a href="/sub">
+                                        <a href="https://chasemind/sub">
                                             <li>Подписка</li>
                                         </a>
                                         <a href="https://vk.com/chasemind">
                                             <li>Блог</li>
                                         </a>
-                                        <a href="/lib">
+                                        <a href="https://chasemind/lib">
                                             <li>Библиотека</li>
                                         </a>
-                                        <a href="/contact">
+                                        <a href="https://chasemind/contact">
                                             <li>Контакты</li>
                                         </a>
                                     </ul>
@@ -52,7 +51,7 @@ export default class Login extends Component {
                 <section className="menuTest">
                     <section className="menuTestWrapper">
                         <section className="menuTestImg">
-                            <img src="/img/menu_sandwich.svg"/>
+                            <img src="img/menu_sandwich.svg"/>
                         </section>
 
                         <section className="menuTestVar">
@@ -76,58 +75,53 @@ export default class Login extends Component {
                     </section>
                 </section>
 
-                <section className="mainWrapper">
-                    <section className="main">
-                        <section className="text">
-                            <section className="header">
-                                Авторизация.
-                            </section>
+                <section className="main">
+                    <section className="path">
+                        • > Контакты
+                    </section>
+
+                    <section className="headerLib">
+                        Контакты.
+                    </section>
+
+                    <section className="discription">
+                        Вы легко можете связатся с нами.
+                        Для этого заполните форму ниже или напишите на
+                        почту: help@chasemind.ru
+                    </section>
+
+
+                    <section className="formContact">
+                        <table>
+                            <tr>
+                                <td>
+                                    <input className="contactName" name="name" type="text" placeholder="Имя"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <input className="contactEmail" name="email" type="text" placeholder="E-mail"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <textarea className="contactMessage" name="message" resize="none"
+                                              placeholder="Сообщение"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <section className="submitContact">
+                            <input className="submit" type="submit" name="sendInf" value="Связаться с нами"/>
                         </section>
 
-                        <section className="formContact">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <input className="login" name="login" type="text" placeholder="Логин"/>
-                                    </td>
-                                </tr>
+                        <section className="response">
 
-                                <tr>
-                                    <td>
-                                        <input className="password" name="password" type="password"
-                                               placeholder="Пароль"/>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <section className="tableSignIn">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <input className="submit" type="submit" name="sendInf" value="Войти"/>
-                                        </td>
-                                        <td>
-                                            <a href="/login">Забыли пароль?</a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </section>
-
-                            <section className="response">
-
-                            </section>
-                        </section>
-
-                        <section className="formReg">
-                            <section className="formRegText">
-                                Впервые на сайте друг?
-                            </section>
-
-                            <section className="formRegButton">
-                                <input type="submit" value="Регистрация"/>
-                            </section>
                         </section>
                     </section>
+
 
                 </section>
 
@@ -140,17 +134,16 @@ export default class Login extends Component {
 
                             <section className="imagesLeftPart">
                                 <section className="footerImg">
-                                    <a href="https://vk.com/chasemind"><img src="/img/vk.svg"/></a>
+                                    <a href="https://vk.com/chasemind"><img src="img/vk.svg"/></a>
                                 </section>
 
                                 <section className="footerImg">
-                                    <a href="https://www.instagram.com/chasemind/"><img
-                                        src="/img/instagram.svg"/></a>
+                                    <a href="https://www.instagram.com/chasemind/"><img src="img/instagram.svg"/></a>
                                 </section>
 
                                 <section className="footerImg">
                                     <a href="https://www.youtube.com/channel/UCL0UdndbjzmEKtyoktusfbA"><img
-                                        src="/img/youtube.svg"/></a>
+                                        src="img/youtube.svg"/></a>
                                 </section>
                             </section>
                         </section>
@@ -158,10 +151,10 @@ export default class Login extends Component {
                         <section className="rightPart">
                             <section className="linksRightPart">
                                 <ul>
-                                    <li><a href="/sub">Подписка</a></li>
+                                    <li><a href="https://chasemind/sub">Подписка</a></li>
                                     <li><a href="https://vk.com/chasemind">Блог</a></li>
-                                    <li><a href="/lib">Библиотека</a></li>
-                                    <li><a href="/contact">Контакты</a></li>
+                                    <li><a href="https://chasemind/lib">Библиотека</a></li>
+                                    <li><a href="https://chasemind/contact">Контакты</a></li>
                                 </ul>
                             </section>
 

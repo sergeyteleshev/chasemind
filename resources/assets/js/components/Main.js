@@ -41,7 +41,7 @@ export default class Main extends Component {
                             <section className="navigationWrapper">
                                 <nav>
                                     <ul>
-                                        <li><a href="/main">Главная</a></li>
+                                        <li><a href="/">Главная</a></li>
                                         <li><a href="/sub">Подписка</a></li>
                                         <li><a href="https://vk.com/chasemind">Блог</a></li>
                                         <li><a href="/lib">Библиотека</a></li>
@@ -54,7 +54,7 @@ export default class Main extends Component {
                         <section className="menu">
                             <section className="main">
                                 <section className="menuWrapper">
-                                    <a href="/main">
+                                    <a href="/">
                                         <section className="logo">
                                             <section className="logoImg">
                                                 <img src="img/logoWhite.png"/>
@@ -348,8 +348,4 @@ export default class Main extends Component {
             </div>
         );
     }
-}
-
-if (document.getElementById('root')) {
-    ReactDOM.render(<Main />, document.getElementById('root'));
 }

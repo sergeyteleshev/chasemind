@@ -8,7 +8,7 @@ export default class Subscription extends Component {
                 <section className="modalWindow">
                     <section className="formModalWindow">
                         <section className="modalBar">
-                            <section className="closeModalBar"><img src="../../../localhost/img/cancel.svg"/></section>
+                            <section className="closeModalBar"><img src="/img/cancel.svg"/></section>
                         </section>
 
                         <section className="headerFormModal">
@@ -25,10 +25,10 @@ export default class Subscription extends Component {
                     <section className="menu">
                         <section className="main">
                             <section className="menuWrapper">
-                                <a href="/main">
+                                <a href="/">
                                     <section className="logo">
                                         <section className="logoImg">
-                                            <img src="../../../localhost/img/logoWhite.png"/>
+                                            <img src="/img/logoWhite.png"/>
                                         </section>
                                         <section className="logoText">CHASE MIND</section>
                                     </section>
@@ -69,7 +69,7 @@ export default class Subscription extends Component {
                     <section className="menuTest">
                         <section className="menuTestWrapper">
                             <section className="menuTestImg">
-                                <img src="../../../localhost/img/menu_sandwich.svg"/>
+                                <img src="/img/menu_sandwich.svg"/>
                             </section>
 
                             <section className="menuTestVar">
@@ -83,7 +83,7 @@ export default class Subscription extends Component {
                         <section className="navigationWrapper">
                             <nav>
                                 <ul>
-                                    <li><a href="/main">Главная</a></li>
+                                    <li><a href="/">Главная</a></li>
                                     <li><a href="/sub">Подписка</a></li>
                                     <li><a href="https://vk.com/chasemind">Блог</a></li>
                                     <li><a href="/lib">Библиотека</a></li>
@@ -103,7 +103,7 @@ export default class Subscription extends Component {
                         <section className="subFirstRow">
                             <section className="subOneAdvantage">
                                 <section className="subOneAdvantageImg">
-                                    <img src="../../../localhost/img/1.png"/>
+                                    <img src="/img/1.png"/>
                                 </section>
 
                                 <section className="subOneAdvantageText">
@@ -113,7 +113,7 @@ export default class Subscription extends Component {
 
                             <section className="subOneAdvantage">
                                 <section className="subOneAdvantageImg">
-                                    <img src="../../../localhost/img/2.png"/>
+                                    <img src="/img/2.png"/>
                                 </section>
 
                                 <section className="subOneAdvantageText">
@@ -123,7 +123,7 @@ export default class Subscription extends Component {
 
                             <section className="subOneAdvantage">
                                 <section className="subOneAdvantageImg">
-                                    <img src="../../../localhost/img/3.png"/>
+                                    <img src="/img/3.png"/>
                                 </section>
 
                                 <section className="subOneAdvantageText">
@@ -133,7 +133,7 @@ export default class Subscription extends Component {
 
                             <section className="subOneAdvantage">
                                 <section className="subOneAdvantageImg">
-                                    <img src="../../../localhost/img/4.png"/>
+                                    <img src="/img/4.png"/>
                                 </section>
 
                                 <section className="subOneAdvantageText">
@@ -143,7 +143,7 @@ export default class Subscription extends Component {
 
                             <section className="subOneAdvantage">
                                 <section className="subOneAdvantageImg">
-                                    <img src="../../../localhost/img/5.png"/>
+                                    <img src="/img/5.png"/>
                                 </section>
 
                                 <section className="subOneAdvantageText">
@@ -176,7 +176,7 @@ export default class Subscription extends Component {
                         </section>
 
                         <section className="subMinMid">
-                            <img src="../../../localhost/img/podpiska_Minimum.png"/>
+                            <img src="/img/podpiska_Minimum.png"/>
                         </section>
 
 
@@ -203,7 +203,7 @@ export default class Subscription extends Component {
                         </section>
 
                         <section className="subMedMid">
-                            <img src="../../../localhost/img/podpiska_Medium.png"/>
+                            <img src="/img/podpiska_Medium.png"/>
                         </section>
 
 
@@ -229,7 +229,7 @@ export default class Subscription extends Component {
                         </section>
 
                         <section className="subOptMid">
-                            <img src="../../../localhost/img/podpiska_Optimum.png"/>
+                            <img src="/img/podpiska_Optimum.png"/>
                         </section>
 
 
@@ -305,17 +305,17 @@ export default class Subscription extends Component {
 
                             <section className="imagesLeftPart">
                                 <section className="footerImg">
-                                    <a href="https://vk.com/chasemind"><img src="../../../localhost/img/vk.svg"/></a>
+                                    <a href="https://vk.com/chasemind"><img src="/img/vk.svg"/></a>
                                 </section>
 
                                 <section className="footerImg">
                                     <a href="https://www.instagram.com/chasemind/"><img
-                                        src="../../../localhost/img/instagram.svg"/></a>
+                                        src="/img/instagram.svg"/></a>
                                 </section>
 
                                 <section className="footerImg">
                                     <a href="https://www.youtube.com/channel/UCL0UdndbjzmEKtyoktusfbA"><img
-                                        src="../../../localhost/img/youtube.svg"/></a>
+                                        src="/img/youtube.svg"/></a>
                                 </section>
                             </section>
                         </section>
@@ -339,8 +339,4 @@ export default class Subscription extends Component {
             </div>
         );
     }
-}
-
-if (document.getElementById('root')) {
-    ReactDOM.render(<Subscription />, document.getElementById('root'));
 }

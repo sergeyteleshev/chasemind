@@ -7,7 +7,7 @@ export default class Dontwork extends Component {
             <div>
                 <section className="wrapper">
                     <section className="logo">
-                        <img src="../../../localhost/img/logoWhite.png"></img>
+                        <img src="/img/logoWhite.png"></img>
                     </section>
                     <br/>
                     <section className="text">
@@ -45,8 +45,4 @@ export default class Dontwork extends Component {
             </div>
         );
     }
-}
-
-if (document.getElementById('root')) {
-    ReactDOM.render(<Dontwork />, document.getElementById('root'));
 }

@@ -14,3 +14,33 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/contact', function () {
+    return view('welcome');
+});
+
+Route::get('/sub', function () {
+    return view('welcome');
+});
+
+Route::get('/lib', function () {
+    return view('welcome');
+});
+
+Route::get('/reg', function () {
+    return view('welcome');
+});
+
+Route::get('/books', function () {
+    return view('welcome');
+});
+
+Route::get('/dontwork', function () {
+    return view('welcome');
+});
+
+Route::get('/login', function () {
+    return view('welcome');
+});
+
+
