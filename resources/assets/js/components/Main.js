@@ -83,14 +83,14 @@ export default class Main extends Component {
                                     </section>
 
                                     <section className="auth">
-                                        <section className="authLeft">
-                                            Войти
-                                        </section>
-
-                                        <section className="authRight">
-                                            Регистрация
-                                        </section>
+                                    <section className="authLeft">
+                                        Войти
                                     </section>
+
+                                    <section className="authRight">
+                                        Регистрация
+                                    </section>
+                                </section>
                                 </section>
                             </section>
                         </section>

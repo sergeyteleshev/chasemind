@@ -14,5 +14,6 @@
         <div id="root"></div>
         <script src="/js/app.js"></script>
         <link rel="stylesheet" href="/css/login.css">
+        <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>

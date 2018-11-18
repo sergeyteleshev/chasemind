@@ -5,16 +5,13 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import storeApp from '../reducers';
 import { AppContainer } from 'react-hot-loader';
+import Login from './Login';
 import Main from './Main';
 /*eslint no-unused-vars:0*/
-import {Redirect, Route, Router} from 'react-router-dom';
+import {Route, Router} from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
-
-
-
 const history = createHistory();
 const middleware = [thunkMiddleware];
-
 let store = createStore(storeApp, applyMiddleware(...middleware));
 
 const render = Component => {
@@ -22,7 +19,8 @@ const render = Component => {
         <AppContainer>
             <Provider store={store}>
                 <Router history={history}>
-                    <Route patch='/' component={Main}/>
+                    <Route exact patch='/' component={Main}/>
+                    <Route exact patch='/login' component={Login}/>
                 </Router>
             </Provider>
         </AppContainer>,
