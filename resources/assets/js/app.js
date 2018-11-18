@@ -15,4 +15,6 @@ require('./bootstrap');
 
 require('./components/App');
 
+//todo указать index.js который соберёт вебпак
+
 

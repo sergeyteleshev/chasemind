@@ -11,6 +11,9 @@
 |
 */
 
+//todo отдаёт json. запросы на API server. вьюхи не надо рендерить.
+//todo поставить вебпак
+
 Route::get('/', function () {
     return view('welcome');
 });

@@ -15,7 +15,7 @@ import Registration from './Registration';
 import Subscription from './Subscription';
 
 /*eslint no-unused-vars:0*/
-import {Route, Router, BrowserRouter} from 'react-router-dom';
+import {Route, Router} from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 const history = createHistory();
 const middleware = [thunkMiddleware];

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import {Link} from "react-router-dom";
 
 export default class Login extends Component {
     render() {
@@ -8,30 +9,23 @@ export default class Login extends Component {
                 <section className="menu">
                     <section className="main">
                         <section className="menuWrapper">
-                            <a href="/">
+                            <Link to="/">
                                 <section className="logo">
                                     <section className="logoImg">
                                         <img src="/img/logoWhite.png"/>
                                     </section>
                                     <section className="logoText">CHASE MIND</section>
                                 </section>
-                            </a>
+                            </Link>
 
                             <section className="pages">
                                 <nav className="nav">
                                     <ul>
-                                        <a href="/sub">
-                                            <li>Подписка</li>
-                                        </a>
-                                        <a href="https://vk.com/chasemind">
-                                            <li>Блог</li>
-                                        </a>
-                                        <a href="/lib">
-                                            <li>Библиотека</li>
-                                        </a>
-                                        <a href="/contact">
-                                            <li>Контакты</li>
-                                        </a>
+                                        <li><Link to="/">Главная</Link></li>
+                                        <li><Link to="/sub">Подписка</Link></li>
+                                        <li><a href="https://vk.com/chasemind">Блог</a></li>
+                                        <li><Link to="/lib">Библиотека</Link></li>
+                                        <li><Link to="/contact">Контакты</Link></li>
                                     </ul>
                                 </nav>
                             </section>
@@ -66,11 +60,11 @@ export default class Login extends Component {
                     <section className="navigationWrapper">
                         <nav>
                             <ul>
-                                <li><a href="/">Главная</a></li>
-                                <li><a href="/sub">Подписка</a></li>
+                                <li><Link to="/">Главная</Link></li>
+                                <li><Link to="/sub">Подписка</Link></li>
                                 <li><a href="https://vk.com/chasemind">Блог</a></li>
-                                <li><a href="/lib">Библиотека</a></li>
-                                <li><a href="/contact">Контакты</a></li>
+                                <li><Link to="/lib">Библиотека</Link></li>
+                                <li><Link to="/contact">Контакты</Link></li>
                             </ul>
                         </nav>
                     </section>
@@ -158,10 +152,10 @@ export default class Login extends Component {
                         <section className="rightPart">
                             <section className="linksRightPart">
                                 <ul>
-                                    <li><a href="/sub">Подписка</a></li>
+                                    <li><Link to="/sub">Подписка</Link></li>
                                     <li><a href="https://vk.com/chasemind">Блог</a></li>
-                                    <li><a href="/lib">Библиотека</a></li>
-                                    <li><a href="/contact">Контакты</a></li>
+                                    <li><Link to="/lib">Библиотека</Link></li>
+                                    <li><Link to="/contact">Контакты</Link></li>
                                 </ul>
                             </section>
 
