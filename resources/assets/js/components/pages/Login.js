@@ -21,7 +21,6 @@ export default class Login extends Component {
                             <section className="pages">
                                 <nav className="nav">
                                     <ul>
-                                        <li><Link to="/">Главная</Link></li>
                                         <li><Link to="/sub">Подписка</Link></li>
                                         <li><a href="https://vk.com/chasemind">Блог</a></li>
                                         <li><Link to="/lib">Библиотека</Link></li>

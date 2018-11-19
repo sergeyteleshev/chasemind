@@ -5,14 +5,14 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import storeApp from '../reducers';
 import { AppContainer } from 'react-hot-loader';
-import Contact from './Contact';
-import Main from './Main';
-import Books from './Books';
-import Dontwork from './Dontwork';
-import Library from './Library';
-import Login from './Login';
-import Registration from './Registration';
-import Subscription from './Subscription';
+import Contact from './pages/Contact';
+import Main from './pages/Main';
+import Books from './pages/Books';
+import Dontwork from './pages/Dontwork';
+import Library from './pages/Library';
+import Login from './pages/Login';
+import Registration from './pages/Registration';
+import Subscription from './pages/Subscription';
 
 /*eslint no-unused-vars:0*/
 import {Route, Router} from 'react-router-dom';

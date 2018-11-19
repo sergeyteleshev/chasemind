@@ -113,7 +113,7 @@ export default class Main extends Component {
 
                                 <section className="chooseObjectButtons">
                                     <section className="tryFreeButton">
-                                        <a href="/registration">
+                                        <a href="/reg">
                                             <button>Попробовать<br/>бесплатно</button>
                                         </a>
                                     </section>
@@ -289,7 +289,7 @@ export default class Main extends Component {
                         </section>
 
                         <section className="lastStepSubmit">
-                            <a href="/registration">
+                            <a href="/reg">
                                 <button>
                                     Попробовать
                                     <br/>
