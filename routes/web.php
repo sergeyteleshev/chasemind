@@ -36,9 +36,9 @@ Route::get('/reg', function () {
     return view('welcome');
 });
 
-//Route::get('/books', function () {
-//    return view('welcome');
-//});
+Route::get('/books', function () {
+    return view('welcome');
+});
 
 Route::get('/dontwork', function () {
     return view('welcome');
@@ -48,14 +48,8 @@ Route::get('/login', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => 'auth:api'], function() {
-    Route::get('books', 'BookController@index');
-    Route::get('books/{book}', 'BookController@show');
-    Route::post('books', 'BookController@store');
-    Route::put('books/{book}', 'BookController@update');
-    Route::delete('books/{book}', 'BookController@delete');
-});
-
-
-Route::get('register', 'Auth\RegisterController@register');
-Route::post('login', 'Auth\LoginController@login');
+Route::get('books', 'BookController@index');
+Route::get('books/{book}', 'BookController@show');
+Route::post('books', 'BookController@store');
+Route::put('books/{book}', 'BookController@update');
+Route::delete('books/{book}', 'BookController@delete');
