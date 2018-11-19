@@ -48,8 +48,6 @@ Route::get('/login', function () {
     return view('welcome');
 });
 
-Route::get('books', 'BookController@index');
-Route::get('books/{book}', 'BookController@show');
-Route::post('books', 'BookController@store');
-Route::put('books/{book}', 'BookController@update');
-Route::delete('books/{book}', 'BookController@delete');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
