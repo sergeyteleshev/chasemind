@@ -13,7 +13,7 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/App');
+require('./index');
 
 //todo указать index.js который соберёт вебпак
 

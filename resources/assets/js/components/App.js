@@ -17,6 +17,7 @@ import Subscription from './pages/Subscription';
 /*eslint no-unused-vars:0*/
 import {Route, Router} from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
+import LibraryContainer from "../containers/LibraryContainer";
 const history = createHistory();
 const middleware = [thunkMiddleware];
 let store = createStore(storeApp, applyMiddleware(...middleware));
@@ -32,7 +33,7 @@ export default class App extends Component {
                         <Route exact path='/contact' component={Contact}/>
                         <Route exact path='/books' component={Books}/>
                         <Route exact path='/dontwork' component={Dontwork}/>
-                        <Route exact path='/lib' component={Library}/>
+                        <Route exact path='/lib' component={LibraryContainer}/>
                         <Route exact path='/sub' component={Subscription}/>
                         <Route exact path='/login' component={Login}/>
                         <Route exact path='/reg' component={Registration}/>
