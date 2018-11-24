@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Footer from "./Footer";
 import Header from "../Header";
+import {Link} from "react-router-dom";
 
 export default class Library extends Component {
     componentWillMount()
@@ -8,19 +9,36 @@ export default class Library extends Component {
         this.props.fetchBooks();
     }
 
-    render() {
-        const { test2, fetchBooks, libBooks } = this.props;
-         let author = 'not loaded';
-        if(Object.keys(libBooks).length > 0) {
-            author = libBooks[0].author
+    render()
+    {
+        const { libBooks } = this.props;
+        let books = null;
+
+        if(Object(libBooks).length > 0)
+        {
+            books = libBooks.map((book) => {
+                return (
+                    <Link to={"/book/" + book.id} onClick={() => this.props.openCurrentBook(book)} key={book.id}>
+                        <section className='newBook'>
+                            <section className='newBookImg'>
+                                <img src={book.imgURL}/>
+                            </section>
+                            <section className='newBookTitle'>
+                                {book.name}
+                            </section>
+                        </section>
+                    </Link>
+                );
+            });
         }
+
         return (
             <div>
                 <Header/>
 
                 <section className="main">
                     <section className="path">
-                        • > Библиотека {author}
+                        • > Библиотека
                     </section>
 
                     <section className="headerLib">
@@ -28,7 +46,7 @@ export default class Library extends Component {
                     </section>
 
                     <section className="objectOfBook">
-                        <input type={"button"} onClick={() => fetchBooks()}/>
+
                     </section>
 
                     <section className="underlineLib">
@@ -36,14 +54,7 @@ export default class Library extends Component {
                     </section>
 
                     <section className="books">
-                        <section className='newBook'>
-                            <section className='newBookImg'>
-                                <img src="#"/>
-                            </section>
-                            <section className='newBookTitle'>
-                                Kekmda
-                            </section>
-                        </section>
+                        {books}
                     </section>
                 </section>
 

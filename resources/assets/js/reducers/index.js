@@ -1,10 +1,11 @@
 import {combineReducers} from 'redux';
-import {RECEIVE_BOOKS, REQUEST_BOOKS, TEST} from "../actions/index";
+import {OPEN_CURRENT_BOOK, RECEIVE_BOOK, RECEIVE_BOOKS, REQUEST_BOOK, REQUEST_BOOKS} from "../actions/index";
 
 let initialStateBooks = {
     libBooks: {},
     isLibLoading: true,
-    test: "false",
+    isBookLoading: true,
+    currentBook: {},
 };
 
 function Books(state = initialStateBooks, action) {
@@ -12,21 +13,28 @@ function Books(state = initialStateBooks, action) {
         case REQUEST_BOOKS:
             return Object.assign({}, state, {
                 isLibLoading: true,
-                test: "BOOKS REQUESTED",
             });
 
         case RECEIVE_BOOKS:
             return Object.assign({}, state, {
                 libBooks: action.payload,
                 isLibLoading: false,
-                test: "BOOKS GOTTEN",
             });
 
-        case TEST:
-            alert(1);
+        case REQUEST_BOOK:
             return Object.assign({}, state, {
-                isLoading: true,
-                test: "BOOKS TEST",
+                isBookLoading: true,
+            });
+
+        case RECEIVE_BOOK:
+            return Object.assign({}, state, {
+                isBookLoading: false,
+                currentBook: action.payload,
+            });
+
+        case OPEN_CURRENT_BOOK:
+            return Object.assign({}, state, {
+                currentBook: action.payload,
             });
 
         default:

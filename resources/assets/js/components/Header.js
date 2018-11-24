@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import {Link} from "react-router-dom";
-import Login from "./pages/Login";
-import Registration from "./pages/Registration";
 
 export default class Header extends Component {
     render() {
