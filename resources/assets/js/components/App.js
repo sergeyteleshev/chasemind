@@ -43,11 +43,3 @@ export default class App extends Component {
         </AppContainer>
     }
 }
-
-if(document.getElementById('root'))
-{
-    ReactDOM.render(
-        <App/>,
-        document.getElementById('root')
-    );
-}

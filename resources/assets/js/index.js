@@ -12,33 +12,24 @@ import createHistory from 'history/createBrowserHistory';
 
 const history = createHistory();
 const middleware = [thunkMiddleware];
-const composeEnhancers =
-    typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-            // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-        }) : compose;
 
-const enhancer = composeEnhancers(
-    applyMiddleware(...middleware),
-    // other store enhancers if any
-);
-
-let store = createStore(storeApp, enhancer);
-
+let store = createStore(storeApp, applyMiddleware(...middleware));
 
 const render = Component => {
     ReactDOM.render(
         <AppContainer>
             <Provider store={store}>
                 <Router history={history}>
-                    <Route patch='/' component={App}/>
+                    <Route path='/' component={Component}/>
                 </Router>
             </Provider>
         </AppContainer>,
         document.getElementById('root'),
     )
 };
+
+render(App);
+
 //
 // if(NODE_ENV==='development') {
 //

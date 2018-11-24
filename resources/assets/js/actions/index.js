@@ -30,6 +30,7 @@ export function test() {
 
 export function fetchBooks() {
     return dispatch => {
+        console.log('request books thunk action')
         dispatch(requestBooks());
 
         fetch('/api/books').then(

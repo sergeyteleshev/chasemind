@@ -5,13 +5,15 @@ import {fetchBooks, test} from "../actions/index";
 const mapStateToProps = (state) => {
     return {
         libBooks: state.Books.libBooks,
+        isLibLoading: state.Books.isLibLoading,
+        test: state.Books.test,
     }
 };
 
-const mapDispatchToProps = (dispatch)=> {
+const mapDispatchToProps = (dispatch) => {
     return {
-        fetchBooks: ()=> dispatch(fetchBooks()),
-        test: ()=> dispatch(test())
+        fetchBooks: () => dispatch(fetchBooks()),
+        test: () => dispatch(test()),
     }
 };
 
