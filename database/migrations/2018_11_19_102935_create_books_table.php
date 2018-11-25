@@ -35,7 +35,7 @@ class CreateBooksTable extends Migration
             $table->string('linkOnDemoText')->nullable()->unique();
             $table->string('linkOnDemoAudio')->nullable()->unique();
             $table->string('linkOnDemoVideo')->nullable()->unique();
-            $table->string('amountOfDownloadsDemo')->default(0);
+            $table->integer('amountOfDownloadsDemo')->default(0);
         });
     }
 

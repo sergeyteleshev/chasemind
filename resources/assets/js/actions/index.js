@@ -5,6 +5,11 @@ export const REQUEST_BOOK = "REQUEST_BOOKS";
 export const RECEIVE_BOOK = "RECEIVE_BOOKS";
 export const OPEN_CURRENT_BOOK = "OPEN_CURRENT_BOOK";
 
+export const LOGIN_HANDLE_CHANGE = "LOGIN_HANDLE_CHANGE";
+export const EMAIL_HANDLE_CHANGE = "EMAIL_HANDLE_CHANGE";
+export const PASS_HANDLE_CHANGE = "PASS_HANDLE_CHANGE";
+export const PASS_AGAIN_HANDLE_CHANGE = "PASS_AGAIN_HANDLE_CHANGE";
+
 export function requestBooks() {
     return {
         type: REQUEST_BOOKS,
@@ -24,10 +29,9 @@ export function requestBook() {
     }
 }
 
-export function receiveBook(book) {
+export function receiveBook() {
     return {
         type: RECEIVE_BOOK,
-        payload: book,
     }
 }
 
@@ -42,12 +46,14 @@ export function fetchBooks() {
     return dispatch => {
         dispatch(requestBooks());
 
-        fetch('/api/books').then(
-            response => response.json(),
-            error => console.log('An error occurred.', error)
-        ).then(json => {
-            dispatch(receiveBooks(json))
-        });
+        const request = async () => {
+            const response = await fetch('/api/books');
+            const json = await response.json();
+            console.log(json);
+            dispatch(receiveBooks(json));
+        };
+
+        request();
     }
 }
 
@@ -56,13 +62,79 @@ export function fetchBook(id)
     return dispatch => {
         dispatch(requestBook());
 
-        fetch('/api/book/' + id).then(
-            response => response.json(),
-            error => console.log('An error occurred.', error)
-        ).then(json => {
+        const request = async () => {
+            const response = await fetch('/api/book/'+ id);
+            const json = await response.json();
             console.log(json);
-            dispatch(receiveBook(json))
-        });
+            dispatch(openCurrentBook(json));
+            dispatch(receiveBook());
+        };
+
+        request();
     }
 }
 
+export function loginHandleChange(event)
+{
+    return {
+        type: LOGIN_HANDLE_CHANGE,
+        payload: event.target.value,
+    }
+}
+
+export function emailHandleChange(event)
+{
+    return {
+        type: EMAIL_HANDLE_CHANGE,
+        payload: event.target.value,
+    }
+}
+
+export function passHandleChange(event)
+{
+    return {
+        type: PASS_HANDLE_CHANGE,
+        payload: event.target.value,
+    }
+}
+
+export function passAgainHandleChange(event)
+{
+    return {
+        type: PASS_AGAIN_HANDLE_CHANGE,
+        payload: event.target.value,
+    }
+}
+
+export function fetchRegister(login, email, pass)
+{
+    const payload = {
+        name: login,
+        email: email,
+        password: pass,
+    };
+
+    let data = new FormData();
+    data.append( "json", JSON.stringify(payload));
+
+    const request = async () => {
+        const response = await fetch('/api/register/', {
+            method: 'POST',
+            body: data,
+            headers : {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        });
+
+        //const json = await response.json();
+
+        console.log(response);
+    };
+
+    request();
+
+    return dispatch => {
+
+    }
+}

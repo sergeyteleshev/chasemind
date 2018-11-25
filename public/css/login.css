@@ -351,8 +351,16 @@
 
 .newBook
 {
+    width: 200px;
     cursor: pointer;
     margin-left: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.newBook:hover
+{
+    text-decoration: underline;
 }
 
 .newBooksCourusel
@@ -1500,6 +1508,9 @@ input[type=submit]:hover
     text-align: CENTER;
     margin-bottom: 50px;
     width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .book

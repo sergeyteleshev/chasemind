@@ -14,55 +14,58 @@ export default class Book extends Component {
         {
             this.props.fetchBook(id);
         }
+
+        console.log(book);
     }
 
     render() {
         const currentBook = this.props.currentBook;
         let book = null;
 
-        if(Object.keys(currentBook).length !== 0 && currentBook.constructor === Object)
+        if(currentBook)
         {
                book = <section className="bookWrapper">
                    <section className="topOfBook">
                        <section className="topOfBookImg">
+                            <img src={currentBook.imgURL}/>
 
                        </section>
 
                        <section className="topOfBookText">
                            <section className="topOfBookHeader">
-
+                               {currentBook.name}
                            </section>
 
                            <section className="topOfBookSlogan">
-
+                               {currentBook.slogan}
                            </section>
 
                            <section className="topOfBookSloganEng">
-
+                               {currentBook.sloganENG}
                            </section>
 
                            <section className="topOfBookAuthor">
-
+                               {currentBook.author}
                            </section>
 
                            <section className="topOfBookPublisher">
-
+                               {currentBook.publisher}
                            </section>
                        </section>
 
                        <section className="middleOfBook">
                            <section className="middleOfBookPages">
                                <section className="firstRow">
-                                   Оригинал книги <span></span>
+                                   Оригинал книги <span>{currentBook.pagesBook}</span>
                                </section>
 
                                <section className="secondRow">
-                                   Конспект книги <span></span>
+                                   Конспект книги <span>{currentBook.pagesAbstarct}</span>
                                </section>
                            </section>
 
                            <section className="middleOfBookAdvantage">
-
+                               <span>ПРЕИМУЩЕСТВО</span> {Math.round(currentBook.pagesBook /currentBook.pagesAbstarct) * 100 }%
                            </section>
                        </section>
 
@@ -78,7 +81,7 @@ export default class Book extends Component {
                            </section>
 
                            <section className="bottomOfBookDiscription">
-
+                               {currentBook.desc}
                            </section>
                        </section>
                    </section>

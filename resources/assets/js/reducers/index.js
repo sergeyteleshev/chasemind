@@ -1,5 +1,13 @@
 import {combineReducers} from 'redux';
-import {OPEN_CURRENT_BOOK, RECEIVE_BOOK, RECEIVE_BOOKS, REQUEST_BOOK, REQUEST_BOOKS} from "../actions/index";
+import {
+    EMAIL_HANDLE_CHANGE,
+    LOGIN_HANDLE_CHANGE,
+    OPEN_CURRENT_BOOK, PASS_AGAIN_HANDLE_CHANGE, PASS_HANDLE_CHANGE,
+    RECEIVE_BOOK,
+    RECEIVE_BOOKS,
+    REQUEST_BOOK,
+    REQUEST_BOOKS
+} from "../actions/index";
 
 let initialStateBooks = {
     libBooks: {},
@@ -7,6 +15,16 @@ let initialStateBooks = {
     isBookLoading: true,
     currentBook: {},
 };
+
+let initialStateAuth = {
+    login: '',
+    email: '',
+    password: '',
+    passwordAgain: '',
+    isLoginLoading: true,
+    isRegLoading: true,
+};
+
 
 function Books(state = initialStateBooks, action) {
     switch(action.type) {
@@ -29,7 +47,6 @@ function Books(state = initialStateBooks, action) {
         case RECEIVE_BOOK:
             return Object.assign({}, state, {
                 isBookLoading: false,
-                currentBook: action.payload,
             });
 
         case OPEN_CURRENT_BOOK:
@@ -42,5 +59,32 @@ function Books(state = initialStateBooks, action) {
     }
 }
 
-const storeApp = combineReducers({Books});
+function Auth(state = initialStateAuth, action) {
+    switch(action.type) {
+        case LOGIN_HANDLE_CHANGE:
+            return Object.assign({}, state, {
+                login: action.payload,
+            });
+
+        case EMAIL_HANDLE_CHANGE:
+            return Object.assign({}, state, {
+                email: action.payload,
+            });
+
+        case PASS_HANDLE_CHANGE:
+            return Object.assign({}, state, {
+                password: action.payload,
+            });
+
+        case PASS_AGAIN_HANDLE_CHANGE:
+            return Object.assign({}, state, {
+                passwordAgain: action.payload,
+            });
+
+        default:
+            return state;
+    }
+}
+
+const storeApp = combineReducers({Books, Auth});
 export default storeApp;

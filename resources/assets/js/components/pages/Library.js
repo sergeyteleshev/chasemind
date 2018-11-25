@@ -18,8 +18,8 @@ export default class Library extends Component {
         {
             books = libBooks.map((book) => {
                 return (
-                    <Link to={"/book/" + book.id} onClick={() => this.props.openCurrentBook(book)} key={book.id}>
-                        <section className='newBook'>
+                    <Link className='newBook' to={"/book/" + book.id} onClick={() => this.props.openCurrentBook(book)} key={book.id}>
+                        <section>
                             <section className='newBookImg'>
                                 <img src={book.imgURL}/>
                             </section>
