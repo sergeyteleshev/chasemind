@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 Route::get('books', 'BookController@index');
 Route::get('book/{book}', 'BookController@show');
@@ -24,5 +24,5 @@ Route::put('books/{book}', 'BookController@update');
 Route::delete('books/{book}', 'BookController@delete');
 
 Route::post('register', 'Auth\RegisterController@create');
-//Route::get('register', 'Auth\RegisterController@create');
+//Route::get('register', 'Auth\RegisterController@test');
 

@@ -117,24 +117,17 @@ export function fetchRegister(login, email, pass)
     let data = new FormData();
     data.append( "json", JSON.stringify(payload));
 
-    const request = async () => {
-        const response = await fetch('/api/register/', {
-            method: 'POST',
-            body: data,
-            headers : {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        });
-
-        //const json = await response.json();
-
-        console.log(response);
-    };
-
-    request();
-
     return dispatch => {
+        const request = async () => {
+            const response = await fetch('/api/register/', {
+                method: 'POST',
+                body: data,
+            });
+            const json = await response.json();
 
+            console.log(json);
+        };
+
+        request();
     }
 }
