@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux';
 import {
     EMAIL_HANDLE_CHANGE,
-    LOGIN_HANDLE_CHANGE,
-    OPEN_CURRENT_BOOK, PASS_AGAIN_HANDLE_CHANGE, PASS_HANDLE_CHANGE,
+    LOGIN_HANDLE_CHANGE, LOGIN_INPUT_HANDLE_CHANGE,
+    OPEN_CURRENT_BOOK, PASS_AGAIN_HANDLE_CHANGE, PASS_HANDLE_CHANGE, PASS_INPUT_HANDLE_CHANGE,
     RECEIVE_BOOK,
-    RECEIVE_BOOKS,
+    RECEIVE_BOOKS, RECEIVE_LOGIN, RECEIVE_REGISTER,
     REQUEST_BOOK,
-    REQUEST_BOOKS
+    REQUEST_BOOKS, REQUEST_LOGIN, REQUEST_REGISTER, SUBMIT_REGISTER
 } from "../actions/index";
 
 let initialStateBooks = {
@@ -23,6 +23,9 @@ let initialStateAuth = {
     passwordAgain: '',
     isLoginLoading: true,
     isRegLoading: true,
+    user: {},
+    loginInput: '',
+    passwordInput: '',
 };
 
 
@@ -79,6 +82,40 @@ function Auth(state = initialStateAuth, action) {
         case PASS_AGAIN_HANDLE_CHANGE:
             return Object.assign({}, state, {
                 passwordAgain: action.payload,
+            });
+
+        case RECEIVE_REGISTER:
+            console.log(action.payload);
+            return Object.assign({}, state, {
+                user: action.payload,
+                isRegLoading: false,
+            });
+
+        case REQUEST_REGISTER:
+            return Object.assign({}, state, {
+                isRegLoading: true,
+            });
+
+        case LOGIN_INPUT_HANDLE_CHANGE:
+            return Object.assign({}, state, {
+                loginInput: action.payload,
+            });
+
+        case PASS_INPUT_HANDLE_CHANGE:
+            return Object.assign({}, state, {
+                passwordInput: action.payload,
+            });
+
+        case RECEIVE_LOGIN:
+            console.log(action.payload);
+            return Object.assign({}, state, {
+                user: action.payload,
+                isLoginLoading: false,
+            });
+
+        case REQUEST_LOGIN:
+            return Object.assign({}, state, {
+                isLoginLoading: true,
             });
 
         default:

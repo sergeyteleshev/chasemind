@@ -1,8 +1,40 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 
 export default class Header extends Component {
     render() {
+        let loginButtons = (
+            <section className="auth">
+                <Link to={"/login"}>
+                    <section className="authLeft">
+                        Войти
+                    </section>
+                </Link>
+
+                <Link to={"/reg"}>
+                    <section className="authRight">
+                        Регистрация
+                    </section>
+                </Link>
+            </section>
+        );
+
+        const {name, password, status} = this.props.user;
+        if((typeof name === "string" && typeof password === "string" && typeof status === "string") && (status === "ok") && name.length > 0)
+        {
+            loginButtons = (
+                <section className="auth">
+                    <section className="authLeft">
+                        {name}
+                    </section>
+
+                    <section className="authRight">
+                        Выйти
+                    </section>
+                </section>
+            );
+        }
+
         return (
             <div>
                 <section className="menu">
@@ -28,19 +60,7 @@ export default class Header extends Component {
                                 </nav>
                             </section>
 
-                            <section className="auth">
-                                <Link to={"/login"}>
-                                    <section className="authLeft">
-                                        Войти
-                                    </section>
-                                </Link>
-
-                                <Link to={"/reg"}>
-                                    <section className="authRight">
-                                        Регистрация
-                                    </section>
-                                </Link>
-                            </section>
+                            {loginButtons}
                         </section>
                     </section>
                 </section>

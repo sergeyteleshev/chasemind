@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
-import Header from "../Header";
+import HeaderContainer from "../../containers/HeaderContainer";
 import Footer from "./Footer";
 
 export default class Contact extends Component {
     render() {
         return (
             <div>
-                <Header/>
+                <HeaderContainer/>
 
                 <section className="main">
                     <section className="path">
@@ -27,24 +27,26 @@ export default class Contact extends Component {
 
                     <section className="formContact">
                         <table>
-                            <tr>
-                                <td>
-                                    <input className="contactName" name="name" type="text" placeholder="Имя"/>
-                                </td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input className="contactName" name="name" type="text" placeholder="Имя"/>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td>
-                                    <input className="contactEmail" name="email" type="text" placeholder="E-mail"/>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        <input className="contactEmail" name="email" type="text" placeholder="E-mail"/>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td>
-                                    <textarea className="contactMessage" name="message" resize="none"
-                                              placeholder="Сообщение"></textarea>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        <textarea className="contactMessage" name="message" resize="none"
+                                                  placeholder="Сообщение"></textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
 
                         <section className="submitContact">

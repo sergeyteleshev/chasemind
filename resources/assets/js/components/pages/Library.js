@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Footer from "./Footer";
-import Header from "../Header";
+import HeaderContainer from "../../containers/HeaderContainer";
 import {Link} from "react-router-dom";
 
 export default class Library extends Component {
@@ -34,7 +34,7 @@ export default class Library extends Component {
 
         return (
             <div>
-                <Header/>
+                <HeaderContainer/>
 
                 <section className="main">
                     <section className="path">

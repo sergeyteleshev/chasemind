@@ -24,5 +24,5 @@ Route::put('books/{book}', 'BookController@update');
 Route::delete('books/{book}', 'BookController@delete');
 
 Route::post('register', 'Auth\RegisterController@create');
-//Route::get('register', 'Auth\RegisterController@test');
+Route::post('login', 'Auth\LoginController@login');
 

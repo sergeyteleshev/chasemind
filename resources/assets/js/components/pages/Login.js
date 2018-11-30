@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import {Link} from "react-router-dom";
 import Footer from "./Footer";
-import Header from "../Header";
+import HeaderContainer from "../../containers/HeaderContainer";
 
 export default class Login extends Component {
     render() {
         return (
             <div>
-                <Header/>
+                <HeaderContainer/>
 
                 <section className="mainWrapper">
                     <section className="main">
@@ -22,13 +21,13 @@ export default class Login extends Component {
                             <table>
                                 <tr>
                                     <td>
-                                        <input className="login" name="login" type="text" placeholder="Логин"/>
+                                        <input onChange={(event) => this.props.loginInputHandleChange(event)} value={this.props.loginInput} className="login" name="login" type="text" placeholder="Логин"/>
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td>
-                                        <input className="password" name="password" type="password"
+                                        <input onChange={(event) => this.props.passwordInputHandleChange(event)} value={this.props.passwordInput} className="password" name="password" type="password"
                                                placeholder="Пароль"/>
                                     </td>
                                 </tr>
@@ -38,10 +37,10 @@ export default class Login extends Component {
                                 <table>
                                     <tr>
                                         <td>
-                                            <input className="submit" type="submit" name="sendInf" value="Войти"/>
+                                            <input onClick={() => this.props.submitLogin(this.props.loginInput, this.props.passwordInput)} className="submit" type="submit" name="sendInf" value="Войти"/>
                                         </td>
                                         <td>
-                                            <a href="/login">Забыли пароль?</a>
+                                            <Link to={"/reg"}>Забыли пароль?</Link>
                                         </td>
                                     </tr>
                                 </table>
@@ -58,7 +57,7 @@ export default class Login extends Component {
                             </section>
 
                             <section className="formRegButton">
-                                <input type="submit" value="Регистрация"/>
+                                <Link to={"/reg"}><input type="submit" value="Регистрация"/></Link>
                             </section>
                         </section>
                     </section>

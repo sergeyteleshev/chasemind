@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import {Link} from "react-router-dom";
 import Footer from "./Footer";
-import Header from "../Header";
+import HeaderContainer from "../../containers/HeaderContainer";
 
 export default class Book extends Component {
     componentWillMount()
@@ -65,7 +64,7 @@ export default class Book extends Component {
                            </section>
 
                            <section className="middleOfBookAdvantage">
-                               <span>ПРЕИМУЩЕСТВО</span> {Math.round(currentBook.pagesBook /currentBook.pagesAbstarct) * 100 }%
+                               <span>ПРЕИМУЩЕСТВО</span> {Math.round(currentBook.pagesAbstarct /currentBook.pagesBook) * 100 }%
                            </section>
                        </section>
 
@@ -132,7 +131,7 @@ export default class Book extends Component {
                     </section>
                 </section>
 
-                <Header/>
+                <HeaderContainer/>
 
                 <section className="main">
                     <section className="path">

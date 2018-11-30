@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import {Link} from "react-router-dom";
 import Footer from "./Footer";
-import Header from "../Header";
+import HeaderContainer from "../../containers/HeaderContainer";
 
 export default class Subscription extends Component {
     render() {
@@ -25,7 +24,7 @@ export default class Subscription extends Component {
                 </section>
 
                 <section className="subBackground">
-                    <Header/>
+                    <HeaderContainer/>
 
                     <section className="subHeader">
                         Оформить подписку.

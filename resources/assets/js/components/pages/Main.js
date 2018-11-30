@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import {Link} from "react-router-dom";
-import Header from '../Header';
+import HeaderContainer from '../../containers/HeaderContainer';
 import Footer from "./Footer";
 
 export default class Main extends Component {
@@ -27,7 +26,7 @@ export default class Main extends Component {
                     </section>
 
                     <section className="mainTop">
-                        <Header/>
+                        <HeaderContainer/>
 
                         <section className="chooseObject">
                             <section className="main">

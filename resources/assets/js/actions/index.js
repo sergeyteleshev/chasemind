@@ -1,4 +1,3 @@
-export const TEST_ACTION = "TEST_ACTION";
 export const REQUEST_BOOKS = "REQUEST_BOOKS";
 export const RECEIVE_BOOKS = "RECEIVE_BOOKS";
 export const REQUEST_BOOK = "REQUEST_BOOKS";
@@ -9,6 +8,16 @@ export const LOGIN_HANDLE_CHANGE = "LOGIN_HANDLE_CHANGE";
 export const EMAIL_HANDLE_CHANGE = "EMAIL_HANDLE_CHANGE";
 export const PASS_HANDLE_CHANGE = "PASS_HANDLE_CHANGE";
 export const PASS_AGAIN_HANDLE_CHANGE = "PASS_AGAIN_HANDLE_CHANGE";
+
+export const REQUEST_REGISTER = "REQUEST_REGISTER";
+export const RECEIVE_REGISTER = "RECEIVE_REGISTER";
+export const SUBMIT_REGISTER = "SUBMIT_REGISTER";
+
+export const REQUEST_LOGIN = "REQUEST_LOGIN";
+export const RECEIVE_LOGIN = "RECEIVE_LOGIN";
+export const SUBMIT_LOGIN = "SUBMIT_LOGIN";
+export const LOGIN_INPUT_HANDLE_CHANGE = "LOGIN_INPUT_HANDLE_CHANGE";
+export const PASS_INPUT_HANDLE_CHANGE = "PASS_INPUT_HANDLE_CHANGE";
 
 export function requestBooks() {
     return {
@@ -49,7 +58,6 @@ export function fetchBooks() {
         const request = async () => {
             const response = await fetch('/api/books');
             const json = await response.json();
-            console.log(json);
             dispatch(receiveBooks(json));
         };
 
@@ -65,7 +73,6 @@ export function fetchBook(id)
         const request = async () => {
             const response = await fetch('/api/book/'+ id);
             const json = await response.json();
-            console.log(json);
             dispatch(openCurrentBook(json));
             dispatch(receiveBook());
         };
@@ -106,6 +113,33 @@ export function passAgainHandleChange(event)
     }
 }
 
+export function requestRegister() {
+    return {
+        type: REQUEST_REGISTER,
+    }
+}
+
+export function receiveRegister(user) {
+    return {
+        type: RECEIVE_REGISTER,
+        payload: user,
+    }
+}
+
+export function submitRegister(login, email, pass, passAgain) {
+
+    return dispatch => {
+        if(login.length > 0 && email.length > 0 && pass.length > 0 && passAgain.length > 0 && (pass === passAgain))
+        {
+            dispatch(fetchRegister(login, email, pass));
+        }
+
+        return {
+            type: SUBMIT_REGISTER,
+        }
+    };
+}
+
 export function fetchRegister(login, email, pass)
 {
     const payload = {
@@ -114,20 +148,92 @@ export function fetchRegister(login, email, pass)
         password: pass,
     };
 
-    let data = new FormData();
-    data.append( "json", JSON.stringify(payload));
-
     return dispatch => {
+        dispatch(requestRegister());
         const request = async () => {
-            const response = await fetch('/api/register/', {
+            const response = await fetch('/api/register',{
                 method: 'POST',
-                body: data,
-            });
-            const json = await response.json();
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)}
+            );
 
-            console.log(json);
+            const json = await response.json();
+            dispatch(receiveRegister(json));
         };
 
         request();
+    };
+}
+
+export function requestLogin() {
+    return {
+        type: REQUEST_LOGIN,
+    }
+}
+
+export function receiveLogin(user) {
+    return {
+        type: RECEIVE_LOGIN,
+        payload: user,
+    }
+}
+
+export function submitLogin(login, pass) {
+
+    return dispatch => {
+        if(login.length > 0 && pass.length > 0)
+        {
+            dispatch(fetchLogin(login, pass));
+        }
+
+        return {
+            type: SUBMIT_LOGIN,
+        }
+    };
+}
+
+export function fetchLogin(login, pass)
+{
+    const payload = {
+        name: login,
+        password: pass,
+    };
+
+    return dispatch => {
+        dispatch(requestLogin());
+        const request = async () => {
+            const response = await fetch('/api/login',{
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)}
+            );
+
+            const json = await response.json();
+            dispatch(receiveLogin(json));
+        };
+
+        request();
+    };
+}
+
+export function loginInputHandleChange(event)
+{
+    return {
+        type: LOGIN_INPUT_HANDLE_CHANGE,
+        payload: event.target.value,
+    }
+}
+
+export function passwordInputHandleChange(event)
+{
+    return {
+        type: PASS_INPUT_HANDLE_CHANGE,
+        payload: event.target.value,
     }
 }

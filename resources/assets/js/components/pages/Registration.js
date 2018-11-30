@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Footer from "./Footer";
-import Header from "../Header";
+import HeaderContainer from "../../containers/HeaderContainer";
 
 export default class Registration extends Component {
     render() {
         return (
             <div>
-                <Header/>
+                <HeaderContainer/>
 
                 <section className="main">
                     <section className="text">
@@ -44,13 +44,13 @@ export default class Registration extends Component {
                                 <tr>
                                     <td>
                                         <input className="passwordAgain" onChange={(event) => this.props.passAgainHandleChange(event)} value={this.props.passwordAgain} placeholder="Пароль(снова)" name="passwordAgain" type="password"/>
-                                        <span>{this.props.login + " " + this.props.email  + " " + this.props.password}</span>
+                                        <span>{this.props.login + " " + this.props.email  + " " + this.props.password + " " + this.props.passwordAgain}</span>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <input className="submit" onClick={() => this.props.fetchRegister(this.props.login, this.props.email, this.props.password)} type="submit" name="sendInf" value="Регистрация"/>
+                        <input className="submit" onClick={() => this.props.submitRegister(this.props.login, this.props.email, this.props.password, this.props.passwordAgain)} type="submit" name="sendInf" value="Регистрация"/>
                         <section className="response">
 
                         </section>
