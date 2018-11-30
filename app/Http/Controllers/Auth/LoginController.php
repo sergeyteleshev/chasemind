@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,25 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $response = Auth::user();
             $response['status'] = "ok";
+
+            if($remember)
+                $response['rem_token'] = Auth::user()->getRememberToken();
+        }
+        else
+        {
+            $response['error'] = 'invalid data';
+        }
+
+        return $response;
+    }
+
+    public function loginViaRememberToken(Request $request)
+    {
+        $response = User::where('remember_token', $request->input('remember_token'))->first();
+        if($response)
+        {
+            $response['status'] = "ok";
+            $response['rem_token'] = $request->input('remember_token');
         }
         else
         {

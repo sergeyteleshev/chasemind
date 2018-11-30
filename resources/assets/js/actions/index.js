@@ -180,6 +180,11 @@ export function requestLogin() {
 }
 
 export function receiveLogin(user) {
+    if(user.rem_token)
+    {
+        localStorage.setItem('remember_token', user.rem_token);
+    }
+
     return {
         type: RECEIVE_LOGIN,
         payload: user,
@@ -187,7 +192,6 @@ export function receiveLogin(user) {
 }
 
 export function submitLogin(login, pass, remember) {
-
     return dispatch => {
         if(login.length > 0 && pass.length > 0)
         {
@@ -253,6 +257,7 @@ export function rememberMeHandleChange(event)
 }
 
 export function receiveLogout(response) {
+    localStorage.removeItem('remember_token');
     return {
         type: RECEIVE_LOGOUT,
         payload: response,
@@ -296,3 +301,30 @@ export function submitLogout() {
     };
 }
 
+export function fetchLoginViaRememberToken(rememberToken)
+{
+    const payload = {
+        remember_token: rememberToken,
+    };
+
+    const request = async () => {
+        const response = await fetch('/api/rememberLogin',{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)}
+        );
+
+        return await response.json();
+    };
+
+    request();
+
+}
+
+export function testAlert()
+{
+    alert(1);
+}

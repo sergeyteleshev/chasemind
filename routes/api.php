@@ -26,4 +26,5 @@ Route::delete('books/{book}', 'BookController@delete');
 Route::post('register', 'Auth\RegisterController@create');
 Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout');
+Route::post('rememberLogin', 'Auth\LoginController@loginViaRememberToken');
 

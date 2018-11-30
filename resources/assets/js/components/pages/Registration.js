@@ -5,8 +5,8 @@ import {Redirect} from "react-router-dom";
 
 export default class Registration extends Component {
     render() {
-        const {name, email, id} = this.props.user;
-        if((typeof name === "string" && typeof email === "string" && typeof id === "number") && name.length > 0 && email.length > 0 && id > 0)
+        const {name, email} = this.props.user;
+        if((typeof name === "string" && typeof email === "string") && name.length > 0 && email.length > 0)
         {
             return <Redirect to={"/lib"}/>;
         }

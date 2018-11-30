@@ -19,8 +19,8 @@ export default class Header extends Component {
             </section>
         );
 
-        const {name, email, status} = this.props.user;
-        if((typeof name === "string" && typeof email === "string" && typeof status === "string") && (status === "ok") && name.length > 0)
+        const {name, email} = this.props.user;
+        if((typeof name === "string" && typeof email === "string") && name.length > 0)
         {
             loginButtons = (
                 <section className="auth">

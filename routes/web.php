@@ -13,10 +13,6 @@ Use App\User;
 |
 */
 
-//todo отдаёт json. запросы на API server. вьюхи не надо рендерить.
-//todo поставить вебпак
-
-
 Route::view('/{path?}', 'welcome')
     ->where('path', '.*')
     ->name('react');
