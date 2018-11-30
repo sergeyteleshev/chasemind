@@ -13,17 +13,9 @@ import createHistory from 'history/createBrowserHistory';
 const history = createHistory();
 const middleware = [thunkMiddleware];
 
-const composeEnhancers =
-    typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-            // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+let authToken = localStorage.getItem('authToken');
 
-        }) : compose;
-
-let store = createStore(storeApp, composeEnhancers(applyMiddleware(...middleware)));
-
-if (window.devToolsExtension) window.devToolsExtension.updateStore(store);
+let store = createStore(storeApp, applyMiddleware(...middleware));
 
 const render = Component => {
     ReactDOM.render(
@@ -39,21 +31,3 @@ const render = Component => {
 };
 
 render(App);
-
-//
-// if(NODE_ENV==='development') {
-//
-//     //LOGGER
-//
-//
-//     console.log(NODE_ENV);
-//
-//     store.subscribe(()=>console.log(store.getState()));
-//
-//     //HOT MODULE
-//
-//     render(App);
-//     if (module.hot) {
-//         module.hot.accept('./components/App', () => { render(App) })
-//     }
-// }

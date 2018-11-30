@@ -4,9 +4,9 @@ import {
     LOGIN_HANDLE_CHANGE, LOGIN_INPUT_HANDLE_CHANGE,
     OPEN_CURRENT_BOOK, PASS_AGAIN_HANDLE_CHANGE, PASS_HANDLE_CHANGE, PASS_INPUT_HANDLE_CHANGE,
     RECEIVE_BOOK,
-    RECEIVE_BOOKS, RECEIVE_LOGIN, RECEIVE_REGISTER,
+    RECEIVE_BOOKS, RECEIVE_LOGIN, RECEIVE_LOGOUT, RECEIVE_REGISTER, REMEMBER_ME_HANDLE_CHANGE,
     REQUEST_BOOK,
-    REQUEST_BOOKS, REQUEST_LOGIN, REQUEST_REGISTER, SUBMIT_REGISTER
+    REQUEST_BOOKS, REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REGISTER, SUBMIT_REGISTER
 } from "../actions/index";
 
 let initialStateBooks = {
@@ -23,9 +23,11 @@ let initialStateAuth = {
     passwordAgain: '',
     isLoginLoading: true,
     isRegLoading: true,
+    isLogoutLoading: true,
     user: {},
     loginInput: '',
     passwordInput: '',
+    remember: false,
 };
 
 
@@ -116,6 +118,23 @@ function Auth(state = initialStateAuth, action) {
         case REQUEST_LOGIN:
             return Object.assign({}, state, {
                 isLoginLoading: true,
+            });
+
+        case REMEMBER_ME_HANDLE_CHANGE:
+            return Object.assign({}, state, {
+                remember: action.payload,
+            });
+
+        case REQUEST_LOGOUT:
+            return Object.assign({}, state, {
+                isLogoutLoading: true,
+            });
+
+        case RECEIVE_LOGOUT:
+            console.log(action.payload);
+            return Object.assign({}, state, {
+                isLogoutLoading: false,
+                user: {},
             });
 
         default:

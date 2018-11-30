@@ -42,16 +42,19 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('name', 'password');
+        $remember = $request->input('remember');
+        $response = [];
 
-        if (Auth::attempt($credentials)) {
-            $request['status'] = "ok";
+        if (Auth::attempt($credentials, $remember)) {
+            $response = Auth::user();
+            $response['status'] = "ok";
         }
         else
         {
-            return array("error" => "invalid data");
+            $response['error'] = 'invalid data';
         }
 
-        return $request;
+        return $response;
     }
 
     public function logout(Request $request)
@@ -59,8 +62,9 @@ class LoginController extends Controller
         if(Auth::check())
         {
             Auth::logout();
+            return ["response" => "user is logged out"];
         }
 
-        return $request;
+        return ["response" => "user is NOT logged out"];
     }
 }

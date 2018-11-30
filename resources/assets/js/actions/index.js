@@ -18,6 +18,11 @@ export const RECEIVE_LOGIN = "RECEIVE_LOGIN";
 export const SUBMIT_LOGIN = "SUBMIT_LOGIN";
 export const LOGIN_INPUT_HANDLE_CHANGE = "LOGIN_INPUT_HANDLE_CHANGE";
 export const PASS_INPUT_HANDLE_CHANGE = "PASS_INPUT_HANDLE_CHANGE";
+export const REMEMBER_ME_HANDLE_CHANGE = "REMEMBER_ME_HANDLE_CHANGE";
+
+export const REQUEST_LOGOUT = "REQUEST_LOGOUT";
+export const RECEIVE_LOGOUT = "RECEIVE_LOGOUT";
+export const SUBMIT_LOGOUT = "SUBMIT_LOGOUT";
 
 export function requestBooks() {
     return {
@@ -181,12 +186,12 @@ export function receiveLogin(user) {
     }
 }
 
-export function submitLogin(login, pass) {
+export function submitLogin(login, pass, remember) {
 
     return dispatch => {
         if(login.length > 0 && pass.length > 0)
         {
-            dispatch(fetchLogin(login, pass));
+            dispatch(fetchLogin(login, pass, remember));
         }
 
         return {
@@ -195,11 +200,12 @@ export function submitLogin(login, pass) {
     };
 }
 
-export function fetchLogin(login, pass)
+export function fetchLogin(login, pass, remember)
 {
     const payload = {
         name: login,
         password: pass,
+        remember
     };
 
     return dispatch => {
@@ -237,3 +243,56 @@ export function passwordInputHandleChange(event)
         payload: event.target.value,
     }
 }
+
+export function rememberMeHandleChange(event)
+{
+    return {
+        type: REMEMBER_ME_HANDLE_CHANGE,
+        payload: event.target.checked,
+    }
+}
+
+export function receiveLogout(response) {
+    return {
+        type: RECEIVE_LOGOUT,
+        payload: response,
+    }
+}
+
+export function requestLogout() {
+    return {
+        type: REQUEST_LOGOUT,
+    }
+}
+
+export function fetchLogout()
+{
+    return dispatch => {
+        dispatch(requestLogout());
+        const request = async () => {
+            const response = await fetch('/api/logout', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const json = await response.json();
+            dispatch(receiveLogout(json));
+        };
+
+        request();
+    };
+}
+
+export function submitLogout() {
+
+    return dispatch => {
+        dispatch(fetchLogout());
+        return {
+            type: SUBMIT_LOGOUT,
+        }
+    };
+}
+

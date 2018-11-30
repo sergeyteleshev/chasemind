@@ -1853,6 +1853,23 @@ body
     display: none;
 }
 
+.registerResponse
+{
+    word-break: break-word;
+    width: 100%;
+}
+
+.rememberMe
+{
+    margin-top: 20px;
+}
+
+.rememberMe label
+{
+    display: inline-flex;
+    align-items: center;
+}
+
 
 @media screen and (max-width: 960px)
 {

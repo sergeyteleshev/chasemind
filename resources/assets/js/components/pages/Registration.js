@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
+import {Redirect} from "react-router-dom";
 
 export default class Registration extends Component {
     render() {
+        const {name, email, id} = this.props.user;
+        if((typeof name === "string" && typeof email === "string" && typeof id === "number") && name.length > 0 && email.length > 0 && id > 0)
+        {
+            return <Redirect to={"/lib"}/>;
+        }
+
         return (
             <div>
                 <HeaderContainer/>
@@ -44,7 +51,7 @@ export default class Registration extends Component {
                                 <tr>
                                     <td>
                                         <input className="passwordAgain" onChange={(event) => this.props.passAgainHandleChange(event)} value={this.props.passwordAgain} placeholder="Пароль(снова)" name="passwordAgain" type="password"/>
-                                        <span>{this.props.login + " " + this.props.email  + " " + this.props.password + " " + this.props.passwordAgain}</span>
+                                        {/*<span className={"registerResponse"}>{JSON.stringify(this.props.user)}</span>*/}
                                     </td>
                                 </tr>
                             </tbody>

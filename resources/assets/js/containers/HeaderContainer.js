@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {fetchBooks, openCurrentBook} from "../actions/index";
+import {fetchBooks, openCurrentBook, submitLogout} from "../actions/index";
 import Header from "../components/Header";
 
 const mapStateToProps = (state) => {
@@ -14,6 +14,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchBooks: () => dispatch(fetchBooks()),
         openCurrentBook: (book) => dispatch(openCurrentBook(book)),
+        submitLogout: () => dispatch(submitLogout())
     }
 };
 

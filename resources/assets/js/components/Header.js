@@ -19,8 +19,8 @@ export default class Header extends Component {
             </section>
         );
 
-        const {name, password, status} = this.props.user;
-        if((typeof name === "string" && typeof password === "string" && typeof status === "string") && (status === "ok") && name.length > 0)
+        const {name, email, status} = this.props.user;
+        if((typeof name === "string" && typeof email === "string" && typeof status === "string") && (status === "ok") && name.length > 0)
         {
             loginButtons = (
                 <section className="auth">
@@ -28,7 +28,7 @@ export default class Header extends Component {
                         {name}
                     </section>
 
-                    <section className="authRight">
+                    <section onClick={() => this.props.submitLogout()} className="authRight">
                         Выйти
                     </section>
                 </section>
