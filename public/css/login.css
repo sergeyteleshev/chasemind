@@ -1715,6 +1715,18 @@ body
     margin-top: 20px;
 }
 
+.chooseObjectRightPart a
+{
+    color: white;
+    text-decoration: none;
+}
+
+.chooseObjectRightPart a:hover
+{
+    color: #009393;
+}
+
+
 .tableSignIn table td a
 {
     color: #212121;

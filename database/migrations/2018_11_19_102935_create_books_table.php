@@ -21,16 +21,16 @@ class CreateBooksTable extends Migration
             $table->string('author');
             $table->double('rating')->default(0);
             $table->longText('slogan');
-            $table->longText('sloganENG');
+            $table->longText('sloganENG')->nullable();
             $table->integer('subject',0,1);
             $table->integer('amountOfDownloads')->default(0);
             $table->string('imgURL');
             $table->string('pagesBook');
             $table->string('pagesAbstarct');
             $table->string('publisher');
-            $table->string('linkOnText')->unique();
-            $table->string('linkOnAudio')->unique();
-            $table->string('linkOnVideo')->unique();
+            $table->string('linkOnText')->nullable()->unique();
+            $table->string('linkOnAudio')->nullable()->unique();
+            $table->string('linkOnVideo')->nullable()->unique();
             $table->integer('type');
             $table->string('linkOnDemoText')->nullable()->unique();
             $table->string('linkOnDemoAudio')->nullable()->unique();
@@ -38,9 +38,9 @@ class CreateBooksTable extends Migration
             $table->integer('amountOfDownloadsDemo')->default(0);
         });
 
-        Schema::table('books', function (Blueprint $table) {
-            $table->foreign('subject')->references('id')->on('subjects')->onDelete('cascade');
-        });
+//        Schema::table('books', function (Blueprint $table) {
+//            $table->foreign('subject')->references('id')->on('subjects')->onDelete('cascade');
+//        });
     }
 
     /**

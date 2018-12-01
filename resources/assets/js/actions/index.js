@@ -24,6 +24,10 @@ export const REQUEST_LOGOUT = "REQUEST_LOGOUT";
 export const RECEIVE_LOGOUT = "RECEIVE_LOGOUT";
 export const SUBMIT_LOGOUT = "SUBMIT_LOGOUT";
 
+export const REQUEST_SUBJECTS = "REQUEST_SUBJECTS";
+export const RECEIVE_SUBJECTS = "RECEIVE_SUBJECTS";
+export const SORT_BOOKS = "SORT_BOOKS";
+
 export function requestBooks() {
     return {
         type: REQUEST_BOOKS,
@@ -327,7 +331,44 @@ export function fetchLoginViaRememberToken(rememberToken)
     };
 }
 
-export function testAlert()
+export function fetchSubjects()
 {
-    alert(1);
+    return dispatch => {
+        dispatch(requestSubjects());
+        const request = async () => {
+            const response = await fetch('/api/subjects',{
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            let json = await response.json();
+            dispatch(receiveSubjects(json));
+        };
+
+        request();
+    };
+}
+
+export function requestSubjects() {
+    return {
+        type: REQUEST_SUBJECTS,
+    }
+}
+
+export function receiveSubjects(subjects) {
+    return {
+        type: RECEIVE_SUBJECTS,
+        payload: subjects,
+    }
+}
+
+export function sortBooks(id)
+{
+    return {
+        type: SORT_BOOKS,
+        payload: id,
+    }
 }

@@ -6,7 +6,6 @@ import thunkMiddleware from 'redux-thunk';
 import storeApp from '../reducers';
 import { AppContainer } from 'react-hot-loader';
 import Contact from './pages/Contact';
-import Main from './pages/Main';
 import Dontwork from './pages/Dontwork';
 import Subscription from './pages/Subscription';
 
@@ -18,6 +17,7 @@ import BookContainer from "../containers/BookContainer";
 import RegistrationContainer from "../containers/RegistrationContainer";
 import LoginController from "../containers/LoginContainer";
 import {fetchLoginViaRememberToken} from "../actions";
+import MainContainer from "../containers/MainContainer";
 const history = createHistory();
 const middleware = [thunkMiddleware];
 let store = createStore(storeApp, applyMiddleware(...middleware));
@@ -29,7 +29,7 @@ export default class App extends Component {
             <Provider store={store}>
                 <Router history={history}>
                     <div>
-                        <Route exact path='/' name={"main"} component={Main}/>
+                        <Route exact path='/' name={"main"} component={MainContainer}/>
                         <Route exact path='/contact' name={"contact"} component={Contact}/>
                         <Route exact path='/book/:id' name={"book"} component={BookContainer}/>
                         <Route exact path='/dontwork' component={Dontwork}/>

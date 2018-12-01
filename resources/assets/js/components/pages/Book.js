@@ -64,7 +64,7 @@ export default class Book extends Component {
                            </section>
 
                            <section className="middleOfBookAdvantage">
-                               <span>ПРЕИМУЩЕСТВО</span> {Math.round(currentBook.pagesAbstarct /currentBook.pagesBook) * 100 }%
+                               <span>ПРЕИМУЩЕСТВО</span> {(currentBook.pagesBook / currentBook.pagesAbstarct).toFixed(2) * 100 }%
                            </section>
                        </section>
 

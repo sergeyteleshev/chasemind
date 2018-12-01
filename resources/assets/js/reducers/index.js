@@ -4,16 +4,19 @@ import {
     LOGIN_HANDLE_CHANGE, LOGIN_INPUT_HANDLE_CHANGE,
     OPEN_CURRENT_BOOK, PASS_AGAIN_HANDLE_CHANGE, PASS_HANDLE_CHANGE, PASS_INPUT_HANDLE_CHANGE,
     RECEIVE_BOOK,
-    RECEIVE_BOOKS, RECEIVE_LOGIN, RECEIVE_LOGOUT, RECEIVE_REGISTER, REMEMBER_ME_HANDLE_CHANGE,
+    RECEIVE_BOOKS, RECEIVE_LOGIN, RECEIVE_LOGOUT, RECEIVE_REGISTER, RECEIVE_SUBJECTS, REMEMBER_ME_HANDLE_CHANGE,
     REQUEST_BOOK,
-    REQUEST_BOOKS, REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REGISTER, SUBMIT_REGISTER
+    REQUEST_BOOKS, REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REGISTER, REQUEST_SUBJECTS, SORT_BOOKS, SUBMIT_REGISTER
 } from "../actions/index";
 
 let initialStateBooks = {
     libBooks: {},
     isLibLoading: true,
     isBookLoading: true,
+    isSubjectsLoading: true,
     currentBook: {},
+    subjects: {},
+    sortId: 0,
 };
 
 let initialStateAuth = {
@@ -57,6 +60,23 @@ function Books(state = initialStateBooks, action) {
         case OPEN_CURRENT_BOOK:
             return Object.assign({}, state, {
                 currentBook: action.payload,
+            });
+
+        case REQUEST_SUBJECTS:
+            return Object.assign({}, state, {
+                isSubjectsLoading: true,
+            });
+
+        case RECEIVE_SUBJECTS:
+            return Object.assign({}, state, {
+                isSubjectsLoading: false,
+                subjects: action.payload,
+            });
+
+        case SORT_BOOKS:
+            console.log("sort id:" + action.payload);
+            return Object.assign({}, state, {
+                sortId: action.payload,
             });
 
         default:
