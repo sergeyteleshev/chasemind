@@ -64,10 +64,13 @@ class RegisterController extends Controller
     protected function create(Request $request)
     {
         $data = $request->all();
-        return response()->json(User::create([
+        User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-        ]));
+        ]);
+
+        $user = User::where('email', $request->input('email'))->first();
+        return response()->json($user, 201);
     }
 }

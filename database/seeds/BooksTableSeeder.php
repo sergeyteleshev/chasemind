@@ -13,6 +13,15 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
+        $subjects = array('Бизнес', 'Здоровье', 'Творчество', 'Маркетинг', 'Саморазвитие');
+
+        foreach ($subjects as $subject)
+        {
+            DB::table('subjects')->insert([
+                'subject' => $subject,
+            ]);
+        }
+
         foreach (range(1, 100) as $index)
         {
             DB::table('books')->insert([
@@ -22,7 +31,7 @@ class BooksTableSeeder extends Seeder
                 'rating' => random_int(0,5),
                 'slogan' => str_random(100),
                 'sloganENG' => str_random(100),
-                'subject' => random_int(1,5),
+                'subject' => random_int(1, DB::table('subjects')->max('id')),
                 'amountOfDownloads' => 0,
                 'imgURL' => "https://images.ua.prom.st/941882038_w640_h640_elrod_h.magiya__200na140mm.jpg",
                 'pagesBook' => (string) random_int(500,1000),

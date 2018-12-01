@@ -303,25 +303,28 @@ export function submitLogout() {
 
 export function fetchLoginViaRememberToken(rememberToken)
 {
-    const payload = {
-        remember_token: rememberToken,
+    return dispatch => {
+        const payload = {
+            remember_token: rememberToken,
+        };
+
+        dispatch(requestLogin());
+        const request = async () => {
+            const response = await fetch('/api/rememberLogin',{
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            let json = await response.json();
+            dispatch(receiveLogin(json));
+        };
+
+        request();
     };
-
-    const request = async () => {
-        const response = await fetch('/api/rememberLogin',{
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)}
-        );
-
-        return await response.json();
-    };
-
-    request();
-
 }
 
 export function testAlert()

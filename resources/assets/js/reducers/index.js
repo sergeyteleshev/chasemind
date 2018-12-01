@@ -109,6 +109,7 @@ function Auth(state = initialStateAuth, action) {
             });
 
         case RECEIVE_LOGIN:
+            console.log('RECEIVE LOGIN');
             console.log(action.payload);
             return Object.assign({}, state, {
                 user: action.payload,

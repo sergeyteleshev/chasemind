@@ -9,7 +9,7 @@ export default class Library extends Component {
         this.props.fetchBooks();
     }
 
-    render()
+    renderBooks()
     {
         const { libBooks } = this.props;
         let books = null;
@@ -31,6 +31,17 @@ export default class Library extends Component {
                 );
             });
         }
+        else
+        {
+            books = <section className={"nobooks"}>Книг нет;(</section>;
+        }
+
+        return books;
+    };
+
+    render()
+    {
+        let books = this.renderBooks();
 
         return (
             <div>
@@ -46,7 +57,21 @@ export default class Library extends Component {
                     </section>
 
                     <section className="objectOfBook">
-
+                        <section className='object'>
+                            <input type='submit' id="" value="Бизнес"/>
+                        </section>
+                        <section className='object'>
+                            <input type='submit' id="" value="Здоровье"/>
+                        </section>
+                        <section className='object'>
+                            <input type='submit' id="" value="Творчество"/>
+                        </section>
+                        <section className='object'>
+                            <input type='submit' id="" value="Маркетинг"/>
+                        </section>
+                        <section className='object'>
+                            <input type='submit' id="" value="Саморазвитие"/>
+                        </section>
                     </section>
 
                     <section className="underlineLib">

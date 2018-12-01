@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import {fetchBooks, openCurrentBook, submitLogout} from "../actions/index";
 import Header from "../components/Header";
+import {fetchLoginViaRememberToken} from "../actions";
 
 const mapStateToProps = (state) => {
     return {
@@ -14,7 +15,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchBooks: () => dispatch(fetchBooks()),
         openCurrentBook: (book) => dispatch(openCurrentBook(book)),
-        submitLogout: () => dispatch(submitLogout())
+        submitLogout: () => dispatch(submitLogout()),
+        fetchLoginViaRememberToken: (token) => dispatch(fetchLoginViaRememberToken(token))
     }
 };
 

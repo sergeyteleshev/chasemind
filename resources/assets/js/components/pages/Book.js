@@ -19,11 +19,11 @@ export default class Book extends Component {
 
     render() {
         const currentBook = this.props.currentBook;
-        let book = null;
+        let books = null;
 
         if(currentBook)
         {
-               book = <section className="bookWrapper">
+               books = <section className="bookWrapper">
                    <section className="topOfBook">
                        <section className="topOfBookImg">
                             <img src={currentBook.imgURL}/>
@@ -138,7 +138,7 @@ export default class Book extends Component {
                         • > Библиотека
                     </section>
 
-                    {book}
+                    {books}
 
                 </section>
 

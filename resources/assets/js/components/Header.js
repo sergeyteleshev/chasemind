@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import {Link, Redirect} from "react-router-dom";
 
 export default class Header extends Component {
+    componentWillMount()
+    {
+        let rememberToken = localStorage.getItem('remember_token');
+        if(rememberToken)
+        {
+            this.props.fetchLoginViaRememberToken(rememberToken);
+        }
+    }
+
     render() {
         let loginButtons = (
             <section className="auth">
