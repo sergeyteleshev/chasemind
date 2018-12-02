@@ -17,6 +17,7 @@ import BookContainer from "../containers/BookContainer";
 import RegistrationContainer from "../containers/RegistrationContainer";
 import LoginController from "../containers/LoginContainer";
 import MainContainer from "../containers/MainContainer";
+import ContactContainer from "../containers/ContactContainer";
 const history = createHistory();
 const middleware = [thunkMiddleware];
 let store = createStore(storeApp, applyMiddleware(...middleware));
@@ -29,7 +30,7 @@ export default class App extends Component {
                 <Router history={history}>
                     <div>
                         <Route exact path='/' name={"main"} component={MainContainer}/>
-                        <Route exact path='/contact' name={"contact"} component={Contact}/>
+                        <Route exact path='/contact' name={"contact"} component={ContactContainer}/>
                         <Route exact path='/book/:id' name={"book"} component={BookContainer}/>
                         <Route exact path='/dontwork' component={Dontwork}/>
                         <Route exact path='/lib' component={LibraryContainer}/>

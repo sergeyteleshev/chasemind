@@ -85,6 +85,9 @@ export default class Library extends Component {
                     </section>
 
                     <section className="objectOfBook">
+                        <section className='object'>
+                            <input onClick={() => this.props.sortBooks(0)} type='submit' key={0} id={0} value={"Все"}/>
+                        </section>
                         {subjects}
                     </section>
 

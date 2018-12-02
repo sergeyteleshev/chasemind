@@ -1,5 +1,7 @@
 import {combineReducers} from 'redux';
 import {
+    CONTACT_EMAIL_HANDLE_CHANGE, CONTACT_MESSAGE_HANDLE_CHANGE,
+    CONTACT_NAME_HANDLE_CHANGE, CONTACT_RECEIVE, CONTACT_REQUEST,
     EMAIL_HANDLE_CHANGE,
     LOGIN_HANDLE_CHANGE, LOGIN_INPUT_HANDLE_CHANGE,
     OPEN_CURRENT_BOOK, PASS_AGAIN_HANDLE_CHANGE, PASS_HANDLE_CHANGE, PASS_INPUT_HANDLE_CHANGE,
@@ -9,7 +11,7 @@ import {
     REQUEST_BOOKS, REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REGISTER, REQUEST_SUBJECTS, SORT_BOOKS, SUBMIT_REGISTER
 } from "../actions/index";
 
-let initialStateBooks = {
+const initialStateBooks = {
     libBooks: {},
     isLibLoading: true,
     isBookLoading: true,
@@ -19,7 +21,7 @@ let initialStateBooks = {
     sortId: 0,
 };
 
-let initialStateAuth = {
+const initialStateAuth = {
     login: '',
     email: '',
     password: '',
@@ -33,6 +35,13 @@ let initialStateAuth = {
     remember: false,
 };
 
+const initialStateEmail = {
+    name: "",
+    email: "",
+    message: "",
+    isContactLoading: true,
+    contact: {},
+};
 
 function Books(state = initialStateBooks, action) {
     switch(action.type) {
@@ -163,5 +172,40 @@ function Auth(state = initialStateAuth, action) {
     }
 }
 
-const storeApp = combineReducers({Books, Auth});
+function Email(state = initialStateEmail, action) {
+    switch (action.type) {
+        case CONTACT_NAME_HANDLE_CHANGE:
+            return Object.assign({}, state, {
+                name: action.payload,
+            });
+
+        case CONTACT_EMAIL_HANDLE_CHANGE:
+            return Object.assign({}, state, {
+                email: action.payload,
+            });
+
+        case CONTACT_MESSAGE_HANDLE_CHANGE:
+            return Object.assign({}, state, {
+                message: action.payload,
+            });
+
+        case CONTACT_REQUEST:
+            return Object.assign({}, state, {
+                isContactLoading: true,
+            });
+
+        case CONTACT_RECEIVE:
+            console.log('CONTACT_RECEIVE');
+            console.log(action.payload);
+            return Object.assign({}, state, {
+                isContactLoading: false,
+                contact: action.payload,
+            });
+
+        default:
+            return state;
+    }
+}
+
+const storeApp = combineReducers({Books, Auth, Email});
 export default storeApp;

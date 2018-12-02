@@ -28,6 +28,13 @@ export const REQUEST_SUBJECTS = "REQUEST_SUBJECTS";
 export const RECEIVE_SUBJECTS = "RECEIVE_SUBJECTS";
 export const SORT_BOOKS = "SORT_BOOKS";
 
+export const CONTACT_NAME_HANDLE_CHANGE = "CONTACT_NAME_HANDLE_CHANGE";
+export const CONTACT_EMAIL_HANDLE_CHANGE = "CONTACT_EMAIL_HANDLE_CHANGE";
+export const CONTACT_MESSAGE_HANDLE_CHANGE = "CONTACT_MESSAGE_HANDLE_CHANGE";
+export const CONTACT_SUBMIT = "CONTACT_SUBMIT";
+export const CONTACT_REQUEST = "CONTACT_REQUEST";
+export const CONTACT_RECEIVE = "CONTACT_RECEIVE";
+
 export function requestBooks() {
     return {
         type: REQUEST_BOOKS,
@@ -384,4 +391,84 @@ export function setAuthorizationToken(token) {
          delete axios.defaults.headers.common['Authorization'];
     }
 
+}
+
+export function contactNameHandleChange(event)
+{
+    return {
+        type: CONTACT_NAME_HANDLE_CHANGE,
+        payload: event.target.value,
+    }
+}
+
+export function contactEmailHandleChange(event)
+{
+    return {
+        type: CONTACT_EMAIL_HANDLE_CHANGE,
+        payload: event.target.value,
+    }
+}
+
+export function contactMessageHandleChange(event)
+{
+    return {
+        type: CONTACT_MESSAGE_HANDLE_CHANGE,
+        payload: event.target.value,
+    }
+}
+
+export function requestContact() {
+    return {
+        type: CONTACT_REQUEST,
+    }
+}
+
+export function receiveContact(contactData) {
+    return {
+        type: CONTACT_RECEIVE,
+        payload: contactData,
+    }
+}
+
+export function contactSubmit(name, email, message)
+{
+    return dispatch => {
+        if(name.length > 0 && email.length > 0 && message.length > 0)
+        {
+            dispatch(fetchCustomerContactMessage(name, email, message));
+        }
+
+        return {
+            type: CONTACT_SUBMIT,
+        }
+    };
+}
+
+
+export function fetchCustomerContactMessage(name, email, message)
+{
+    const payload = {
+        name,
+        email,
+        message,
+    };
+
+    return dispatch => {
+        dispatch(requestContact());
+        const request = async () => {
+            const response = await fetch('/api/emails',{
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const json = await response.json();
+            dispatch(receiveContact(json));
+        };
+
+        request();
+    };
 }

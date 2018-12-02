@@ -29,3 +29,6 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::post('rememberLogin', 'Auth\LoginController@loginViaRememberToken');
 
 Route::get('subjects', 'SubjectController@index');
+
+Route::get('emails', 'CallsController@index');
+Route::put('emails', 'CallsController@create');
