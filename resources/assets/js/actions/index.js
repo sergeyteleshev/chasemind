@@ -493,7 +493,7 @@ export function receiveGetMaterial(contactData) {
 export function getMaterialSubmit(bookId, type)
 {
     return dispatch => {
-        if(bookId.length > 0 && type.length > 0)
+        if(bookId > 0 && type.length > 0)
         {
             dispatch(fetchGetMaterial(bookId, type));
         }
@@ -511,20 +511,23 @@ export function fetchGetMaterial(bookId, type)
         type,
     };
 
+    console.log(payload);
+
     return dispatch => {
         dispatch(requestGetMaterial());
         const request = async () => {
             const response = await fetch('/api/getBook',{
                 method: 'POST',
                 headers: {
+                    'Content-Type': 'application/json',
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(payload)
             });
 
             const json = await response.json();
-            dispatch(receiveGetMaterial(json));
+            console.log(json);
+            // dispatch(receiveGetMaterial());
         };
 
         request();

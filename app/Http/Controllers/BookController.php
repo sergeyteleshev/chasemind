@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class BookController extends Controller
 {
@@ -43,25 +44,40 @@ class BookController extends Controller
         //todo чёто не робит
         $id = $request->input('id');
         $type = $request->input('type');
-        $book = Book::find($id);
+        $book = Book::findOrFail($id);
+        $filename = "";
 
-        if($type == 'read')
+        if($type == 'read' && $book)
         {
-            $file_path_from_public = $book['linkOnText'];
+            $file_path_from_public = $book->linkOnText;
         }
-        else if($type == 'listen')
+        else if($type == 'listen' && $book)
         {
-            $file_path_from_public = $book['linkOnAudio'];
+            $file_path_from_public = $book->linkOnAudio;
         }
-        else if($type == 'watch')
+        else if($type == 'watch' && $book)
         {
-            $file_path_from_public = $book['linkOnVideo'];
+            $file_path_from_public = $book->linkOnVideo;
         }
         else
         {
-            return response()->json(["error" => "not found"], 404);
+            if(!$book)
+                return response()->json(["error" => "book not found"], 404);
+            else if($type)
+                return response()->json(["error" => "unknown file type"], 500);
+            else
+                return response()->json(["error" => "unknown error"], 500);
         }
 
-        return response()->download($file_path_from_public, 201);
+        for($i = strlen($file_path_from_public) - 1; $i > 0; $i--)
+        {
+            if($file_path_from_public[$i] == "/")
+                break;
+
+            $filename = $file_path_from_public[$i] . $filename;
+        }
+
+        return response()->download(public_path($file_path_from_public), $filename, $request->header());
+//        return response()->json($filename, 201);
     }
 }

@@ -66,11 +66,6 @@ export default class Main extends Component {
 
                                 <section className="chooseObjectRightPart">
                                     <ul>
-                                        {/*<Link to={"/lib"}><li className="businessMain">бизнесу.</li></Link>*/}
-                                        {/*<Link to={"/lib"}><li className="healthMain">здоровью.</li></Link>*/}
-                                        {/*<Link to={"/lib"}><li className="artMain">творчеству.</li></Link>*/}
-                                        {/*<Link to={"/lib"}><li className="marketMain">маркетингу.</li></Link>*/}
-                                        {/*<Link to={"/lib"}><li className="selfdevelopmentMain">саморазвитию.</li></Link>*/}
                                         {subjects}
                                     </ul>
                                 </section>
