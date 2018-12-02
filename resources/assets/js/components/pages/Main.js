@@ -2,10 +2,40 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import HeaderContainer from '../../containers/HeaderContainer';
 import Footer from "./Footer";
-import RegistrationContainer from "../../containers/RegistrationContainer";
 
 export default class Main extends Component {
+    componentWillMount() {
+        this.props.fetchSubjects();
+    }
+
+    renderSubjects()
+    {
+        const { subjects } = this.props;
+        let subjectsHtml = null;
+
+        if(Object(subjects).length > 0)
+        {
+            subjectsHtml = subjects.map((subject) => {
+                return (
+                    <Link to={"lib"} key={subject.id}>
+                        <li id={subject.id} onClick={() => this.props.sortBooks(subject.id)} className='mainSubject'>
+                            {subject.subject}
+                        </li>
+                    </Link>
+                );
+            });
+        }
+        else
+        {
+            subjectsHtml = <section className={"nosubjects"}>Тематик книг нет;(</section>;
+        }
+
+        return subjectsHtml;
+    }
+
     render() {
+        let subjects = this.renderSubjects();
+
         return (
             <div className="container">
                 <section className="modalWindow">
@@ -31,16 +61,17 @@ export default class Main extends Component {
                         <section className="main">
                             <section className="chooseObjectWrapper">
                                 <section className="chooseObjectLeftPart">
-                                    Конспекты книг по
+                                    Конспекты книг по категориям
                                 </section>
 
                                 <section className="chooseObjectRightPart">
                                     <ul>
-                                        <Link to={"/lib"}><li className="businessMain">бизнесу.</li></Link>
-                                        <Link to={"/lib"}><li className="healthMain">здоровью.</li></Link>
-                                        <Link to={"/lib"}><li className="artMain">творчеству.</li></Link>
-                                        <Link to={"/lib"}><li className="marketMain">маркетингу.</li></Link>
-                                        <Link to={"/lib"}><li className="selfdevelopmentMain">саморазвитию.</li></Link>
+                                        {/*<Link to={"/lib"}><li className="businessMain">бизнесу.</li></Link>*/}
+                                        {/*<Link to={"/lib"}><li className="healthMain">здоровью.</li></Link>*/}
+                                        {/*<Link to={"/lib"}><li className="artMain">творчеству.</li></Link>*/}
+                                        {/*<Link to={"/lib"}><li className="marketMain">маркетингу.</li></Link>*/}
+                                        {/*<Link to={"/lib"}><li className="selfdevelopmentMain">саморазвитию.</li></Link>*/}
+                                        {subjects}
                                     </ul>
                                 </section>
                             </section>

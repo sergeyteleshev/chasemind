@@ -230,6 +230,7 @@ export function fetchLogin(login, pass, remember)
 
             const json = await response.json();
             dispatch(receiveLogin(json));
+            // dispatch(setAuthorizationToken(json.rem_token));
         };
 
         request();
@@ -371,4 +372,16 @@ export function sortBooks(id)
         type: SORT_BOOKS,
         payload: id,
     }
+}
+
+export function setAuthorizationToken(token) {
+    if(token)
+    {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
+    else
+    {
+         delete axios.defaults.headers.common['Authorization'];
+    }
+
 }

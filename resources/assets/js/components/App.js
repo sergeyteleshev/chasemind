@@ -16,7 +16,6 @@ import LibraryContainer from "../containers/LibraryContainer";
 import BookContainer from "../containers/BookContainer";
 import RegistrationContainer from "../containers/RegistrationContainer";
 import LoginController from "../containers/LoginContainer";
-import {fetchLoginViaRememberToken} from "../actions";
 import MainContainer from "../containers/MainContainer";
 const history = createHistory();
 const middleware = [thunkMiddleware];
