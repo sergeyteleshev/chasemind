@@ -37,4 +37,31 @@ class BookController extends Controller
 
         return response()->json($response, 204);
     }
+
+    public function getBookMaterial(Request $request)
+    {
+        //todo чёто не робит
+        $id = $request->input('id');
+        $type = $request->input('type');
+        $book = Book::find($id);
+
+        if($type == 'read')
+        {
+            $file_path_from_public = $book['linkOnText'];
+        }
+        else if($type == 'listen')
+        {
+            $file_path_from_public = $book['linkOnAudio'];
+        }
+        else if($type == 'watch')
+        {
+            $file_path_from_public = $book['linkOnVideo'];
+        }
+        else
+        {
+            return response()->json(["error" => "not found"], 404);
+        }
+
+        return response()->download($file_path_from_public, 201);
+    }
 }

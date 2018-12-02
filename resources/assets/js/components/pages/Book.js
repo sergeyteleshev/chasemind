@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
+import {getMaterialSubmit} from "../../actions";
 
 export default class Book extends Component {
     componentWillMount()
@@ -64,14 +65,14 @@ export default class Book extends Component {
                            </section>
 
                            <section className="middleOfBookAdvantage">
-                               <span>ПРЕИМУЩЕСТВО</span> {(currentBook.pagesBook / currentBook.pagesAbstarct).toFixed(2) * 100 }%
+                               <span>ПРЕИМУЩЕСТВО</span> {Math.trunc(((currentBook.pagesBook / currentBook.pagesAbstarct).toFixed(2)) * 100)} %
                            </section>
                        </section>
 
                        <section className="bookButtonsMobile">
-                           <input type="submit" value="Читать" id="linkOnTextMobile"/>
-                           <input type="submit" value="Слушать" id="linkOnAudioMobile"/>
-                           <input type="submit" value="Смотреть" id="linkOnVideoMobile"/>
+                           <input onClick={() => this.props.getMaterialSubmit(currentBook.id, 'read')} type="submit" value="Читать" id="linkOnTextMobile"/>
+                           <input onClick={() => this.props.getMaterialSubmit(currentBook.id, 'listen')} type="submit" value="Слушать" id="linkOnAudioMobile"/>
+                           <input onClick={() => this.props.getMaterialSubmit(currentBook.id, 'watch')} type="submit" value="Смотреть" id="linkOnVideoMobile"/>
                        </section>
 
                        <section className="bottomOfBook">
@@ -86,9 +87,9 @@ export default class Book extends Component {
                    </section>
 
                    <section className="bookButtons">
-                       <input type="submit" value="Читать" id="linkOnText"/>
-                       <input type="submit" value="Слушать" id="linkOnAudio"/>
-                       <input type="submit" value="Смотреть" id="linkOnVideo"/>
+                       <input onClick={() => this.props.getMaterialSubmit(currentBook.id, 'read')} type="submit" value="Читать" id="linkOnText"/>
+                       <input onClick={() => this.props.getMaterialSubmit(currentBook.id, 'listen')} type="submit" value="Слушать" id="linkOnAudio"/>
+                       <input onClick={() => this.props.getMaterialSubmit(currentBook.id, 'watch')} type="submit" value="Смотреть" id="linkOnVideo"/>
                    </section>
                </section>;
         }

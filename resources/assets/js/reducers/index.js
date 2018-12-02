@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import {
     CONTACT_EMAIL_HANDLE_CHANGE, CONTACT_MESSAGE_HANDLE_CHANGE,
     CONTACT_NAME_HANDLE_CHANGE, CONTACT_RECEIVE, CONTACT_REQUEST,
-    EMAIL_HANDLE_CHANGE,
+    EMAIL_HANDLE_CHANGE, GET_MATERIAL_RECEIVE, GET_MATERIAL_REQUEST, GET_MATERIAL_SUBMIT,
     LOGIN_HANDLE_CHANGE, LOGIN_INPUT_HANDLE_CHANGE,
     OPEN_CURRENT_BOOK, PASS_AGAIN_HANDLE_CHANGE, PASS_HANDLE_CHANGE, PASS_INPUT_HANDLE_CHANGE,
     RECEIVE_BOOK,
@@ -19,6 +19,7 @@ const initialStateBooks = {
     currentBook: {},
     subjects: {},
     sortId: 0,
+    isBookMaterialLoading: true,
 };
 
 const initialStateAuth = {
@@ -86,6 +87,24 @@ function Books(state = initialStateBooks, action) {
             console.log("sort id:" + action.payload);
             return Object.assign({}, state, {
                 sortId: action.payload,
+            });
+
+        case GET_MATERIAL_REQUEST:
+            return Object.assign({}, state, {
+                isBookMaterialLoading: true,
+            });
+
+        case GET_MATERIAL_RECEIVE:
+            console.log('MATERIAL_RECEIVE');
+            console.log(action.payload);
+            return Object.assign({}, state, {
+                isBookMaterialLoading: false,
+            });
+
+        case GET_MATERIAL_SUBMIT:
+            console.log('MATERIAL_SUBMIT');
+            return Object.assign({}, state, {
+                isBookMaterialLoading: true,
             });
 
         default:

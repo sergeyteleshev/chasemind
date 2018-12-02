@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import Book from '../components/pages/Book';
 import {fetchBook} from "../actions/index";
+import {getMaterialSubmit} from "../actions";
 
 const mapStateToProps = (state) => {
     return {
@@ -12,6 +13,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchBook: (id) => dispatch(fetchBook(id)),
+        getMaterialSubmit: (bookId, type) => dispatch(getMaterialSubmit(bookId, type)),
     }
 };
 

@@ -17,7 +17,7 @@ class CreateCallsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('email');
-            $table->string('name')->nullable();
+            $table->string('name');
             $table->longText('message');
         });
     }

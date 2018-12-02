@@ -35,6 +35,10 @@ export const CONTACT_SUBMIT = "CONTACT_SUBMIT";
 export const CONTACT_REQUEST = "CONTACT_REQUEST";
 export const CONTACT_RECEIVE = "CONTACT_RECEIVE";
 
+export const GET_MATERIAL_SUBMIT = "GET_MATERIAL_SUBMIT";
+export const GET_MATERIAL_REQUEST = "GET_MATERIAL_REQUEST";
+export const GET_MATERIAL_RECEIVE = "GET_MATERIAL_RECEIVE";
+
 export function requestBooks() {
     return {
         type: REQUEST_BOOKS,
@@ -472,3 +476,58 @@ export function fetchCustomerContactMessage(name, email, message)
         request();
     };
 }
+
+export function requestGetMaterial() {
+    return {
+        type: GET_MATERIAL_REQUEST,
+    }
+}
+
+export function receiveGetMaterial(contactData) {
+    return {
+        type: GET_MATERIAL_RECEIVE,
+        payload: contactData,
+    }
+}
+
+export function getMaterialSubmit(bookId, type)
+{
+    return dispatch => {
+        if(bookId.length > 0 && type.length > 0)
+        {
+            dispatch(fetchGetMaterial(bookId, type));
+        }
+
+        return {
+            type: GET_MATERIAL_SUBMIT,
+        }
+    };
+}
+
+export function fetchGetMaterial(bookId, type)
+{
+    const payload = {
+        id: bookId,
+        type,
+    };
+
+    return dispatch => {
+        dispatch(requestGetMaterial());
+        const request = async () => {
+            const response = await fetch('/api/getBook',{
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const json = await response.json();
+            dispatch(receiveGetMaterial(json));
+        };
+
+        request();
+    };
+}
+

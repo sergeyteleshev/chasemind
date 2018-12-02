@@ -61,7 +61,7 @@ export default class Main extends Component {
                         <section className="main">
                             <section className="chooseObjectWrapper">
                                 <section className="chooseObjectLeftPart">
-                                    Конспекты книг по категориям
+                                    Конспекты книг по темам
                                 </section>
 
                                 <section className="chooseObjectRightPart">
