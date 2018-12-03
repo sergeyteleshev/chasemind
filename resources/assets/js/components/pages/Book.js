@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
-import {getMaterialSubmit} from "../../actions";
+import {getMaterialSubmit, showBookDialog} from "../../actions";
 
 export default class Book extends Component {
     componentWillMount()
@@ -16,6 +16,103 @@ export default class Book extends Component {
         }
 
         console.log(book);
+    }
+
+    getMaterial(bookId, type)
+    {
+        if(this.props.authorized && this.props.user.daysLeft > 0)
+        {
+            return this.props.getMaterialSubmit(bookId, type);
+        }
+        else
+        {
+            return this.props.showBookDialog();
+        }
+    }
+
+    renderModelWindow()
+    {
+        if(!this.props.isBookModalWindowShowing)
+            return null;
+
+        if(this.props.authorized && this.props.user.daysLeft <= 0)
+        {
+            return (
+                <section className="modalWindow">
+                    <section className="formModalWindow">
+                        <section className="modalBar">
+                            <section className="closeModalBar"><img onClick={() => this.props.hideBookDialog()} src="/img/cancel.svg"/></section>
+                        </section>
+
+                        <section className="headerFormModal">
+
+                        </section>
+
+                        <section className="modalWindowContent">
+                            <section className="modalWindowText">
+                                У вас осталось <span>{this.props.user.daysLeft} дней</span> подписки.
+                                <br/>
+                                Для того чтобы иметь доступ к материалам
+                                <br/>
+                                <span>нужно её купить.</span>
+                                <br/>
+                                Сейчас вы можете:
+                            </section>
+
+                            <section className="signInOutLinks">
+                                <input type="submit" className="modalDemo" value="Cкачать демо"/>
+                                <Link to={"/sub"}><input type="submit" className="buyFormModal" value="Полный доступ"/></Link>
+                            </section>
+
+                            {/*<section className="loginLink">*/}
+                                {/*<Link to={"/login"}>У меня уже есть учётная запись</Link>*/}
+                            {/*</section>*/}
+
+                            {/*<section className="subLink">*/}
+                            {/*<Link to={"/login"}>или получить <span>полный доступ</span></Link>*/}
+                            {/*</section>*/}
+                        </section>
+                    </section>
+                </section>
+            );
+        }
+
+        return (
+            <section className="modalWindow">
+                <section className="formModalWindow">
+                    <section className="modalBar">
+                        <section className="closeModalBar"><img onClick={() => this.props.hideBookDialog()} src="/img/cancel.svg"/></section>
+                    </section>
+
+                    <section className="headerFormModal">
+
+                    </section>
+
+                    <section className="modalWindowContent">
+                        <section className="modalWindowText">
+                            Полная версия конспекта доступна только
+                            <br/>
+                            <span>пользователям с подпиской.</span>
+                            <br/>
+                            Сейчас вы можете:
+                        </section>
+                        <input type="submit" className="modalDemo" value="Cкачать демо"/>
+                        <section className="signInOutLinks">
+                            <Link to={"/reg"}><input className="modalRegister" type="submit" value="Регистрация"/></Link>
+                            <Link to={"/sub"}><input type="submit" className="buyFormModal" value="Полный доступ"/></Link>
+                        </section>
+
+                        <section className="loginLink">
+                            <Link to={"/login"}>У меня уже есть учётная запись</Link>
+                        </section>
+
+                        {/*<section className="subLink">*/}
+                            {/*<Link to={"/login"}>или получить <span>полный доступ</span></Link>*/}
+                        {/*</section>*/}
+                    </section>
+                </section>
+            </section>
+        );
     }
 
     render() {
@@ -70,9 +167,9 @@ export default class Book extends Component {
                        </section>
 
                        <section className="bookButtonsMobile">
-                           <input onClick={() => this.props.getMaterialSubmit(currentBook.id, 'read')} type="submit" value="Читать" id="linkOnTextMobile"/>
-                           <input onClick={() => this.props.getMaterialSubmit(currentBook.id, 'listen')} type="submit" value="Слушать" id="linkOnAudioMobile"/>
-                           <input onClick={() => this.props.getMaterialSubmit(currentBook.id, 'watch')} type="submit" value="Смотреть" id="linkOnVideoMobile"/>
+                           <input onClick={() => this.getMaterial(currentBook.id, 'read')} type="submit" value="Читать" id="linkOnTextMobile"/>
+                           <input onClick={() => this.getMaterial(currentBook.id, 'listen')} type="submit" value="Слушать" id="linkOnAudioMobile"/>
+                           <input onClick={() => this.getMaterial(currentBook.id, 'watch')} type="submit" value="Смотреть" id="linkOnVideoMobile"/>
                        </section>
 
                        <section className="bottomOfBook">
@@ -87,50 +184,16 @@ export default class Book extends Component {
                    </section>
 
                    <section className="bookButtons">
-                       <input onClick={() => this.props.getMaterialSubmit(currentBook.id, 'read')} type="submit" value="Читать" id="linkOnText"/>
-                       <input onClick={() => this.props.getMaterialSubmit(currentBook.id, 'listen')} type="submit" value="Слушать" id="linkOnAudio"/>
-                       <input onClick={() => this.props.getMaterialSubmit(currentBook.id, 'watch')} type="submit" value="Смотреть" id="linkOnVideo"/>
+                       <input onClick={() => this.getMaterial(currentBook.id, 'read')} type="submit" value="Читать" id="linkOnText"/>
+                       <input onClick={() => this.getMaterial(currentBook.id, 'listen')} type="submit" value="Слушать" id="linkOnAudio"/>
+                       <input onClick={() => this.getMaterial(currentBook.id, 'watch')} type="submit" value="Смотреть" id="linkOnVideo"/>
                    </section>
                </section>;
         }
 
         return (
             <div>
-                <section className="modalWindow">
-                    <section className="formModalWindow">
-                        <section className="modalBar">
-                            <section className="closeModalBar"><img src="/img/cancel.svg"/></section>
-                        </section>
-
-                        <section className="headerFormModal">
-
-                        </section>
-
-                        <section className="modalWindowContent">
-                            <section className="modalWindowText">
-                                Полная версия конспекта доступна только
-                                <br/>
-                                <span>пользователям с подпиской.</span>
-                                <br/>
-                                Сейчас вы можете:
-                            </section>
-                            <input type="submit" className="modalDemo" value="Cкачать демо"/>
-                            <section className="signInOutLinks">
-                                <a href="/registration"><input className="modalRegister" type="submit"
-                                                               value="Регистрация"/></a>
-                                <a href="/sub"><input type="submit" className="buyFormModal" value="Полный доступ"/></a>
-                            </section>
-
-                            <section className="loginLink">
-                                <a href="/login">У меня уже есть учётная запись</a>
-                            </section>
-
-                            <section className="subLink">
-                                <a href="/login">или получить <span>полный доступ</span></a>
-                            </section>
-                        </section>
-                    </section>
-                </section>
+                {this.renderModelWindow()}
 
                 <HeaderContainer/>
 

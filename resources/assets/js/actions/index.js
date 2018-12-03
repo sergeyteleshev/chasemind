@@ -39,6 +39,11 @@ export const GET_MATERIAL_SUBMIT = "GET_MATERIAL_SUBMIT";
 export const GET_MATERIAL_REQUEST = "GET_MATERIAL_REQUEST";
 export const GET_MATERIAL_RECEIVE = "GET_MATERIAL_RECEIVE";
 
+export const SHOW_BOOK_MODAL_WINDOW = "SHOW_BOOK_MODAL_WINDOW";
+export const HIDE_BOOK_MODAL_WINDOW = "HIDE_BOOK_MODAL_WINDOW";
+export const SHOW_SUB_MODAL_WINDOW = "SHOW_SUB_MODAL_WINDOW";
+export const HIDE_SUB_MODAL_WINDOW = "HIDE_SUB_MODAL_WINDOW";
+
 export function requestBooks() {
     return {
         type: REQUEST_BOOKS,
@@ -526,19 +531,16 @@ export function fetchGetMaterial(bookId, type)
             });
 
             //todo обработать ошбику если файла нет
+            //todo чёто не работает и редиректит на главную страницу Оо
             const blob = await response.blob();
-
-            if(blob)
-            {
-                console.log(blob);
-                let objectURL = URL.createObjectURL(blob);
-                let a = document.querySelector('a');
-                a.href = objectURL;
-                a.download = await dispatch(fetchBookFileName(bookId, type));
-                document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
-                a.click();
-                a.remove();
-            }
+            console.log(blob);
+            let objectURL = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = objectURL;
+            a.download = await dispatch(fetchBookFileName(bookId, type));
+            document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+            a.click();
+            a.remove();
         };
 
         request();
@@ -575,3 +577,26 @@ export function fetchBookFileName(bookId, type)
     };
 }
 
+export function showBookDialog() {
+    return {
+        type: SHOW_BOOK_MODAL_WINDOW,
+    }
+}
+
+export function hideBookDialog() {
+    return {
+        type: HIDE_BOOK_MODAL_WINDOW,
+    }
+}
+
+export function showSubDialog() {
+    return {
+        type: SHOW_SUB_MODAL_WINDOW,
+    }
+}
+
+export function hideSubDialog() {
+    return {
+        type: HIDE_SUB_MODAL_WINDOW,
+    }
+}

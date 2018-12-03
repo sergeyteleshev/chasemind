@@ -93,6 +93,18 @@ class BookController extends Controller
         {
             $file_path_from_public = $book->linkOnVideo;
         }
+        else if($type == 'readDemo' && $book)
+        {
+            $file_path_from_public = $book->linkOnDemoText;
+        }
+        else if($type == 'listenDemo' && $book)
+        {
+            $file_path_from_public = $book->linkOnDemoAudio;
+        }
+        else if($type == 'watchDemo' && $book)
+        {
+            $file_path_from_public = $book->linkOnDemoVideo;
+        }
         else
         {
             if(!$book)

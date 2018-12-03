@@ -718,7 +718,7 @@
 
 .modalWindow
 {
-    display: none;
+    /*display: none;*/
     text-align: center;
     position: fixed;
     top: 0;

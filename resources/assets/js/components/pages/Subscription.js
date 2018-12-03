@@ -1,27 +1,68 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
 import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
+import {Link} from "react-router-dom";
 
 export default class Subscription extends Component {
+    renderSubModalWindow()
+    {
+        if (!this.props.isSubModalWindowShowing)
+            return null;
+
+        return (
+            <section className="modalWindow">
+                <section className="formModalWindow">
+                    <section className="modalBar">
+                        <section className="closeModalBar"><img onClick={() => this.props.hideSubDialog()} src="/img/cancel.svg"/></section>
+                    </section>
+
+                    <section className="headerFormModal">
+
+                    </section>
+
+                    <section className="modalWindowContent">
+                        <section className="modalWindowText">
+                            Полная версия конспекта доступна только
+                            <br/>
+                            <span>пользователям с подпиской.</span>
+                            <br/>
+                            Сейчас вы можете:
+                        </section>
+                        <input type="submit" className="modalDemo" value="Cкачать демо"/>
+                        <section className="signInOutLinks">
+                            <Link to={"/reg"}><input className="modalRegister" type="submit" value="Регистрация"/></Link>
+                            <Link to={"/sub"}><input type="submit" className="buyFormModal" value="Полный доступ"/></Link>
+                        </section>
+
+                        <section className="loginLink">
+                            <Link to={"/login"}>У меня уже есть учётная запись</Link>
+                        </section>
+
+                        {/*<section className="subLink">*/}
+                        {/*<Link to={"/login"}>или получить <span>полный доступ</span></Link>*/}
+                        {/*</section>*/}
+                    </section>
+                </section>
+            </section>
+        );
+    }
+
+    buySub()
+    {
+        if(this.props.authorized && this.props.user.daysLeft > 0)
+        {
+            return alert(1);
+        }
+        else
+        {
+            return this.props.showSubDialog();
+        }
+    }
+
     render() {
         return (
             <div>
-                <section className="modalWindow">
-                    <section className="formModalWindow">
-                        <section className="modalBar">
-                            <section className="closeModalBar"><img src="/img/cancel.svg"/></section>
-                        </section>
-
-                        <section className="headerFormModal">
-
-                        </section>
-
-                        <section className="modalWindowContent">
-
-                        </section>
-                    </section>
-                </section>
+                {this.renderSubModalWindow()}
 
                 <section className="subBackground">
                     <HeaderContainer/>
@@ -114,7 +155,7 @@ export default class Subscription extends Component {
 
 
                         <section className="minButton">
-                            <input type="submit" value="Выбрать"/>
+                            <input type="submit" onClick={() => this.buySub()} value="Выбрать"/>
                         </section>
                     </section>
 
@@ -141,7 +182,7 @@ export default class Subscription extends Component {
 
 
                         <section className="medButton">
-                            <input type="submit" value="Выбрать"/>
+                            <input type="submit" onClick={() => this.buySub()} value="Выбрать"/>
                         </section>
                     </section>
 
@@ -167,7 +208,7 @@ export default class Subscription extends Component {
 
 
                         <section className="optButton">
-                            <input type="submit" value="Выбрать"/>
+                            <input type="submit" onClick={() => this.buySub()} value="Выбрать"/>
                         </section>
 
                     </section>

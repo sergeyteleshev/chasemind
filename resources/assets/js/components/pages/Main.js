@@ -38,21 +38,21 @@ export default class Main extends Component {
 
         return (
             <div className="container">
-                <section className="modalWindow">
-                    <section className="formModalWindow">
-                        <section className="modalBar">
-                            <section className="closeModalBar"><span>x</span></section>
-                        </section>
+                {/*<section className="modalWindow">*/}
+                    {/*<section className="formModalWindow">*/}
+                        {/*<section className="modalBar">*/}
+                            {/*<section className="closeModalBar"><span>x</span></section>*/}
+                        {/*</section>*/}
 
-                        <section className="headerFormModal">
+                        {/*<section className="headerFormModal">*/}
 
-                        </section>
+                        {/*</section>*/}
 
-                        <section className="modalWindowContent">
+                        {/*<section className="modalWindowContent">*/}
 
-                        </section>
-                    </section>
-                </section>
+                        {/*</section>*/}
+                    {/*</section>*/}
+                {/*</section>*/}
 
                 <section className="mainTop">
                     <HeaderContainer/>

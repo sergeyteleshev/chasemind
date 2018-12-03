@@ -1,14 +1,36 @@
 import {combineReducers} from 'redux';
 import {
-    CONTACT_EMAIL_HANDLE_CHANGE, CONTACT_MESSAGE_HANDLE_CHANGE,
-    CONTACT_NAME_HANDLE_CHANGE, CONTACT_RECEIVE, CONTACT_REQUEST,
-    EMAIL_HANDLE_CHANGE, GET_MATERIAL_RECEIVE, GET_MATERIAL_REQUEST, GET_MATERIAL_SUBMIT,
-    LOGIN_HANDLE_CHANGE, LOGIN_INPUT_HANDLE_CHANGE,
-    OPEN_CURRENT_BOOK, PASS_AGAIN_HANDLE_CHANGE, PASS_HANDLE_CHANGE, PASS_INPUT_HANDLE_CHANGE,
+    CONTACT_EMAIL_HANDLE_CHANGE,
+    CONTACT_MESSAGE_HANDLE_CHANGE,
+    CONTACT_NAME_HANDLE_CHANGE,
+    CONTACT_RECEIVE,
+    CONTACT_REQUEST,
+    EMAIL_HANDLE_CHANGE,
+    GET_MATERIAL_RECEIVE,
+    GET_MATERIAL_REQUEST,
+    GET_MATERIAL_SUBMIT, HIDE_BOOK_MODAL_WINDOW, HIDE_SUB_MODAL_WINDOW,
+    LOGIN_HANDLE_CHANGE,
+    LOGIN_INPUT_HANDLE_CHANGE,
+    OPEN_CURRENT_BOOK,
+    PASS_AGAIN_HANDLE_CHANGE,
+    PASS_HANDLE_CHANGE,
+    PASS_INPUT_HANDLE_CHANGE,
     RECEIVE_BOOK,
-    RECEIVE_BOOKS, RECEIVE_LOGIN, RECEIVE_LOGOUT, RECEIVE_REGISTER, RECEIVE_SUBJECTS, REMEMBER_ME_HANDLE_CHANGE,
+    RECEIVE_BOOKS,
+    RECEIVE_LOGIN,
+    RECEIVE_LOGOUT,
+    RECEIVE_REGISTER,
+    RECEIVE_SUBJECTS,
+    REMEMBER_ME_HANDLE_CHANGE,
     REQUEST_BOOK,
-    REQUEST_BOOKS, REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REGISTER, REQUEST_SUBJECTS, SORT_BOOKS, SUBMIT_REGISTER
+    REQUEST_BOOKS,
+    REQUEST_LOGIN,
+    REQUEST_LOGOUT,
+    REQUEST_REGISTER,
+    REQUEST_SUBJECTS,
+    SHOW_BOOK_MODAL_WINDOW, SHOW_SUB_MODAL_WINDOW,
+    SORT_BOOKS,
+    SUBMIT_REGISTER
 } from "../actions/index";
 
 const initialStateBooks = {
@@ -34,6 +56,7 @@ const initialStateAuth = {
     loginInput: '',
     passwordInput: '',
     remember: false,
+    authorized: false,
 };
 
 const initialStateEmail = {
@@ -42,6 +65,11 @@ const initialStateEmail = {
     message: "",
     isContactLoading: true,
     contact: {},
+};
+
+const initialStateModalWindows = {
+    isSubModalWindowShowing: false,
+    isBookModalWindowShowing: false,
 };
 
 function Books(state = initialStateBooks, action) {
@@ -162,6 +190,7 @@ function Auth(state = initialStateAuth, action) {
             return Object.assign({}, state, {
                 user: action.payload,
                 isLoginLoading: false,
+                authorized: true,
             });
 
         case REQUEST_LOGIN:
@@ -184,6 +213,7 @@ function Auth(state = initialStateAuth, action) {
             return Object.assign({}, state, {
                 isLogoutLoading: false,
                 user: {},
+                authorized: false,
             });
 
         default:
@@ -226,5 +256,33 @@ function Email(state = initialStateEmail, action) {
     }
 }
 
-const storeApp = combineReducers({Books, Auth, Email});
+function ModalWindows(state = initialStateModalWindows, action) {
+    switch (action.type) {
+        case SHOW_BOOK_MODAL_WINDOW:
+            return Object.assign({}, state, {
+                isBookModalWindowShowing: true,
+            });
+
+        case HIDE_BOOK_MODAL_WINDOW:
+            return Object.assign({}, state, {
+                isBookModalWindowShowing: false,
+            });
+
+        case SHOW_SUB_MODAL_WINDOW:
+            console.log("SUB SHOWING");
+            return Object.assign({}, state, {
+                isSubModalWindowShowing: true,
+            });
+
+        case HIDE_SUB_MODAL_WINDOW:
+            return Object.assign({}, state, {
+                isSubModalWindowShowing: false,
+            });
+
+        default:
+            return state;
+    }
+}
+
+const storeApp = combineReducers({Books, Auth, Email, ModalWindows});
 export default storeApp;

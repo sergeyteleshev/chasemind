@@ -7,7 +7,6 @@ import storeApp from '../reducers';
 import { AppContainer } from 'react-hot-loader';
 import Contact from './pages/Contact';
 import Dontwork from './pages/Dontwork';
-import Subscription from './pages/Subscription';
 
 /*eslint no-unused-vars:0*/
 import {Route, Router} from 'react-router-dom';
@@ -18,6 +17,8 @@ import RegistrationContainer from "../containers/RegistrationContainer";
 import LoginController from "../containers/LoginContainer";
 import MainContainer from "../containers/MainContainer";
 import ContactContainer from "../containers/ContactContainer";
+import SubscriptionContainer from "../containers/SubscriptionContainer";
+import ScrollToTop from "./ScrollToTop";
 const history = createHistory();
 const middleware = [thunkMiddleware];
 let store = createStore(storeApp, applyMiddleware(...middleware));
@@ -28,16 +29,16 @@ export default class App extends Component {
         return <AppContainer>
             <Provider store={store}>
                 <Router history={history}>
-                    <div>
+                    <ScrollToTop className={"appRoutes"}>
                         <Route exact path='/' name={"main"} component={MainContainer}/>
                         <Route exact path='/contact' name={"contact"} component={ContactContainer}/>
                         <Route exact path='/book/:id' name={"book"} component={BookContainer}/>
                         <Route exact path='/dontwork' component={Dontwork}/>
                         <Route exact path='/lib' component={LibraryContainer}/>
-                        <Route exact path='/sub' component={Subscription}/>
+                        <Route exact path='/sub' component={SubscriptionContainer}/>
                         <Route exact path='/login' component={LoginController}/>
                         <Route exact path='/reg' component={RegistrationContainer}/>
-                    </div>
+                    </ScrollToTop>
                 </Router>
             </Provider>
         </AppContainer>
