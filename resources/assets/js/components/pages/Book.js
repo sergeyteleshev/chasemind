@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
-import {getMaterialSubmit, showBookDialog} from "../../actions";
+import {getMaterialSubmit, selectCurrentBookType, showBookDialog} from "../../actions";
 
 export default class Book extends Component {
     componentWillMount()
@@ -18,11 +18,17 @@ export default class Book extends Component {
         console.log(book);
     }
 
-    getMaterial(bookId, type)
+    getMaterial(bookId, type, demo = false)
     {
+        this.props.selectCurrentBookType(type);
+
         if(this.props.authorized && this.props.user.daysLeft > 0)
         {
-            return this.props.getMaterialSubmit(bookId, type);
+            return this.props.getMaterialSubmit(bookId, type, demo);
+        }
+        else if(this.props.authorized && this.props.user.daysLeft === 0)
+        {
+            return this.props.showBookDialog();
         }
         else
         {
@@ -30,12 +36,13 @@ export default class Book extends Component {
         }
     }
 
+    //todo чёто не качает демку
     renderModelWindow()
     {
         if(!this.props.isBookModalWindowShowing)
             return null;
 
-        if(this.props.authorized && this.props.user.daysLeft <= 0)
+        if(this.props.authorized && this.props.user.daysLeft === 0)
         {
             return (
                 <section className="modalWindow">
@@ -60,7 +67,7 @@ export default class Book extends Component {
                             </section>
 
                             <section className="signInOutLinks">
-                                <input type="submit" className="modalDemo" value="Cкачать демо"/>
+                                <input type="submit" className="modalDemo" onClick={() => this.props.getMaterialSubmit(this.props.currentBook.id, this.props.currentBookTypeSelected, true)} value="Cкачать демо"/>
                                 <Link to={"/sub"}><input type="submit" className="buyFormModal" value="Полный доступ"/></Link>
                             </section>
 
@@ -96,7 +103,7 @@ export default class Book extends Component {
                             <br/>
                             Сейчас вы можете:
                         </section>
-                        <input type="submit" className="modalDemo" value="Cкачать демо"/>
+                        <input type="submit" className="modalDemo" value="Cкачать демо" onClick={() => this.props.getMaterialSubmit(this.props.currentBook.id, this.props.currentBookTypeSelected, true)}/>
                         <section className="signInOutLinks">
                             <Link to={"/reg"}><input className="modalRegister" type="submit" value="Регистрация"/></Link>
                             <Link to={"/sub"}><input type="submit" className="buyFormModal" value="Полный доступ"/></Link>

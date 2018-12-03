@@ -1421,9 +1421,9 @@ input[type=submit]:hover
     text-decoration: none;
 }
 
-.pages a:hover
+.pages li:hover
 {
-    background: #545454;
+    background: #009393;
 }
 
 .signOut table td:first-child, .nickname

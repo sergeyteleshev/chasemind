@@ -9,6 +9,45 @@ export default class Subscription extends Component {
         if (!this.props.isSubModalWindowShowing)
             return null;
 
+        if(this.props.authorized && this.props.user.daysLeft === 0)
+        {
+            return (
+                <section className="modalWindow">
+                    <section className="formModalWindow">
+                        <section className="modalBar">
+                            <section className="closeModalBar"><img onClick={() => this.props.hideSubDialog()} src="/img/cancel.svg"/></section>
+                        </section>
+
+                        <section className="headerFormModal">
+
+                        </section>
+
+                        <section className="modalWindowContent">
+                            <section className="modalWindowText">
+                                Полные версии конспектов доступна только
+                                <br/>
+                                <span>пользователям с подпиской.</span>
+                                <br/>
+                                Сейчас вы можете:
+                            </section>
+                            <Link to={"/lib"}><input type="submit" className="modalDemo" value="Cкачать демо"/></Link>
+                            <section className="signInOutLinks">
+                                <input type="submit" className="buyFormModal" value="Купить подписку"/>
+                            </section>
+
+                            {/*<section className="loginLink">*/}
+                                {/*<Link to={"/login"}>У меня уже есть учётная запись</Link>*/}
+                            {/*</section>*/}
+
+                            {/*<section className="subLink">*/}
+                            {/*<Link to={"/login"}>или получить <span>полный доступ</span></Link>*/}
+                            {/*</section>*/}
+                        </section>
+                    </section>
+                </section>
+            );
+        }
+
         return (
             <section className="modalWindow">
                 <section className="formModalWindow">
@@ -22,17 +61,16 @@ export default class Subscription extends Component {
 
                     <section className="modalWindowContent">
                         <section className="modalWindowText">
-                            Полная версия конспекта доступна только
+                            Полные версии конспектов доступна только
                             <br/>
-                            <span>пользователям с подпиской.</span>
+                            <span>зарегистрированным пользователям с подпиской.</span>
                             <br/>
                             Сейчас вы можете:
                         </section>
-                        <input type="submit" className="modalDemo" value="Cкачать демо"/>
-                        <section className="signInOutLinks">
-                            <Link to={"/reg"}><input className="modalRegister" type="submit" value="Регистрация"/></Link>
-                            <Link to={"/sub"}><input type="submit" className="buyFormModal" value="Полный доступ"/></Link>
-                        </section>
+                        <Link to={"/login"}><input type="submit" className="modalDemo" value="Регистрация"/></Link>
+                        {/*<section className="signInOutLinks">*/}
+                            {/*<input type="submit" className="buyFormModal" value="Купить подписку"/>*/}
+                        {/*</section>*/}
 
                         <section className="loginLink">
                             <Link to={"/login"}>У меня уже есть учётная запись</Link>

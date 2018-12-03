@@ -43,6 +43,7 @@ export const SHOW_BOOK_MODAL_WINDOW = "SHOW_BOOK_MODAL_WINDOW";
 export const HIDE_BOOK_MODAL_WINDOW = "HIDE_BOOK_MODAL_WINDOW";
 export const SHOW_SUB_MODAL_WINDOW = "SHOW_SUB_MODAL_WINDOW";
 export const HIDE_SUB_MODAL_WINDOW = "HIDE_SUB_MODAL_WINDOW";
+export const SELECT_CURRENT_BOOK_TYPE = "SELECT_CURRENT_BOOK_TYPE";
 
 export function requestBooks() {
     return {
@@ -495,12 +496,12 @@ export function receiveGetMaterial(contactData) {
     }
 }
 
-export function getMaterialSubmit(bookId, type)
+export function getMaterialSubmit(bookId, type, demo)
 {
     return dispatch => {
         if(bookId > 0 && type.length > 0)
         {
-            dispatch(fetchGetMaterial(bookId, type));
+            dispatch(fetchGetMaterial(bookId, type, demo));
         }
 
         return {
@@ -509,8 +510,15 @@ export function getMaterialSubmit(bookId, type)
     };
 }
 
-export function fetchGetMaterial(bookId, type)
+export function fetchGetMaterial(bookId, type, demo = false)
 {
+    if(demo)
+    {
+        type += "Demo";
+    }
+
+    console.log("TYPE: " + type);
+
     const payload = {
         id: bookId,
         type,
@@ -598,5 +606,12 @@ export function showSubDialog() {
 export function hideSubDialog() {
     return {
         type: HIDE_SUB_MODAL_WINDOW,
+    }
+}
+
+export function selectCurrentBookType(type) {
+    return {
+        type: SELECT_CURRENT_BOOK_TYPE,
+        payload: type,
     }
 }

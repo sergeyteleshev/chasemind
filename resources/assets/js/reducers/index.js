@@ -27,7 +27,7 @@ import {
     REQUEST_LOGIN,
     REQUEST_LOGOUT,
     REQUEST_REGISTER,
-    REQUEST_SUBJECTS,
+    REQUEST_SUBJECTS, SELECT_CURRENT_BOOK_TYPE,
     SHOW_BOOK_MODAL_WINDOW, SHOW_SUB_MODAL_WINDOW,
     SORT_BOOKS,
     SUBMIT_REGISTER
@@ -42,6 +42,7 @@ const initialStateBooks = {
     subjects: {},
     sortId: 0,
     isBookMaterialLoading: true,
+    currentBookTypeSelected: '',
 };
 
 const initialStateAuth = {
@@ -133,6 +134,12 @@ function Books(state = initialStateBooks, action) {
             console.log('MATERIAL_SUBMIT');
             return Object.assign({}, state, {
                 isBookMaterialLoading: true,
+            });
+
+        case SELECT_CURRENT_BOOK_TYPE:
+            console.log("currentBookType: " + action.payload);
+            return Object.assign({}, state, {
+                currentBookTypeSelected: action.payload,
             });
 
         default:
