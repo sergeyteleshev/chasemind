@@ -525,12 +525,53 @@ export function fetchGetMaterial(bookId, type)
                 body: JSON.stringify(payload)
             });
 
-            const json = await response.json();
-            console.log(json);
-            // dispatch(receiveGetMaterial());
+            //todo обработать ошбику если файла нет
+            const blob = await response.blob();
+
+            if(blob)
+            {
+                console.log(blob);
+                let objectURL = URL.createObjectURL(blob);
+                let a = document.querySelector('a');
+                a.href = objectURL;
+                a.download = await dispatch(fetchBookFileName(bookId, type));
+                document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+                a.click();
+                a.remove();
+            }
         };
 
         request();
+    };
+}
+
+export function fetchBookFileName(bookId, type)
+{
+    const payload = {
+        id: bookId,
+        type,
+    };
+
+    console.log(payload);
+
+    return dispatch => {
+        dispatch(requestGetMaterial());
+        const request = async () => {
+            const response = await fetch('/api/getFileName',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            });
+            const json = await response.json();
+            console.log("GET MATERIAL NAME");
+            console.log(json);
+            return json;
+        };
+
+        return request();
     };
 }
 

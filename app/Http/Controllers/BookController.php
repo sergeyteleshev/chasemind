@@ -41,7 +41,41 @@ class BookController extends Controller
 
     public function getBookMaterial(Request $request)
     {
-        //todo чёто не робит
+        $id = $request->input('id');
+        $type = $request->input('type');
+        $book = Book::findOrFail($id);
+        $filename = ""; //тут не убирать. оно и так работает
+
+        if($type == 'read' && $book)
+        {
+            $file_path_from_public = $book->linkOnText;
+        }
+        else if($type == 'listen' && $book)
+        {
+            $file_path_from_public = $book->linkOnAudio;
+        }
+        else if($type == 'watch' && $book)
+        {
+            $file_path_from_public = $book->linkOnVideo;
+        }
+        else
+        {
+            if(!$book)
+                return response()->json(["error" => "book not found"], 404);
+            else if($type)
+                return response()->json(["error" => "unknown file type"], 500);
+            else
+                return response()->json(["error" => "unknown error"], 500);
+        }
+
+        if(is_string($file_path_from_public))
+            return response()->download(public_path($file_path_from_public), $filename, $request->header());
+        else
+            return response()->json(["error" => "file not found"], 404);
+    }
+
+    public function getFileName(Request $request)
+    {
         $id = $request->input('id');
         $type = $request->input('type');
         $book = Book::findOrFail($id);
@@ -77,7 +111,7 @@ class BookController extends Controller
             $filename = $file_path_from_public[$i] . $filename;
         }
 
-        return response()->download(public_path($file_path_from_public), $filename, $request->header());
-//        return response()->json($filename, 201);
+        return response()->json($filename, 201);
     }
+
 }

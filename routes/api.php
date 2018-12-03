@@ -23,6 +23,7 @@ Route::post('books', 'BookController@store');
 Route::put('books/{book}', 'BookController@update');
 Route::delete('books/{book}', 'BookController@delete');
 Route::post('getBook', 'BookController@getBookMaterial');
+Route::post('getFileName', 'BookController@getFileName');
 
 Route::post('register', 'Auth\RegisterController@create');
 Route::post('login', 'Auth\LoginController@login');
