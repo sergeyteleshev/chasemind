@@ -58,11 +58,23 @@ class BookController extends Controller
         {
             $file_path_from_public = $book->linkOnVideo;
         }
+        else if($type == 'readDemo' && $book)
+        {
+            $file_path_from_public = $book->linkOnDemoText;
+        }
+        else if($type == 'listenDemo' && $book)
+        {
+            $file_path_from_public = $book->linkOnDemoAudio;
+        }
+        else if($type == 'watchDemo' && $book)
+        {
+            $file_path_from_public = $book->linkOnDemoVideo;
+        }
         else
         {
             if(!$book)
                 return response()->json(["error" => "book not found"], 404);
-            else if($type)
+            else if(!$type)
                 return response()->json(["error" => "unknown file type"], 500);
             else
                 return response()->json(["error" => "unknown error"], 500);
@@ -109,7 +121,7 @@ class BookController extends Controller
         {
             if(!$book)
                 return response()->json(["error" => "book not found"], 404);
-            else if($type)
+            else if(!$type)
                 return response()->json(["error" => "unknown file type"], 500);
             else
                 return response()->json(["error" => "unknown error"], 500);

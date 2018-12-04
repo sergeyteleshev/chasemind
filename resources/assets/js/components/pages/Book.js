@@ -26,17 +26,14 @@ export default class Book extends Component {
         {
             return this.props.getMaterialSubmit(bookId, type, demo);
         }
-        else if(this.props.authorized && this.props.user.daysLeft === 0)
-        {
-            return this.props.showBookDialog();
-        }
         else
         {
+            type += "Demo";
+            this.props.selectCurrentBookType(type);
             return this.props.showBookDialog();
         }
     }
-
-    //todo чёто не качает демку
+    
     renderModelWindow()
     {
         if(!this.props.isBookModalWindowShowing)

@@ -538,8 +538,6 @@ export function fetchGetMaterial(bookId, type, demo = false)
                 body: JSON.stringify(payload)
             });
 
-            //todo обработать ошбику если файла нет
-            //todo чёто не работает и редиректит на главную страницу Оо
             const blob = await response.blob();
             console.log(blob);
             let objectURL = URL.createObjectURL(blob);
@@ -549,6 +547,7 @@ export function fetchGetMaterial(bookId, type, demo = false)
             document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
             a.click();
             a.remove();
+            dispatch(receiveGetMaterial(blob));
         };
 
         request();
