@@ -34,3 +34,6 @@ Route::get('subjects', 'SubjectController@index');
 
 Route::get('emails', 'CallsController@index');
 Route::put('emails', 'CallsController@create');
+
+Route::get('payForSub', 'UserController@payForSub');
+

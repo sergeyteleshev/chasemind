@@ -34,6 +34,7 @@ export const CONTACT_MESSAGE_HANDLE_CHANGE = "CONTACT_MESSAGE_HANDLE_CHANGE";
 export const CONTACT_SUBMIT = "CONTACT_SUBMIT";
 export const CONTACT_REQUEST = "CONTACT_REQUEST";
 export const CONTACT_RECEIVE = "CONTACT_RECEIVE";
+export const CONTACT_FORM_ERROR_RESPONSE = "CONTACT_FORM_ERROR_RESPONSE";
 
 export const GET_MATERIAL_SUBMIT = "GET_MATERIAL_SUBMIT";
 export const GET_MATERIAL_REQUEST = "GET_MATERIAL_REQUEST";
@@ -44,6 +45,7 @@ export const HIDE_BOOK_MODAL_WINDOW = "HIDE_BOOK_MODAL_WINDOW";
 export const SHOW_SUB_MODAL_WINDOW = "SHOW_SUB_MODAL_WINDOW";
 export const HIDE_SUB_MODAL_WINDOW = "HIDE_SUB_MODAL_WINDOW";
 export const SELECT_CURRENT_BOOK_TYPE = "SELECT_CURRENT_BOOK_TYPE";
+export const LOGIN_FORM_ERROR_RESPONSE = "LOGIN_FORM_ERROR_RESPONSE";
 
 export function requestBooks() {
     return {
@@ -209,6 +211,13 @@ export function receiveLogin(user) {
     return {
         type: RECEIVE_LOGIN,
         payload: user,
+    }
+}
+
+export function showLoginFormErrorResponse()
+{
+    return {
+        type: LOGIN_FORM_ERROR_RESPONSE,
     }
 }
 
@@ -454,6 +463,12 @@ export function contactSubmit(name, email, message)
     };
 }
 
+export function showContactFormErrorResponse()
+{
+    return {
+        type: CONTACT_FORM_ERROR_RESPONSE,
+    }
+}
 
 export function fetchCustomerContactMessage(name, email, message)
 {
@@ -539,15 +554,19 @@ export function fetchGetMaterial(bookId, type, demo = false)
             });
 
             const blob = await response.blob();
-            console.log(blob);
-            let objectURL = URL.createObjectURL(blob);
-            let a = document.createElement('a');
-            a.href = objectURL;
-            a.download = await dispatch(fetchBookFileName(bookId, type));
-            document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
-            a.click();
-            a.remove();
-            dispatch(receiveGetMaterial(blob));
+
+            //todo если нет файла то обработать
+            if(blob)
+            {
+                let objectURL = URL.createObjectURL(blob);
+                let a = document.createElement('a');
+                a.href = objectURL;
+                a.download = await dispatch(fetchBookFileName(bookId, type));
+                document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+                a.click();
+                a.remove();
+                dispatch(receiveGetMaterial(blob));
+            }
         };
 
         request();

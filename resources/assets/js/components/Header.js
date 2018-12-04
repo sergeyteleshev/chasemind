@@ -61,10 +61,10 @@ export default class Header extends Component {
                             <section className="pages">
                                 <nav className="nav">
                                     <ul>
-                                        <li><Link to="/sub">Подписка</Link></li>
+                                        <Link to="/sub"><li>Подписка</li></Link>
                                         <li><a target={"_blank"} href="https://vk.com/sergeyteleshev">Блог</a></li>
-                                        <li><Link to="/lib">Библиотека</Link></li>
-                                        <li><Link to="/contact">Контакты</Link></li>
+                                        <Link to="/lib"><li>Библиотека</li></Link>
+                                        <Link to="/contact"><li>Контакты</li></Link>
                                     </ul>
                                 </nav>
                             </section>
@@ -90,11 +90,11 @@ export default class Header extends Component {
                     <section className="navigationWrapper">
                         <nav>
                             <ul>
-                                <li><Link to="/">Главная</Link></li>
-                                <li><Link to="/sub">Подписка</Link></li>
-                                <li><a href="https://vk.com/chasemind">Блог</a></li>
-                                <li><Link to="/lib">Библиотека</Link></li>
-                                <li><Link to="/contact">Контакты</Link></li>
+                                <Link to="/"><li>Главная</li></Link>
+                                <Link to="/sub"><li>Подписка</li></Link>
+                                <li><a target={"_blank"} href="https://vk.com/sergeyteleshev">Блог</a></li>
+                                <Link to="/lib"><li>Библиотека</li></Link>
+                                <Link to="/contact"><li>Контакты</li></Link>
                             </ul>
                         </nav>
                     </section>

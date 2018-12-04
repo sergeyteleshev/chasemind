@@ -1,6 +1,12 @@
 import {connect} from 'react-redux';
 import Login from '../components/pages/Login';
-import {submitLogin, loginInputHandleChange, passwordInputHandleChange, rememberMeHandleChange} from "../actions";
+import {
+    submitLogin,
+    loginInputHandleChange,
+    passwordInputHandleChange,
+    rememberMeHandleChange,
+    showLoginFormErrorResponse
+} from "../actions";
 
 const mapStateToProps = (state) => {
     return {
@@ -8,6 +14,7 @@ const mapStateToProps = (state) => {
         loginInput: state.Auth.loginInput,
         passwordInput: state.Auth.passwordInput,
         remember: state.Auth.remember,
+        loginFormErrorResponse: state.Auth.loginFormErrorResponse,
     }
 };
 
@@ -17,6 +24,7 @@ const mapDispatchToProps = (dispatch) => {
         loginInputHandleChange: (event) => dispatch(loginInputHandleChange(event)),
         passwordInputHandleChange: (event) => dispatch(passwordInputHandleChange(event)),
         rememberMeHandleChange: (event) => dispatch(rememberMeHandleChange(event)),
+        showLoginFormErrorResponse: () => dispatch(showLoginFormErrorResponse())
     }
 };
 

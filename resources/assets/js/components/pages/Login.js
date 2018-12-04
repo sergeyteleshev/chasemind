@@ -4,9 +4,28 @@ import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
 
 export default class Login extends Component {
+    submitLogin()
+    {
+        if(this.props.loginInput !== '' || this.props.passwordInput !== '')
+            this.props.submitLogin(this.props.loginInput, this.props.passwordInput, this.props.remember);
+
+        if(Object.keys(this.props.user).length === 0 || this.props.loginInput === '' || this.props.passwordInput === '')
+        {
+            this.props.showLoginFormErrorResponse();
+        }
+    }
+
     render()
     {
+        let loginResponse = null;
         const {name, email, id} = this.props.user;
+
+        //todo чёто при логине всё чистится
+        if(this.props.loginFormErrorResponse === true && Object.keys(this.props.user).length === 0 || ((this.props.loginInput === '' || this.props.passwordInput === '') && this.props.loginFormErrorResponse === true))
+        {
+            loginResponse = "Неверный логин или пароль";
+        }
+
         if((typeof name === "string" && typeof email === "string" && typeof id === "number") && name.length > 0 && email.length > 0 && id > 0)
         {
             return <Redirect to={"/lib"}/>;
@@ -47,7 +66,7 @@ export default class Login extends Component {
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <input onClick={() => this.props.submitLogin(this.props.loginInput, this.props.passwordInput, this.props.remember)} className="submit" type="submit" name="sendInf" value="Войти"/>
+                                                <input onClick={() => this.submitLogin()} className="submit" type="submit" name="sendInf" value="Войти"/>
                                             </td>
                                             <td>
                                                 <Link to={"/reg"}>Забыли пароль?</Link>
@@ -62,7 +81,7 @@ export default class Login extends Component {
                             </section>
 
                             <section className="response">
-
+                                {loginResponse}
                             </section>
                         </section>
 

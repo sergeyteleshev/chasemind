@@ -33,7 +33,7 @@ export default class Book extends Component {
             return this.props.showBookDialog();
         }
     }
-    
+
     renderModelWindow()
     {
         if(!this.props.isBookModalWindowShowing)

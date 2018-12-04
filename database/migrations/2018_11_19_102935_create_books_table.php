@@ -38,9 +38,9 @@ class CreateBooksTable extends Migration
             $table->integer('amountOfDownloadsDemo')->default(0);
         });
 
-//        Schema::table('books', function (Blueprint $table) {
-//            $table->foreign('subject')->references('id')->on('subjects')->onDelete('cascade');
-//        });
+        Schema::table('books', function (Blueprint $table) {
+            $table->foreign('subject')->references('id')->on('subjects')->onDelete('cascade');
+        });
     }
 
     /**

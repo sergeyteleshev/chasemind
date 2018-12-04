@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\User;
 
 use Illuminate\Http\Request;
@@ -12,31 +13,14 @@ class UserController extends Controller
 
     private function infoForPay($login)
     {
-        $sql = "SELECT daysLeft, login, email, id FROM `User` WHERE login = '$login'";
-        $res = mysql_query($sql);
-
-        if ($res)
-        {
-            return $res;
-        }
-        else
-        {
-            return false;
-        }
+        return User::where('name', $login)->first();
     }
 
     private function getOrderId()
     {
-        $sql = "SELECT MAX(`id`) AS `maxid` FROM `Orders`";
-        $res = mysql_query($sql);
-        $id = 1;
+        $order = Order::all()->orderBy('created_at', 'desc')->first();
 
-        while($row = mysql_fetch_array($res))
-        {
-            $id = $row['maxid'];
-        }
-
-        return $id + 1;
+        return $order['id'] + 1;
     }
 
     /**
@@ -55,7 +39,7 @@ class UserController extends Controller
         }
         else
         {
-            if($typeOfSub && $user && Auth::check() && (strtolower(Auth::user()) == strtolower($user)))
+            if($typeOfSub && $user)
             {
                 //todo неверный тип подписки
                 if($typeOfSub < 1 && $typeOfSub > 3)
@@ -70,12 +54,10 @@ class UserController extends Controller
                     $id = null;
                     $daysLeft = null;
 
-                    while($row = mysql_fetch_assoc($res))
-                    {
-                        $email = $row["email"];
-                        $id = $row["id"];
-                        $daysLeft = $row["daysLeft"];
-                    }
+                    $email = $res["email"];
+                    $id = $res["id"];
+                    $daysLeft = $res["daysLeft"];
+
 
                     // регистрационная информация (Идентификатор магазина, пароль #1)
                     // registration info (Merchant ID, password #1)

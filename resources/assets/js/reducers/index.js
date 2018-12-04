@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import {
-    CONTACT_EMAIL_HANDLE_CHANGE,
+    CONTACT_EMAIL_HANDLE_CHANGE, CONTACT_FORM_ERROR_RESPONSE,
     CONTACT_MESSAGE_HANDLE_CHANGE,
     CONTACT_NAME_HANDLE_CHANGE,
     CONTACT_RECEIVE,
@@ -32,6 +32,7 @@ import {
     SORT_BOOKS,
     SUBMIT_REGISTER
 } from "../actions/index";
+import {LOGIN_FORM_ERROR_RESPONSE} from "../actions";
 
 const initialStateBooks = {
     libBooks: {},
@@ -58,6 +59,7 @@ const initialStateAuth = {
     passwordInput: '',
     remember: false,
     authorized: false,
+    loginFormErrorResponse: false,
 };
 
 const initialStateEmail = {
@@ -66,6 +68,8 @@ const initialStateEmail = {
     message: "",
     isContactLoading: true,
     contact: {},
+    contactSent: false,
+    contactFormErrorResponse: false,
 };
 
 const initialStateModalWindows = {
@@ -194,11 +198,16 @@ function Auth(state = initialStateAuth, action) {
         case RECEIVE_LOGIN:
             console.log('RECEIVE LOGIN');
             console.log(action.payload);
+
             return Object.assign({}, state, {
                 user: action.payload,
                 isLoginLoading: false,
                 authorized: true,
+                loginFormErrorResponse: false,
+                loginInput: '',
+                passwordInput: '',
             });
+
 
         case REQUEST_LOGIN:
             return Object.assign({}, state, {
@@ -221,6 +230,11 @@ function Auth(state = initialStateAuth, action) {
                 isLogoutLoading: false,
                 user: {},
                 authorized: false,
+            });
+
+        case LOGIN_FORM_ERROR_RESPONSE:
+            return Object.assign({}, state, {
+                loginFormErrorResponse: true,
             });
 
         default:
@@ -255,7 +269,13 @@ function Email(state = initialStateEmail, action) {
             console.log(action.payload);
             return Object.assign({}, state, {
                 isContactLoading: false,
+                contactSent: true,
                 contact: action.payload,
+            });
+
+        case CONTACT_FORM_ERROR_RESPONSE:
+            return Object.assign({}, state, {
+                contactFormErrorResponse: true,
             });
 
         default:
