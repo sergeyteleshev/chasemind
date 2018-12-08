@@ -2,51 +2,13 @@ import React, {Component} from 'react';
 import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
 import {Link} from "react-router-dom";
+import {LOGIN_LINK, REGISTRATION_LINK} from "../../consts/pageLinks";
 
 export default class Subscription extends Component {
     renderSubModalWindow()
     {
         if (!this.props.isSubModalWindowShowing)
             return null;
-
-        if(this.props.authorized && this.props.user.daysLeft === 0)
-        {
-            return (
-                <section className="modalWindow">
-                    <section className="formModalWindow">
-                        <section className="modalBar">
-                            <section className="closeModalBar"><img onClick={() => this.props.hideSubDialog()} src="/img/cancel.svg"/></section>
-                        </section>
-
-                        <section className="headerFormModal">
-
-                        </section>
-
-                        <section className="modalWindowContent">
-                            <section className="modalWindowText">
-                                Полные версии конспектов доступна только
-                                <br/>
-                                <span>пользователям с подпиской.</span>
-                                <br/>
-                                Сейчас вы можете:
-                            </section>
-                            <Link to={"/lib"}><input type="submit" className="modalDemo" value="Cкачать демо"/></Link>
-                            <section className="signInOutLinks">
-                                <input type="submit" className="buyFormModal" value="Купить подписку"/>
-                            </section>
-
-                            {/*<section className="loginLink">*/}
-                                {/*<Link to={"/login"}>У меня уже есть учётная запись</Link>*/}
-                            {/*</section>*/}
-
-                            {/*<section className="subLink">*/}
-                            {/*<Link to={"/login"}>или получить <span>полный доступ</span></Link>*/}
-                            {/*</section>*/}
-                        </section>
-                    </section>
-                </section>
-            );
-        }
 
         return (
             <section className="modalWindow">
@@ -67,18 +29,11 @@ export default class Subscription extends Component {
                             <br/>
                             Сейчас вы можете:
                         </section>
-                        <Link to={"/login"}><input type="submit" className="modalDemo" value="Регистрация"/></Link>
-                        {/*<section className="signInOutLinks">*/}
-                            {/*<input type="submit" className="buyFormModal" value="Купить подписку"/>*/}
-                        {/*</section>*/}
+                        <Link to={REGISTRATION_LINK}><input type="submit" className="modalDemo" value="Регистрация"/></Link>
 
                         <section className="loginLink">
-                            <Link to={"/login"}>У меня уже есть учётная запись</Link>
+                            <Link to={LOGIN_LINK}>У меня уже есть учётная запись</Link>
                         </section>
-
-                        {/*<section className="subLink">*/}
-                        {/*<Link to={"/login"}>или получить <span>полный доступ</span></Link>*/}
-                        {/*</section>*/}
                     </section>
                 </section>
             </section>

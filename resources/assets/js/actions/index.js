@@ -241,13 +241,6 @@ export function receiveLogin(user) {
     }
 }
 
-export function showLoginFormErrorResponse()
-{
-    return {
-        type: LOGIN_FORM_ERROR_RESPONSE,
-    }
-}
-
 export function submitLogin(login, pass, remember) {
     return dispatch =>
     {
@@ -644,14 +637,10 @@ export function fetchGetMaterial(bookId, type, demo = false)
         type += "Demo";
     }
 
-    console.log("TYPE: " + type);
-
     const payload = {
         id: bookId,
         type,
     };
-
-    console.log(payload);
 
     return dispatch => {
         dispatch(requestGetMaterial());
@@ -692,8 +681,6 @@ export function fetchBookFileName(bookId, type)
         type,
     };
 
-    console.log(payload);
-
     return dispatch => {
         dispatch(requestGetMaterial());
         const request = async () => {
@@ -706,12 +693,11 @@ export function fetchBookFileName(bookId, type)
                 body: JSON.stringify(payload)
             });
             const json = await response.json();
-            console.log("GET MATERIAL NAME");
-            console.log(json);
-            return json;
+            receiveGetMaterial(json);
         };
 
-        return request();
+        //todo тут много изменений делать. посмотреть потом: качает ли файлы
+        request();
     };
 }
 

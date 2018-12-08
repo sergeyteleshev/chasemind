@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import HeaderContainer from '../../containers/HeaderContainer';
 import Footer from "./Footer";
+import {LIBRARY_LINK, REGISTRATION_LINK, SUB_LINK} from "../../consts/pageLinks";
 
 export default class Main extends Component {
     componentWillMount() {
@@ -78,13 +79,13 @@ export default class Main extends Component {
 
                             <section className="chooseObjectButtons">
                                 <section className="tryFreeButton">
-                                    <Link to={"/reg"}>
+                                    <Link to={REGISTRATION_LINK}>
                                         <button>Попробовать<br/>бесплатно</button>
                                     </Link>
                                 </section>
 
                                 <section className="buySubButton">
-                                    <Link to={"/sub"}><input type="submit" value="Оформить подписку"/></Link>
+                                    <Link to={SUB_LINK}><input type="submit" value="Оформить подписку"/></Link>
                                 </section>
                             </section>
                         </section>
@@ -120,14 +121,14 @@ export default class Main extends Component {
                                 </p>
 
                                 <p>
-                    <span>
-                        Вместе с Chase Mind, вы с легкостью сможете стать
-                        лучшей весией самого себя!
-                    </span>
+                                    <span>
+                                        Вместе с Chase Mind, вы с легкостью сможете стать
+                                        лучшей весией самого себя!
+                                    </span>
                                 </p>
 
                                 <p>
-                                    <Link to={"/lib"}><input type="submit" value="Подробнее..."/></Link>
+                                    <Link to={LIBRARY_LINK}><input type="submit" value="Подробнее..."/></Link>
                                 </p>
                             </section>
                         </section>
@@ -254,7 +255,7 @@ export default class Main extends Component {
                     </section>
 
                     <section className="lastStepSubmit">
-                        <Link to={"/reg"}>
+                        <Link to={REGISTRATION_LINK}>
                             <button>
                                 Попробовать
                                 <br/>

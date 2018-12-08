@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link, Redirect} from "react-router-dom";
 import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
+import {LIBRARY_LINK, REGISTRATION_LINK} from "../../consts/pageLinks";
 
 export default class Login extends Component {
     constructor(props)
@@ -22,17 +23,13 @@ export default class Login extends Component {
         }
         else
         {
-            if(this.props.loginInput !== '' || this.props.passwordInput !== '')
-            {
-                this.props.submitLogin(this.props.loginInput, this.props.passwordInput, this.props.remember);
+            this.props.submitLogin(this.props.loginInput, this.props.passwordInput, this.props.remember);
 
-                if(Object.keys(this.props.user).length === 0 || this.props.loginInput === '' || this.props.passwordInput === '')
-                {
-                    this.setState({
-                        loginResponse: "Неверный логин или пароль",
-                    });
-                    this.props.showLoginFormErrorResponse();
-                }
+            if(!this.props.authorized && this.props.isLoginLoading === false && this.props.isLoginFetchDone === true && Object.keys(this.props.user).length === 0)
+            {
+                this.setState({
+                    loginResponse: "Неверный логин или пароль",
+                });
             }
         }
     }
@@ -50,7 +47,7 @@ export default class Login extends Component {
 
         if((typeof name === "string" && typeof email === "string" && typeof id === "number") && name.length > 0 && email.length > 0 && id > 0)
         {
-            return <Redirect to={"/lib"}/>;
+            return <Redirect to={LIBRARY_LINK}/>;
         }
 
         return (
@@ -90,7 +87,7 @@ export default class Login extends Component {
                                                 <input onClick={() => this.submitLogin()} className="submit" type="submit" name="sendInf" value="Войти"/>
                                             </td>
                                             <td>
-                                                <Link to={"/reg"}>Забыли пароль?</Link>
+                                                <Link to={REGISTRATION_LINK}>Забыли пароль?</Link>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -112,7 +109,7 @@ export default class Login extends Component {
                             </section>
 
                             <section className="formRegButton">
-                                <Link to={"/reg"}><input type="submit" value="Регистрация"/></Link>
+                                <Link to={REGISTRATION_LINK}><input type="submit" value="Регистрация"/></Link>
                             </section>
                         </section>
                     </section>

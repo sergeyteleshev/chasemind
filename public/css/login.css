@@ -1069,18 +1069,18 @@ input[type=submit]:hover
 }
 
 
-.linksRightPart li:last-child
+.linksRightPart a:last-child
 {
     margin-right: 0;
 }
 
-.linksRightPart li
+.linksRightPart a
 {
     margin-right: 20px;
     display: inline-block;
 }
 
-.linksRightPart li a
+.linksRightPart a
 {
     font-family: "Century Gothic";
     color: black;
@@ -1088,7 +1088,7 @@ input[type=submit]:hover
     font-size: 16px;
 }
 
-.linksRightPart li a:hover
+.linksRightPart a:hover
 {
     text-decoration: underline;
 }

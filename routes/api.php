@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Http\Request;
+
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
@@ -38,3 +40,5 @@ Route::put('emails', 'CallsController@create');
 Route::post('payForSub', 'UserController@payForSub');
 Route::post('payForSubSuccess', 'UserController@payForSubSuccess');
 Route::post('sub/fail',  'UserController@payForSubFail');
+
+Route::post('checkUserAuth', 'Auth\LoginController@checkUserAuth');

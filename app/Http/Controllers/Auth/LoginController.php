@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,7 +52,9 @@ class LoginController extends Controller
             $response['status'] = "ok";
             $response['api_token'] = Auth::user()->api_token;
             if ($remember)
+            {
                 $response['remember_token'] = Auth::user()->getRememberToken();
+            }
         }
         else
         {
@@ -100,23 +103,27 @@ class LoginController extends Controller
         return response()->json($response, $status_number);
     }
 
-    public function testUserAuth(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function checkUserAuth(Request $request)
     {
-        return response()->json($this->checkUserAuth($request->input('token')));
-    }
+        $api_token = $request->cookie('api_token');
 
-    public function checkUserAuth($token)
-    {
-        if(!$token)
-            return false;
+        if (!$api_token)
+            response()->json(['error' => 'pass the api token'], 404);
 
-        $api_user = User::where('api_token', $token)->first();
-        $remember_user = User::where('remember_token', $token)->first();
+        $api_user = User::where('api_token', $api_token)->first();
 
-        if($api_user || $remember_user)
-            return true;
-
-        return false;
+        if($api_user)
+        {
+            return $api_user;
+        }
+        else
+        {
+            return response()->json(['error' => 'user not found'], 404);
+        }
     }
 
     public function loginViaRememberToken(Request $request)

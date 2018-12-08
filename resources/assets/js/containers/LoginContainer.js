@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
         remember: state.Auth.remember,
         loginFormErrorResponse: state.Auth.loginFormErrorResponse,
         isLoginLoading: state.Auth.isLoginLoading,
+        isLoginFetchDone: state.Auth.isLoginFetchDone,
     }
 };
 
@@ -25,7 +26,6 @@ const mapDispatchToProps = (dispatch) => {
         loginInputHandleChange: (event) => dispatch(loginInputHandleChange(event)),
         passwordInputHandleChange: (event) => dispatch(passwordInputHandleChange(event)),
         rememberMeHandleChange: (event) => dispatch(rememberMeHandleChange(event)),
-        showLoginFormErrorResponse: () => dispatch(showLoginFormErrorResponse())
     }
 };
 

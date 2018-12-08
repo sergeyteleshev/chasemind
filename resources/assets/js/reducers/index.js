@@ -52,6 +52,7 @@ const initialStateAuth = {
     password: '',
     passwordAgain: '',
     isLoginLoading: true,
+    isLoginFetchDone: true,
     isRegLoading: true,
     isLogoutLoading: true,
     user: {},
@@ -127,7 +128,6 @@ function Books(state = initialStateBooks, action) {
             });
 
         case SORT_BOOKS:
-            console.log("sort id:" + action.payload);
             return Object.assign({}, state, {
                 sortId: action.payload,
             });
@@ -138,20 +138,16 @@ function Books(state = initialStateBooks, action) {
             });
 
         case GET_MATERIAL_RECEIVE:
-            console.log('MATERIAL_RECEIVE');
-            console.log(action.payload);
             return Object.assign({}, state, {
                 isBookMaterialLoading: false,
             });
 
         case GET_MATERIAL_SUBMIT:
-            console.log('MATERIAL_SUBMIT');
             return Object.assign({}, state, {
                 isBookMaterialLoading: true,
             });
 
         case SELECT_CURRENT_BOOK_TYPE:
-            console.log("currentBookType: " + action.payload);
             return Object.assign({}, state, {
                 currentBookTypeSelected: action.payload,
             });
@@ -184,7 +180,6 @@ function Auth(state = initialStateAuth, action) {
             });
 
         case RECEIVE_REGISTER:
-            console.log(action.payload);
             return Object.assign({}, state, {
                 user: action.payload,
                 isRegLoading: false,
@@ -206,9 +201,6 @@ function Auth(state = initialStateAuth, action) {
             });
 
         case RECEIVE_LOGIN:
-            console.log('RECEIVE LOGIN');
-            console.log(action.payload);
-
             return Object.assign({}, state, {
                 user: action.payload,
                 isLoginLoading: false,
@@ -220,6 +212,7 @@ function Auth(state = initialStateAuth, action) {
                 loginChecked: {},
                 isEmailInputChecking: false,
                 emailChecked: {},
+                isLoginFetchDone: true,
             });
 
         case LOGIN_ERROR:
@@ -233,6 +226,7 @@ function Auth(state = initialStateAuth, action) {
         case REQUEST_LOGIN:
             return Object.assign({}, state, {
                 isLoginLoading: true,
+                isLoginFetchDone: false,
             });
 
         case REMEMBER_ME_HANDLE_CHANGE:
@@ -246,16 +240,10 @@ function Auth(state = initialStateAuth, action) {
             });
 
         case RECEIVE_LOGOUT:
-            console.log(action.payload);
             return Object.assign({}, state, {
                 isLogoutLoading: false,
                 user: {},
                 authorized: false,
-            });
-
-        case LOGIN_FORM_ERROR_RESPONSE:
-            return Object.assign({}, state, {
-                loginFormErrorResponse: true,
             });
 
         case REQUEST_LOGIN_CHECK:
@@ -313,8 +301,6 @@ function Email(state = initialStateEmail, action) {
             });
 
         case CONTACT_RECEIVE:
-            console.log('CONTACT_RECEIVE');
-            console.log(action.payload);
             return Object.assign({}, state, {
                 isContactLoading: false,
                 contactSent: true,
@@ -344,7 +330,6 @@ function ModalWindows(state = initialStateModalWindows, action) {
             });
 
         case SHOW_SUB_MODAL_WINDOW:
-            console.log("SUB SHOWING");
             return Object.assign({}, state, {
                 isSubModalWindowShowing: true,
             });
@@ -367,8 +352,6 @@ function Sub(state = initialStateBooks, action) {
             });
 
         case RECEIVE_ROBOKASSA:
-            console.log("robokass response");
-            console.log(action.payload);
             return Object.assign({}, state, {
                 isRobokassaLoading: false,
                 robokassaResponse: action.payload,

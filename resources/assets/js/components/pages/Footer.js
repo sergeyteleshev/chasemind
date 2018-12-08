@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import {Link} from "react-router-dom";
+import {CONTACT_LINK, LIBRARY_LINK, SUB_LINK} from "../../consts/pageLinks";
 
 export default class Footer extends Component {
     render() {
@@ -32,10 +32,10 @@ export default class Footer extends Component {
                         <section className="rightPart">
                             <section className="linksRightPart">
                                 <ul>
-                                    <li><Link to="/sub">Подписка</Link></li>
-                                    <li><a href="https://vk.com/chasemind">Блог</a></li>
-                                    <li><Link to="/lib">Библиотека</Link></li>
-                                    <li><Link to="/contact">Контакты</Link></li>
+                                    <Link to={SUB_LINK}><li>Подписка</li></Link>
+                                    <a href="https://vk.com/chasemind"><li>Блог</li></a>
+                                    <Link to={LIBRARY_LINK}><li>Библиотека</li></Link>
+                                    <Link to={CONTACT_LINK}><li>Контакты</li></Link>
                                 </ul>
                             </section>
 

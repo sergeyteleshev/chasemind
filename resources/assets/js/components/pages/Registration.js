@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
-import {Redirect} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
+import {LIBRARY_LINK, LOGIN_LINK} from "../../consts/pageLinks";
 
 export default class Registration extends Component
 {
@@ -40,7 +41,7 @@ export default class Registration extends Component
         const {name, email} = this.props.user;
         if((typeof name === "string" && typeof email === "string") && name.length > 0 && email.length > 0)
         {
-            return <Redirect to={"/lib"}/>;
+            return <Redirect to={LIBRARY_LINK}/>;
         }
 
         let emailResponse = this.props.emailChecked.error ? "Такой email уже существует" : null;
@@ -111,7 +112,7 @@ export default class Registration extends Component
                         </section>
                     </section>
                     <section className="signInPart">
-                        <a href="/login">У меня уже есть учётная запись</a>
+                        <Link to={LOGIN_LINK}>У меня уже есть учётная запись</Link>
                     </section>
                 </section>
 

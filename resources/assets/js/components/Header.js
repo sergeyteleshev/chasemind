@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link, Redirect} from "react-router-dom";
 import {getCookie} from "../helpers/cookies";
+import {CONTACT_LINK, LIBRARY_LINK, LOGIN_LINK, MAIN_LINK, REGISTRATION_LINK, SUB_LINK} from "../consts/pageLinks";
 
 export default class Header extends Component {
     componentWillMount()
@@ -22,13 +23,13 @@ export default class Header extends Component {
     render() {
         let loginButtons = (
             <section className="auth">
-                <Link to={"/login"}>
+                <Link to={LOGIN_LINK}>
                     <section className="authLeft">
                         Войти
                     </section>
                 </Link>
 
-                <Link to={"/reg"}>
+                <Link to={REGISTRATION_LINK}>
                     <section className="authRight">
                         Регистрация
                     </section>
@@ -58,7 +59,7 @@ export default class Header extends Component {
                 <section className="menu">
                     <section className="main">
                         <section className="menuWrapper">
-                            <Link to="/">
+                            <Link to={MAIN_LINK}>
                                 <section className="logo">
                                     <section className="logoImg">
                                         <img src="/img/logoWhite.png"/>
@@ -70,10 +71,10 @@ export default class Header extends Component {
                             <section className="pages">
                                 <nav className="nav">
                                     <ul>
-                                        <Link to="/sub"><li>Подписка</li></Link>
+                                        <Link to={SUB_LINK}><li>Подписка</li></Link>
                                         <li><a target={"_blank"} href="https://vk.com/sergeyteleshev">Блог</a></li>
-                                        <Link to="/lib"><li>Библиотека</li></Link>
-                                        <Link to="/contact"><li>Контакты</li></Link>
+                                        <Link to={LIBRARY_LINK}><li>Библиотека</li></Link>
+                                        <Link to={CONTACT_LINK}><li>Контакты</li></Link>
                                     </ul>
                                 </nav>
                             </section>
@@ -99,11 +100,11 @@ export default class Header extends Component {
                     <section className="navigationWrapper">
                         <nav>
                             <ul>
-                                <Link to="/"><li>Главная</li></Link>
-                                <Link to="/sub"><li>Подписка</li></Link>
+                                <Link to={MAIN_LINK}><li>Главная</li></Link>
+                                <Link to={SUB_LINK}><li>Подписка</li></Link>
                                 <li><a target={"_blank"} href="https://vk.com/sergeyteleshev">Блог</a></li>
-                                <Link to="/lib"><li>Библиотека</li></Link>
-                                <Link to="/contact"><li>Контакты</li></Link>
+                                <Link to={LIBRARY_LINK}><li>Библиотека</li></Link>
+                                <Link to={CONTACT_LINK}><li>Контакты</li></Link>
                             </ul>
                         </nav>
                     </section>

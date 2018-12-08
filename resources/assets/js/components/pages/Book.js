@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
+import {LOGIN_LINK, REGISTRATION_LINK, SUB_LINK} from "../../consts/pageLinks";
 
 export default class Book extends Component {
     componentWillMount()
@@ -13,8 +14,6 @@ export default class Book extends Component {
         {
             this.props.fetchBook(id);
         }
-
-        console.log(book);
     }
 
     getMaterial(bookId, type, demo = false)
@@ -64,15 +63,15 @@ export default class Book extends Component {
 
                             <section className="signInOutLinks">
                                 <input type="submit" className="modalDemo" onClick={() => this.props.getMaterialSubmit(this.props.currentBook.id, this.props.currentBookTypeSelected, true)} value="Cкачать демо"/>
-                                <Link to={"/sub"}><input type="submit" className="buyFormModal" value="Полный доступ"/></Link>
+                                <Link to={SUB_LINK}><input type="submit" className="buyFormModal" value="Полный доступ"/></Link>
                             </section>
 
                             {/*<section className="loginLink">*/}
-                                {/*<Link to={"/login"}>У меня уже есть учётная запись</Link>*/}
+                                {/*<Link to={LOGIN_LINK}>У меня уже есть учётная запись</Link>*/}
                             {/*</section>*/}
 
                             {/*<section className="subLink">*/}
-                            {/*<Link to={"/login"}>или получить <span>полный доступ</span></Link>*/}
+                            {/*<Link to={LOGIN_LINK}>или получить <span>полный доступ</span></Link>*/}
                             {/*</section>*/}
                         </section>
                     </section>
@@ -101,16 +100,16 @@ export default class Book extends Component {
                         </section>
                         <input type="submit" className="modalDemo" value="Cкачать демо" onClick={() => this.props.getMaterialSubmit(this.props.currentBook.id, this.props.currentBookTypeSelected, true)}/>
                         <section className="signInOutLinks">
-                            <Link to={"/reg"}><input className="modalRegister" type="submit" value="Регистрация"/></Link>
-                            <Link to={"/sub"}><input type="submit" className="buyFormModal" value="Полный доступ"/></Link>
+                            <Link to={REGISTRATION_LINK}><input className="modalRegister" type="submit" value="Регистрация"/></Link>
+                            <Link to={SUB_LINK}><input type="submit" className="buyFormModal" value="Полный доступ"/></Link>
                         </section>
 
                         <section className="loginLink">
-                            <Link to={"/login"}>У меня уже есть учётная запись</Link>
+                            <Link to={LOGIN_LINK}>У меня уже есть учётная запись</Link>
                         </section>
 
                         {/*<section className="subLink">*/}
-                            {/*<Link to={"/login"}>или получить <span>полный доступ</span></Link>*/}
+                            {/*<Link to={LOGIN_LINK}>или получить <span>полный доступ</span></Link>*/}
                         {/*</section>*/}
                     </section>
                 </section>

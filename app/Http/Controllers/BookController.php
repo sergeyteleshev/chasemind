@@ -45,30 +45,31 @@ class BookController extends Controller
         $type = $request->input('type');
         $book = Book::findOrFail($id);
         $filename = ""; //тут не убирать. оно и так работает
+        $file_path_from_public = 'files/';
 
         if($type == 'read' && $book)
         {
-            $file_path_from_public = $book->linkOnText;
+            $file_path_from_public .= $book->linkOnText;
         }
         else if($type == 'listen' && $book)
         {
-            $file_path_from_public = $book->linkOnAudio;
+            $file_path_from_public += $book->linkOnAudio;
         }
         else if($type == 'watch' && $book)
         {
-            $file_path_from_public = $book->linkOnVideo;
+            $file_path_from_public .= $book->linkOnVideo;
         }
         else if($type == 'readDemo' && $book)
         {
-            $file_path_from_public = $book->linkOnDemoText;
+            $file_path_from_public .= $book->linkOnDemoText;
         }
         else if($type == 'listenDemo' && $book)
         {
-            $file_path_from_public = $book->linkOnDemoAudio;
+            $file_path_from_public .= $book->linkOnDemoAudio;
         }
         else if($type == 'watchDemo' && $book)
         {
-            $file_path_from_public = $book->linkOnDemoVideo;
+            $file_path_from_public .= $book->linkOnDemoVideo;
         }
         else
         {
