@@ -138,6 +138,7 @@ function Books(state = initialStateBooks, action) {
             });
 
         case GET_MATERIAL_RECEIVE:
+            console.log(action.payload);
             return Object.assign({}, state, {
                 isBookMaterialLoading: false,
             });

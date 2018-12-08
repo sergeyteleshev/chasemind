@@ -28,9 +28,12 @@ class UserController extends Controller
 
     public function payForSubSuccess(Request $request)
     {
-        $inv_id = $request->input('InvId');
-        $subType = $request->input('Shp_item');
         $login = $request->input('Shp_username');
+        $user = User::where('name', $login)->first();
+        $daysLeft = $user['daysLeft'];
+        $subType = $request->input('Shp_item');
+
+        $inv_id = $request->input('InvId');
         $crc = strtoupper($request->input('SignatureValue'));
         $out_summ = $request->input('OutSum');
         $pass = "KBxkUkxZ5eqG8JU72I3r";
@@ -40,20 +43,18 @@ class UserController extends Controller
         if($crc != $my_crc)
             return response()->json(['error' => 'signature failed to confirm'], 500);
 
-        $user = User::where('name', $login)->first();
-        $daysLeft = $user['daysLeft'];
 
-        if($login && $subType && $user && $daysLeft)
+        if($login && $subType && $user)
         {
-            if($subType == "1")
+            if($subType === "1")
             {
                 $daysLeft += + self::SUB_1_DAYS;
             }
-            else if($subType == "2")
+            else if($subType === "2")
             {
                 $daysLeft += self::SUB_2_DAYS;
             }
-            else if($subType == "3")
+            else if($subType === "3")
             {
                 $daysLeft += self::SUB_3_DAYS;
             }
@@ -62,13 +63,10 @@ class UserController extends Controller
                 'daysLeft' => $daysLeft,
             ]);
 
-            return redirect()->route('welcome', [
-                'success' => true,
-                'updated_user' => $update_res,
-            ]);
+            return Redirect::to('/lib');
         }
 
-        return Redirect::to('/');
+        return Redirect::to('/sub');
     }
 
     public function payForSubFail(Request $request)

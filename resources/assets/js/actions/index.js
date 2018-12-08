@@ -103,13 +103,12 @@ export function fetchBooks() {
     }
 }
 
-export function fetchBook(id)
-{
+export function fetchBook(id) {
     return dispatch => {
         dispatch(requestBook());
 
         const request = async () => {
-            const response = await fetch('/api/book/'+ id);
+            const response = await fetch('/api/book/' + id);
             const json = await response.json();
             dispatch(openCurrentBook(json));
             dispatch(receiveBook());
@@ -119,32 +118,28 @@ export function fetchBook(id)
     }
 }
 
-export function loginHandleChange(event)
-{
+export function loginHandleChange(event) {
     return {
         type: LOGIN_HANDLE_CHANGE,
         payload: event.target.value,
     }
 }
 
-export function emailHandleChange(event)
-{
+export function emailHandleChange(event) {
     return {
         type: EMAIL_HANDLE_CHANGE,
         payload: event.target.value,
     }
 }
 
-export function passHandleChange(event)
-{
+export function passHandleChange(event) {
     return {
         type: PASS_HANDLE_CHANGE,
         payload: event.target.value,
     }
 }
 
-export function passAgainHandleChange(event)
-{
+export function passAgainHandleChange(event) {
     return {
         type: PASS_AGAIN_HANDLE_CHANGE,
         payload: event.target.value,
@@ -167,8 +162,7 @@ export function receiveRegister(user) {
 export function submitRegister(login, email, pass, passAgain) {
 
     return dispatch => {
-        if(login.length > 0 && email.length > 0 && pass.length > 0 && passAgain.length > 0 && (pass === passAgain))
-        {
+        if (login.length > 0 && email.length > 0 && pass.length > 0 && passAgain.length > 0 && (pass === passAgain)) {
             dispatch(fetchLoginCheck(login));
             dispatch(fetchEmailCheck(email));
             dispatch(fetchRegister(login, email, pass));
@@ -180,8 +174,7 @@ export function submitRegister(login, email, pass, passAgain) {
     };
 }
 
-export function fetchRegister(login, email, pass)
-{
+export function fetchRegister(login, email, pass) {
     const payload = {
         name: login,
         email: email,
@@ -191,13 +184,14 @@ export function fetchRegister(login, email, pass)
     return dispatch => {
         dispatch(requestRegister());
         const request = async () => {
-            const response = await fetch('/api/register',{
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)}
+            const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                }
             );
 
             const json = await response.json();
@@ -215,25 +209,20 @@ export function requestLogin() {
 }
 
 export function receiveLogin(user) {
-    if(user.api_token)
-    {
+    if (user.api_token) {
         setCookie("api_token", user.api_token);
     }
 
-    if(user.remember_token)
-    {
+    if (user.remember_token) {
         setCookie("remember_token", user.remember_token);
     }
 
-    if(user.error)
-    {
+    if (user.error) {
         return {
             type: LOGIN_ERROR,
             payload: user.error,
         }
-    }
-    else
-    {
+    } else {
         return {
             type: RECEIVE_LOGIN,
             payload: user,
@@ -242,10 +231,8 @@ export function receiveLogin(user) {
 }
 
 export function submitLogin(login, pass, remember) {
-    return dispatch =>
-    {
-        if(login.length > 0 && pass.length > 0)
-        {
+    return dispatch => {
+        if (login.length > 0 && pass.length > 0) {
             dispatch(fetchLogin(login, pass, remember));
         }
 
@@ -255,8 +242,7 @@ export function submitLogin(login, pass, remember) {
     };
 }
 
-export function fetchLogin(login, pass, remember)
-{
+export function fetchLogin(login, pass, remember) {
     const payload = {
         name: login,
         password: pass,
@@ -266,13 +252,14 @@ export function fetchLogin(login, pass, remember)
     return dispatch => {
         dispatch(requestLogin());
         const request = async () => {
-            const response = await fetch('/api/login',{
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)}
+            const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                }
             );
 
             const json = await response.json();
@@ -360,24 +347,21 @@ export function fetchEmailCheck(email) {
     };
 }
 
-export function loginInputHandleChange(event)
-{
+export function loginInputHandleChange(event) {
     return {
         type: LOGIN_INPUT_HANDLE_CHANGE,
         payload: event.target.value,
     }
 }
 
-export function passwordInputHandleChange(event)
-{
+export function passwordInputHandleChange(event) {
     return {
         type: PASS_INPUT_HANDLE_CHANGE,
         payload: event.target.value,
     }
 }
 
-export function rememberMeHandleChange(event)
-{
+export function rememberMeHandleChange(event) {
     return {
         type: REMEMBER_ME_HANDLE_CHANGE,
         payload: event.target.checked,
@@ -399,8 +383,7 @@ export function requestLogout() {
     }
 }
 
-export function fetchLogout()
-{
+export function fetchLogout() {
     const payload = {
         api_token: getCookie('api_token'),
     };
@@ -435,8 +418,7 @@ export function submitLogout() {
     };
 }
 
-export function fetchLoginViaRememberToken(rememberToken)
-{
+export function fetchLoginViaRememberToken(rememberToken) {
     return dispatch => {
         const payload = {
             remember_token: rememberToken,
@@ -444,7 +426,7 @@ export function fetchLoginViaRememberToken(rememberToken)
 
         dispatch(requestLogin());
         const request = async () => {
-            const response = await fetch('/api/rememberLogin',{
+            const response = await fetch('/api/rememberLogin', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -461,12 +443,11 @@ export function fetchLoginViaRememberToken(rememberToken)
     };
 }
 
-export function fetchSubjects()
-{
+export function fetchSubjects() {
     return dispatch => {
         dispatch(requestSubjects());
         const request = async () => {
-            const response = await fetch('/api/subjects',{
+            const response = await fetch('/api/subjects', {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
@@ -497,8 +478,7 @@ export function receiveSubjects(subjects) {
     }
 }
 
-export function sortBooks(id)
-{
+export function sortBooks(id) {
     return {
         type: SORT_BOOKS,
         payload: id,
@@ -506,35 +486,29 @@ export function sortBooks(id)
 }
 
 export function setAuthorizationToken(token) {
-    if(token)
-    {
+    if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
-    else
-    {
-         delete axios.defaults.headers.common['Authorization'];
+    } else {
+        delete axios.defaults.headers.common['Authorization'];
     }
 
 }
 
-export function contactNameHandleChange(event)
-{
+export function contactNameHandleChange(event) {
     return {
         type: CONTACT_NAME_HANDLE_CHANGE,
         payload: event.target.value,
     }
 }
 
-export function contactEmailHandleChange(event)
-{
+export function contactEmailHandleChange(event) {
     return {
         type: CONTACT_EMAIL_HANDLE_CHANGE,
         payload: event.target.value,
     }
 }
 
-export function contactMessageHandleChange(event)
-{
+export function contactMessageHandleChange(event) {
     return {
         type: CONTACT_MESSAGE_HANDLE_CHANGE,
         payload: event.target.value,
@@ -554,11 +528,9 @@ export function receiveContact(contactData) {
     }
 }
 
-export function contactSubmit(name, email, message)
-{
+export function contactSubmit(name, email, message) {
     return dispatch => {
-        if(name.length > 0 && email.length > 0 && message.length > 0)
-        {
+        if (name.length > 0 && email.length > 0 && message.length > 0) {
             dispatch(fetchCustomerContactMessage(name, email, message));
         }
 
@@ -568,15 +540,13 @@ export function contactSubmit(name, email, message)
     };
 }
 
-export function showContactFormErrorResponse()
-{
+export function showContactFormErrorResponse() {
     return {
         type: CONTACT_FORM_ERROR_RESPONSE,
     }
 }
 
-export function fetchCustomerContactMessage(name, email, message)
-{
+export function fetchCustomerContactMessage(name, email, message) {
     const payload = {
         name,
         email,
@@ -586,7 +556,7 @@ export function fetchCustomerContactMessage(name, email, message)
     return dispatch => {
         dispatch(requestContact());
         const request = async () => {
-            const response = await fetch('/api/emails',{
+            const response = await fetch('/api/emails', {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -616,11 +586,9 @@ export function receiveGetMaterial(contactData) {
     }
 }
 
-export function getMaterialSubmit(bookId, type, demo)
-{
+export function getMaterialSubmit(bookId, type, demo) {
     return dispatch => {
-        if(bookId > 0 && type.length > 0)
-        {
+        if (bookId > 0 && type.length > 0) {
             dispatch(fetchGetMaterial(bookId, type, demo));
         }
 
@@ -630,10 +598,8 @@ export function getMaterialSubmit(bookId, type, demo)
     };
 }
 
-export function fetchGetMaterial(bookId, type, demo = false)
-{
-    if(demo)
-    {
+export function fetchGetMaterial(bookId, type, demo = false) {
+    if (demo) {
         type += "Demo";
     }
 
@@ -645,7 +611,7 @@ export function fetchGetMaterial(bookId, type, demo = false)
     return dispatch => {
         dispatch(requestGetMaterial());
         const request = async () => {
-            const response = await fetch('/api/getBook',{
+            const response = await fetch('/api/getBook', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -654,28 +620,25 @@ export function fetchGetMaterial(bookId, type, demo = false)
                 body: JSON.stringify(payload)
             });
 
+            const filename = await dispatch(fetchBookFileName(bookId, type));
             const blob = await response.blob();
+            let objectURL = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = objectURL;
+            a.download = filename;
 
-            //todo если нет файла то обработать
-            if(blob)
-            {
-                let objectURL = URL.createObjectURL(blob);
-                let a = document.createElement('a');
-                a.href = objectURL;
-                a.download = await dispatch(fetchBookFileName(bookId, type));
-                document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
-                a.click();
-                a.remove();
-                dispatch(receiveGetMaterial(blob));
-            }
+            document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+            a.click();
+            a.remove();
+
+            dispatch(receiveGetMaterial(blob));
         };
 
         request();
     };
 }
 
-export function fetchBookFileName(bookId, type)
-{
+export function fetchBookFileName(bookId, type) {
     const payload = {
         id: bookId,
         type,
@@ -684,7 +647,7 @@ export function fetchBookFileName(bookId, type)
     return dispatch => {
         dispatch(requestGetMaterial());
         const request = async () => {
-            const response = await fetch('/api/getFileName',{
+            const response = await fetch('/api/getFileName', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -692,12 +655,14 @@ export function fetchBookFileName(bookId, type)
                 },
                 body: JSON.stringify(payload)
             });
+
             const json = await response.json();
-            receiveGetMaterial(json);
+            dispatch(receiveGetMaterial(json));
+            return json;
         };
 
         //todo тут много изменений делать. посмотреть потом: качает ли файлы
-        request();
+        return request();
     };
 }
 
