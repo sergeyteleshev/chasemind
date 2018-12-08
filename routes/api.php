@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,7 +25,9 @@ Route::post('getFileName', 'BookController@getFileName');
 
 Route::post('register', 'Auth\RegisterController@create');
 Route::post('login', 'Auth\LoginController@login');
-Route::get('logout', 'Auth\LoginController@logout');
+Route::post('logout', 'Auth\LoginController@logout');
+Route::post('checkEmail', 'Auth\LoginController@checkEmail');
+Route::post('checkLogin', 'Auth\LoginController@checkLogin');
 Route::post('rememberLogin', 'Auth\LoginController@loginViaRememberToken');
 
 Route::get('subjects', 'SubjectController@index');
@@ -35,5 +35,6 @@ Route::get('subjects', 'SubjectController@index');
 Route::get('emails', 'CallsController@index');
 Route::put('emails', 'CallsController@create');
 
-Route::get('payForSub', 'UserController@payForSub');
-
+Route::post('payForSub', 'UserController@payForSub');
+Route::post('payForSubSuccess', 'UserController@payForSubSuccess');
+Route::post('sub/fail',  'UserController@payForSubFail');

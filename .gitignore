@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/files
+chasemind.rar
 /storage/*.key
 /vendor
 /.idea

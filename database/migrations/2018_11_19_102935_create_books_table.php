@@ -22,7 +22,7 @@ class CreateBooksTable extends Migration
             $table->double('rating')->default(0);
             $table->longText('slogan');
             $table->longText('sloganENG')->nullable();
-            $table->integer('subject',0,1);
+            $table->integer('subject')->unsigned();
             $table->integer('amountOfDownloads')->default(0);
             $table->string('imgURL');
             $table->string('pagesBook');

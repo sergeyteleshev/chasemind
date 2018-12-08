@@ -4,27 +4,49 @@ import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
 
 export default class Login extends Component {
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            loginResponse: null,
+        };
+    }
+
     submitLogin()
     {
-        if(this.props.loginInput !== '' || this.props.passwordInput !== '')
-            this.props.submitLogin(this.props.loginInput, this.props.passwordInput, this.props.remember);
-
-        if(Object.keys(this.props.user).length === 0 || this.props.loginInput === '' || this.props.passwordInput === '')
+        if(this.props.loginInput === '' || this.props.passwordInput === '')
         {
-            this.props.showLoginFormErrorResponse();
+            this.setState({
+                loginResponse: "Заполните все поля",
+            });
+        }
+        else
+        {
+            if(this.props.loginInput !== '' || this.props.passwordInput !== '')
+            {
+                this.props.submitLogin(this.props.loginInput, this.props.passwordInput, this.props.remember);
+
+                if(Object.keys(this.props.user).length === 0 || this.props.loginInput === '' || this.props.passwordInput === '')
+                {
+                    this.setState({
+                        loginResponse: "Неверный логин или пароль",
+                    });
+                    this.props.showLoginFormErrorResponse();
+                }
+            }
+        }
+    }
+
+    _handleKeyPress(e) {
+        if (e.key === 'Enter')
+        {
+            this.submitLogin();
         }
     }
 
     render()
     {
-        let loginResponse = null;
         const {name, email, id} = this.props.user;
-
-        //todo чёто при логине всё чистится
-        if(this.props.loginFormErrorResponse === true && Object.keys(this.props.user).length === 0 || ((this.props.loginInput === '' || this.props.passwordInput === '') && this.props.loginFormErrorResponse === true))
-        {
-            loginResponse = "Неверный логин или пароль";
-        }
 
         if((typeof name === "string" && typeof email === "string" && typeof id === "number") && name.length > 0 && email.length > 0 && id > 0)
         {
@@ -48,14 +70,13 @@ export default class Login extends Component {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <input onChange={(event) => this.props.loginInputHandleChange(event)} value={this.props.loginInput} className="login" name="login" type="text" placeholder="Логин"/>
+                                            <input onKeyPress={(event) => this._handleKeyPress(event)} onChange={(event) => this.props.loginInputHandleChange(event)} value={this.props.loginInput} className="login" name="login" type="text" placeholder="Логин"/>
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td>
-                                            <input onChange={(event) => this.props.passwordInputHandleChange(event)} value={this.props.passwordInput} className="password" name="password" type="password"
-                                                   placeholder="Пароль"/>
+                                            <input onKeyPress={(event) => this._handleKeyPress(event)} onChange={(event) => this.props.passwordInputHandleChange(event)} value={this.props.passwordInput} className="password" name="password" type="password" placeholder="Пароль"/>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -80,8 +101,8 @@ export default class Login extends Component {
                                 <label><input onChange={(event) => this.props.rememberMeHandleChange(event)} checked={this.props.remember} type={"checkbox"}/> запомнить меня?</label>
                             </section>
 
-                            <section className="response">
-                                {loginResponse}
+                            <section className="response loginResponse">
+                                {this.state.loginResponse}
                             </section>
                         </section>
 

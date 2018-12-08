@@ -15,6 +15,7 @@ const mapStateToProps = (state) => {
         passwordInput: state.Auth.passwordInput,
         remember: state.Auth.remember,
         loginFormErrorResponse: state.Auth.loginFormErrorResponse,
+        isLoginLoading: state.Auth.isLoginLoading,
     }
 };
 

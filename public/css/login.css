@@ -1732,6 +1732,19 @@ body
     color: #212121;
 }
 
+.subjectSelected
+{
+    color: #009393;
+    text-decoration: underline;
+}
+
+.loginResponse,
+.emailResponse,
+.fillResponse,
+.passResponse
+{
+    color: #FF4847;
+}
 .formContact input[type="submit"]
 {
     padding-top: 8px;

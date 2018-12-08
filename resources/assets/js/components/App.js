@@ -19,6 +19,7 @@ import MainContainer from "../containers/MainContainer";
 import ContactContainer from "../containers/ContactContainer";
 import SubscriptionContainer from "../containers/SubscriptionContainer";
 import ScrollToTop from "./ScrollToTop";
+import {getCookie} from "../helpers/cookies";
 const history = createHistory();
 const middleware = [thunkMiddleware];
 let store = createStore(storeApp, applyMiddleware(...middleware));
@@ -35,6 +36,7 @@ export default class App extends Component {
                         <Route exact path='/book/:id' name={"book"} component={BookContainer}/>
                         <Route exact path='/dontwork' component={Dontwork}/>
                         <Route exact path='/lib' component={LibraryContainer}/>
+                        <Route exact path='/lib/:subject' component={LibraryContainer}/>
                         <Route exact path='/sub' component={SubscriptionContainer}/>
                         <Route exact path='/login' component={LoginController}/>
                         <Route exact path='/reg' component={RegistrationContainer}/>

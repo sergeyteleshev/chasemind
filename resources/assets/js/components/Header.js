@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import {Link, Redirect} from "react-router-dom";
+import {getCookie} from "../helpers/cookies";
 
 export default class Header extends Component {
     componentWillMount()
     {
-        let rememberToken = localStorage.getItem('remember_token');
+        let rememberToken = getCookie('remember_token');
+        let apiToken = getCookie('api_token');
+
         if(rememberToken)
         {
             this.props.fetchLoginViaRememberToken(rememberToken);
+        }
+
+        if(apiToken)
+        {
+            // this.props.fetchLoginViaApiToken(apiToken);
         }
     }
 
@@ -28,7 +36,8 @@ export default class Header extends Component {
             </section>
         );
 
-        const {name, email} = this.props.user;
+        let {name, email} = this.props.user;
+
         if((typeof name === "string" && typeof email === "string") && name.length > 0)
         {
             loginButtons = (

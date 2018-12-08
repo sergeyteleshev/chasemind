@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
 import {Link} from "react-router-dom";
@@ -85,11 +85,11 @@ export default class Subscription extends Component {
         );
     }
 
-    buySub()
+    buySub(typeOfSub)
     {
-        if(this.props.authorized && this.props.user.daysLeft > 0)
+        if(this.props.authorized)
         {
-            return alert(1);
+            return this.props.fetchRobokassa(typeOfSub, this.props.user.id);
         }
         else
         {
@@ -193,7 +193,7 @@ export default class Subscription extends Component {
 
 
                         <section className="minButton">
-                            <input type="submit" onClick={() => this.buySub()} value="Выбрать"/>
+                            <input type="submit" onClick={() => this.buySub(1)} value="Выбрать"/>
                         </section>
                     </section>
 
@@ -220,7 +220,7 @@ export default class Subscription extends Component {
 
 
                         <section className="medButton">
-                            <input type="submit" onClick={() => this.buySub()} value="Выбрать"/>
+                            <input type="submit" onClick={() => this.buySub(2)} value="Выбрать"/>
                         </section>
                     </section>
 
@@ -246,7 +246,7 @@ export default class Subscription extends Component {
 
 
                         <section className="optButton">
-                            <input type="submit" onClick={() => this.buySub()} value="Выбрать"/>
+                            <input type="submit" onClick={() => this.buySub(3)} value="Выбрать"/>
                         </section>
 
                     </section>

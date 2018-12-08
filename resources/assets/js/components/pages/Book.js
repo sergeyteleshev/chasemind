@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import Footer from "./Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
-import {getMaterialSubmit, selectCurrentBookType, showBookDialog} from "../../actions";
 
 export default class Book extends Component {
     componentWillMount()

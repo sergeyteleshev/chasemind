@@ -8,7 +8,7 @@ import {
     EMAIL_HANDLE_CHANGE,
     GET_MATERIAL_RECEIVE,
     GET_MATERIAL_REQUEST,
-    GET_MATERIAL_SUBMIT, HIDE_BOOK_MODAL_WINDOW, HIDE_SUB_MODAL_WINDOW,
+    GET_MATERIAL_SUBMIT, HIDE_BOOK_MODAL_WINDOW, HIDE_SUB_MODAL_WINDOW, LOGIN_ERROR,
     LOGIN_HANDLE_CHANGE,
     LOGIN_INPUT_HANDLE_CHANGE,
     OPEN_CURRENT_BOOK,
@@ -16,17 +16,17 @@ import {
     PASS_HANDLE_CHANGE,
     PASS_INPUT_HANDLE_CHANGE,
     RECEIVE_BOOK,
-    RECEIVE_BOOKS,
-    RECEIVE_LOGIN,
+    RECEIVE_BOOKS, RECEIVE_EMAIL_CHECK,
+    RECEIVE_LOGIN, RECEIVE_LOGIN_CHECK,
     RECEIVE_LOGOUT,
-    RECEIVE_REGISTER,
+    RECEIVE_REGISTER, RECEIVE_ROBOKASSA,
     RECEIVE_SUBJECTS,
     REMEMBER_ME_HANDLE_CHANGE,
     REQUEST_BOOK,
-    REQUEST_BOOKS,
-    REQUEST_LOGIN,
+    REQUEST_BOOKS, REQUEST_EMAIL_CHECK,
+    REQUEST_LOGIN, REQUEST_LOGIN_CHECK,
     REQUEST_LOGOUT,
-    REQUEST_REGISTER,
+    REQUEST_REGISTER, REQUEST_ROBOKASSA,
     REQUEST_SUBJECTS, SELECT_CURRENT_BOOK_TYPE,
     SHOW_BOOK_MODAL_WINDOW, SHOW_SUB_MODAL_WINDOW,
     SORT_BOOKS,
@@ -60,6 +60,11 @@ const initialStateAuth = {
     remember: false,
     authorized: false,
     loginFormErrorResponse: false,
+    isLoginInputChecking: false,
+    loginChecked: {},
+    isEmailInputChecking: false,
+    emailChecked: {},
+    isRegisterSubmitted: false,
 };
 
 const initialStateEmail = {
@@ -75,6 +80,11 @@ const initialStateEmail = {
 const initialStateModalWindows = {
     isSubModalWindowShowing: false,
     isBookModalWindowShowing: false,
+};
+
+const initialStateSub = {
+    isRobokassaLoading: false,
+    robokassaResponse: {},
 };
 
 function Books(state = initialStateBooks, action) {
@@ -206,8 +216,19 @@ function Auth(state = initialStateAuth, action) {
                 loginFormErrorResponse: false,
                 loginInput: '',
                 passwordInput: '',
+                isLoginInputChecking: false,
+                loginChecked: {},
+                isEmailInputChecking: false,
+                emailChecked: {},
             });
 
+        case LOGIN_ERROR:
+            console.error(action.payload);
+            return Object.assign({}, state, {
+                loginError: action.payload,
+                isLoginLoading: false,
+                loginFormErrorResponse: true,
+            });
 
         case REQUEST_LOGIN:
             return Object.assign({}, state, {
@@ -235,6 +256,33 @@ function Auth(state = initialStateAuth, action) {
         case LOGIN_FORM_ERROR_RESPONSE:
             return Object.assign({}, state, {
                 loginFormErrorResponse: true,
+            });
+
+        case REQUEST_LOGIN_CHECK:
+            return Object.assign({}, state, {
+                isLoginInputChecking: true,
+            });
+
+        case RECEIVE_LOGIN_CHECK:
+            return Object.assign({}, state, {
+                isLoginInputChecking: false,
+                loginChecked: action.payload,
+            });
+
+        case REQUEST_EMAIL_CHECK:
+            return Object.assign({}, state, {
+                isEmailInputChecking: true,
+            });
+
+        case RECEIVE_EMAIL_CHECK:
+            return Object.assign({}, state, {
+                isEmailInputChecking: false,
+                emailChecked: action.payload,
+            });
+
+        case SUBMIT_REGISTER:
+            return Object.assign({}, state, {
+                isRegisterSubmitted: true,
             });
 
         default:
@@ -311,5 +359,26 @@ function ModalWindows(state = initialStateModalWindows, action) {
     }
 }
 
-const storeApp = combineReducers({Books, Auth, Email, ModalWindows});
+function Sub(state = initialStateBooks, action) {
+    switch(action.type) {
+        case REQUEST_ROBOKASSA:
+            return Object.assign({}, state, {
+                isRobokassaLoading: true,
+            });
+
+        case RECEIVE_ROBOKASSA:
+            console.log("robokass response");
+            console.log(action.payload);
+            return Object.assign({}, state, {
+                isRobokassaLoading: false,
+                robokassaResponse: action.payload,
+            });
+
+
+        default:
+            return state;
+    }
+}
+
+const storeApp = combineReducers({Books, Auth, Email, ModalWindows, Sub});
 export default storeApp;

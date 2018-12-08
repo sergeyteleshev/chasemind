@@ -1,3 +1,5 @@
+import {deleteCookie, getCookie, setCookie} from "../helpers/cookies";
+
 export const REQUEST_BOOKS = "REQUEST_BOOKS";
 export const RECEIVE_BOOKS = "RECEIVE_BOOKS";
 export const REQUEST_BOOK = "REQUEST_BOOKS";
@@ -19,6 +21,11 @@ export const SUBMIT_LOGIN = "SUBMIT_LOGIN";
 export const LOGIN_INPUT_HANDLE_CHANGE = "LOGIN_INPUT_HANDLE_CHANGE";
 export const PASS_INPUT_HANDLE_CHANGE = "PASS_INPUT_HANDLE_CHANGE";
 export const REMEMBER_ME_HANDLE_CHANGE = "REMEMBER_ME_HANDLE_CHANGE";
+export const LOGIN_ERROR = "LOGIN_ERROR";
+export const REQUEST_LOGIN_CHECK = "REQUEST_LOGIN_CHECK";
+export const RECEIVE_LOGIN_CHECK = "RECEIVE_LOGIN_CHECK";
+export const REQUEST_EMAIL_CHECK = "REQUEST_EMAIL_CHECK";
+export const RECEIVE_EMAIL_CHECK = "RECEIVE_EMAIL_CHECK";
 
 export const REQUEST_LOGOUT = "REQUEST_LOGOUT";
 export const RECEIVE_LOGOUT = "RECEIVE_LOGOUT";
@@ -46,6 +53,9 @@ export const SHOW_SUB_MODAL_WINDOW = "SHOW_SUB_MODAL_WINDOW";
 export const HIDE_SUB_MODAL_WINDOW = "HIDE_SUB_MODAL_WINDOW";
 export const SELECT_CURRENT_BOOK_TYPE = "SELECT_CURRENT_BOOK_TYPE";
 export const LOGIN_FORM_ERROR_RESPONSE = "LOGIN_FORM_ERROR_RESPONSE";
+
+export const REQUEST_ROBOKASSA = "REQUEST_ROBOKASSA";
+export const RECEIVE_ROBOKASSA = "RECEIVE_ROBOKASSA";
 
 export function requestBooks() {
     return {
@@ -159,6 +169,8 @@ export function submitRegister(login, email, pass, passAgain) {
     return dispatch => {
         if(login.length > 0 && email.length > 0 && pass.length > 0 && passAgain.length > 0 && (pass === passAgain))
         {
+            dispatch(fetchLoginCheck(login));
+            dispatch(fetchEmailCheck(email));
             dispatch(fetchRegister(login, email, pass));
         }
 
@@ -203,14 +215,29 @@ export function requestLogin() {
 }
 
 export function receiveLogin(user) {
-    if(user.rem_token)
+    if(user.api_token)
     {
-        localStorage.setItem('remember_token', user.rem_token);
+        setCookie("api_token", user.api_token);
     }
 
-    return {
-        type: RECEIVE_LOGIN,
-        payload: user,
+    if(user.remember_token)
+    {
+        setCookie("remember_token", user.remember_token);
+    }
+
+    if(user.error)
+    {
+        return {
+            type: LOGIN_ERROR,
+            payload: user.error,
+        }
+    }
+    else
+    {
+        return {
+            type: RECEIVE_LOGIN,
+            payload: user,
+        }
     }
 }
 
@@ -222,7 +249,8 @@ export function showLoginFormErrorResponse()
 }
 
 export function submitLogin(login, pass, remember) {
-    return dispatch => {
+    return dispatch =>
+    {
         if(login.length > 0 && pass.length > 0)
         {
             dispatch(fetchLogin(login, pass, remember));
@@ -256,7 +284,83 @@ export function fetchLogin(login, pass, remember)
 
             const json = await response.json();
             dispatch(receiveLogin(json));
-            // dispatch(setAuthorizationToken(json.rem_token));
+            // dispatch(setAuthorizationToken(json.api_token));
+        };
+
+        request();
+    };
+}
+
+export function requestLoginCheck() {
+    return {
+        type: REQUEST_LOGIN_CHECK,
+    }
+}
+
+export function receiveLoginCheck(response) {
+    return {
+        type: RECEIVE_LOGIN_CHECK,
+        payload: response,
+    }
+}
+
+export function fetchLoginCheck(name) {
+    const payload = {
+        name,
+    };
+
+    return dispatch => {
+        dispatch(requestLoginCheck());
+        const request = async () => {
+            const response = await fetch('/api/checkLogin', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const json = await response.json();
+            dispatch(receiveLoginCheck(json));
+        };
+
+        request();
+    };
+}
+
+export function requestEmailCheck() {
+    return {
+        type: REQUEST_EMAIL_CHECK,
+    }
+}
+
+export function receiveEmailCheck(response) {
+    return {
+        type: RECEIVE_EMAIL_CHECK,
+        payload: response,
+    }
+}
+
+export function fetchEmailCheck(email) {
+    const payload = {
+        email,
+    };
+
+    return dispatch => {
+        dispatch(requestEmailCheck());
+        const request = async () => {
+            const response = await fetch('/api/checkEmail', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const json = await response.json();
+            dispatch(receiveEmailCheck(json));
         };
 
         request();
@@ -288,7 +392,8 @@ export function rememberMeHandleChange(event)
 }
 
 export function receiveLogout(response) {
-    localStorage.removeItem('remember_token');
+    deleteCookie('api_token');
+    deleteCookie('remember_token');
     return {
         type: RECEIVE_LOGOUT,
         payload: response,
@@ -303,15 +408,20 @@ export function requestLogout() {
 
 export function fetchLogout()
 {
+    const payload = {
+        api_token: getCookie('api_token'),
+    };
+
     return dispatch => {
         dispatch(requestLogout());
         const request = async () => {
             const response = await fetch('/api/logout', {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify(payload),
             });
 
             const json = await response.json();
@@ -373,6 +483,8 @@ export function fetchSubjects()
 
             let json = await response.json();
             dispatch(receiveSubjects(json));
+
+            return json;
         };
 
         request();
@@ -631,5 +743,47 @@ export function selectCurrentBookType(type) {
     return {
         type: SELECT_CURRENT_BOOK_TYPE,
         payload: type,
+    }
+}
+
+export function fetchRobokassa(typeOfSub, user_id) {
+    const payload = {
+        typeOfSub,
+        user_id,
+    };
+
+    return dispatch => {
+        dispatch(requestRobokassa());
+
+        const request = async () => {
+            const response = await fetch('/api/payForSub', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+            const json = await response.json();
+            dispatch(receiveRobokassa(json));
+        };
+
+        request();
+    }
+}
+
+export function requestRobokassa() {
+    return {
+        type: REQUEST_ROBOKASSA,
+    }
+}
+
+export function receiveRobokassa(response) {
+    document.write(response);
+    document.getElementsByClassName("robokassaSubmit")[0].click();
+
+    return {
+        type: RECEIVE_ROBOKASSA,
+        payload: response,
     }
 }

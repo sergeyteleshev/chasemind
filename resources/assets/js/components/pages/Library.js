@@ -8,6 +8,21 @@ export default class Library extends Component {
     {
         this.props.fetchBooks();
         this.props.fetchSubjects();
+
+
+        //todo сделать круто со слагом чтобы сортировало книги
+        // const { subject } = this.props.match.params;
+        // let {subjects} = this.props;
+        //
+        // if(Object.keys(subjects) > 0)
+        // {
+        //     subjects.map((subjectMap) => {
+        //         if(subjectMap.subject.toLowerCase() === subject.toLowerCase())
+        //         {
+        //             this.props.sortBooks(subjectMap.id);
+        //         }
+        //     });
+        // }
     }
 
     renderBooks()
@@ -47,15 +62,27 @@ export default class Library extends Component {
     {
         const { subjects } = this.props;
         let subjectsHtml = null;
+        const subjectSelectedClassName = "subjectSelected";
 
         if(Object(subjects).length > 0)
         {
             subjectsHtml = subjects.map((subject) => {
-                return (
-                    <section className='object'>
-                        <input onClick={() => this.props.sortBooks(subject.id)} type='submit' key={subject.id} id={subject.id} value={subject.subject}/>
-                    </section>
-                );
+                if(this.props.sortId === subject.id)
+                {
+                    return (
+                        <section className='object'>
+                            <input className={subjectSelectedClassName} onClick={() => this.props.sortBooks(subject.id)} type='submit' key={subject.id} id={subject.id} value={subject.subject}/>
+                        </section>
+                    );
+                }
+                else
+                {
+                    return (
+                        <section className='object'>
+                            <input onClick={() => this.props.sortBooks(subject.id)} type='submit' key={subject.id} id={subject.id} value={subject.subject}/>
+                        </section>
+                    );
+                }
             });
         }
         else
@@ -68,6 +95,7 @@ export default class Library extends Component {
 
     render()
     {
+        const subjectSelectedClassName = "subjectSelected";
         let books = this.renderBooks();
         let subjects = this.renderSubjects();
 
@@ -86,7 +114,12 @@ export default class Library extends Component {
 
                     <section className="objectOfBook">
                         <section className='object'>
-                            <input onClick={() => this.props.sortBooks(0)} type='submit' key={0} id={0} value={"Все"}/>
+                            {
+                                this.props.sortId === 0 ?
+                                    <input className={subjectSelectedClassName} onClick={() => this.props.sortBooks(0)} type='submit' key={0} id={0} value={"Все"}/>
+                                        :
+                                    <input onClick={() => this.props.sortBooks(0)} type='submit' key={0} id={0} value={"Все"}/>
+                            }
                         </section>
                         {subjects}
                     </section>

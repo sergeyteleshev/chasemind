@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchBooks: () => dispatch(fetchBooks()),
         openCurrentBook: (book) => dispatch(openCurrentBook(book)),
         submitLogout: () => dispatch(submitLogout()),
-        fetchLoginViaRememberToken: (token) => dispatch(fetchLoginViaRememberToken(token))
+        fetchLoginViaRememberToken: (token) => dispatch(fetchLoginViaRememberToken(token)),
     }
 };
 

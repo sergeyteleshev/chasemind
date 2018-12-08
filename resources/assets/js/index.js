@@ -9,6 +9,7 @@ import { AppContainer } from 'react-hot-loader';
 import {Redirect, Route, Router} from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import AppController from "./containers/AppContainer";
+import {deleteCookie} from "./helpers/cookies";
 
 const history = createHistory();
 const middleware = [thunkMiddleware];
