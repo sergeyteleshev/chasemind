@@ -28,22 +28,32 @@ class UserController extends Controller
 
     public function payForSubSuccess(Request $request)
     {
+        $inv_id = $request->input('InvId');
         $subType = $request->input('Shp_item');
         $login = $request->input('Shp_username');
+        $crc = strtoupper($request->input('SignatureValue'));
+        $out_summ = $request->input('OutSum');
+        $pass = "KBxkUkxZ5eqG8JU72I3r";
+
+        $my_crc = strtoupper(md5("$out_summ:$inv_id:$pass:Shp_item=$subType:Shp_username=$login"));
+
+        if($crc != $my_crc)
+            return response()->json(['error' => 'signature failed to confirm'], 500);
+
         $user = User::where('name', $login)->first();
         $daysLeft = $user['daysLeft'];
 
         if($login && $subType && $user && $daysLeft)
         {
-            if($subType === "1")
+            if($subType == "1")
             {
                 $daysLeft += + self::SUB_1_DAYS;
             }
-            else if($subType === "2")
+            else if($subType == "2")
             {
                 $daysLeft += self::SUB_2_DAYS;
             }
-            else if($subType === "3")
+            else if($subType == "3")
             {
                 $daysLeft += self::SUB_3_DAYS;
             }
@@ -59,14 +69,11 @@ class UserController extends Controller
         }
 
         return Redirect::to('/');
-
-//        return redirect()->('lib', ['success' => false]);
     }
 
     public function payForSubFail(Request $request)
     {
         return Redirect::to('/');
-//        return redirect()->route('sub', ['success' => false]);
     }
 
     /**
@@ -129,6 +136,13 @@ class UserController extends Controller
                         }
                     }
                 }
+
+                //заказ в нашей системе
+                $order = new Order();
+                $order->user_id = $request->input('user_id');
+                $order->type_of_sub = $typeOfSub;
+                $order->sub_cost_rub = $out_summ;
+                $order->save();
 
                 // тип товара
                 // code of goods
