@@ -31,6 +31,7 @@ Route::post('logout', 'Auth\LoginController@logout');
 Route::post('checkEmail', 'Auth\LoginController@checkEmail');
 Route::post('checkLogin', 'Auth\LoginController@checkLogin');
 Route::post('rememberLogin', 'Auth\LoginController@loginViaRememberToken');
+Route::post('apiTokenLogin', 'Auth\LoginController@loginViaApiToken');
 
 Route::get('subjects', 'SubjectController@index');
 

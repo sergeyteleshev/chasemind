@@ -52,10 +52,11 @@ export const HIDE_BOOK_MODAL_WINDOW = "HIDE_BOOK_MODAL_WINDOW";
 export const SHOW_SUB_MODAL_WINDOW = "SHOW_SUB_MODAL_WINDOW";
 export const HIDE_SUB_MODAL_WINDOW = "HIDE_SUB_MODAL_WINDOW";
 export const SELECT_CURRENT_BOOK_TYPE = "SELECT_CURRENT_BOOK_TYPE";
-export const LOGIN_FORM_ERROR_RESPONSE = "LOGIN_FORM_ERROR_RESPONSE";
 
 export const REQUEST_ROBOKASSA = "REQUEST_ROBOKASSA";
 export const RECEIVE_ROBOKASSA = "RECEIVE_ROBOKASSA";
+
+export const HANDLE_MENU_MOBILE = "HANDLE_MENU_MOBILE";
 
 export function requestBooks() {
     return {
@@ -97,9 +98,10 @@ export function fetchBooks() {
             const response = await fetch('/api/books');
             const json = await response.json();
             dispatch(receiveBooks(json));
+            return json;
         };
 
-        request();
+        return request();
     }
 }
 
@@ -112,9 +114,10 @@ export function fetchBook(id) {
             const json = await response.json();
             dispatch(openCurrentBook(json));
             dispatch(receiveBook());
+            return json;
         };
 
-        request();
+        return request();
     }
 }
 
@@ -196,9 +199,10 @@ export function fetchRegister(login, email, pass) {
 
             const json = await response.json();
             dispatch(receiveRegister(json));
+            return json;
         };
 
-        request();
+        return request();
     };
 }
 
@@ -264,10 +268,11 @@ export function fetchLogin(login, pass, remember) {
 
             const json = await response.json();
             dispatch(receiveLogin(json));
+            return json;
             // dispatch(setAuthorizationToken(json.api_token));
         };
 
-        request();
+        return request();
     };
 }
 
@@ -303,9 +308,10 @@ export function fetchLoginCheck(name) {
 
             const json = await response.json();
             dispatch(receiveLoginCheck(json));
+            return json;
         };
 
-        request();
+        return request();
     };
 }
 
@@ -341,9 +347,10 @@ export function fetchEmailCheck(email) {
 
             const json = await response.json();
             dispatch(receiveEmailCheck(json));
+            return json;
         };
 
-        request();
+        return request();
     };
 }
 
@@ -402,9 +409,10 @@ export function fetchLogout() {
 
             const json = await response.json();
             dispatch(receiveLogout(json));
+            return json;
         };
 
-        request();
+        return request();
     };
 }
 
@@ -416,6 +424,33 @@ export function submitLogout() {
             type: SUBMIT_LOGOUT,
         }
     };
+}
+
+export function fetchLoginViaApiToken(api_token)
+{
+    return dispatch => {
+        const payload = {
+            api_token,
+        };
+
+        dispatch(requestLogin());
+        const request = async () => {
+            const response = await fetch('/api/apiTokenLogin', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            let json = await response.json();
+            dispatch(receiveLogin(json));
+            return json;
+        };
+
+        return request();
+    }
 }
 
 export function fetchLoginViaRememberToken(rememberToken) {
@@ -437,9 +472,10 @@ export function fetchLoginViaRememberToken(rememberToken) {
 
             let json = await response.json();
             dispatch(receiveLogin(json));
+            return json;
         };
 
-        request();
+        return request();
     };
 }
 
@@ -461,7 +497,7 @@ export function fetchSubjects() {
             return json;
         };
 
-        request();
+        return request();
     };
 }
 
@@ -483,15 +519,6 @@ export function sortBooks(id) {
         type: SORT_BOOKS,
         payload: id,
     }
-}
-
-export function setAuthorizationToken(token) {
-    if (token) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    } else {
-        delete axios.defaults.headers.common['Authorization'];
-    }
-
 }
 
 export function contactNameHandleChange(event) {
@@ -567,9 +594,10 @@ export function fetchCustomerContactMessage(name, email, message) {
 
             const json = await response.json();
             dispatch(receiveContact(json));
+            return json;
         };
 
-        request();
+        return request();
     };
 }
 
@@ -632,9 +660,10 @@ export function fetchGetMaterial(bookId, type, demo = false) {
             a.remove();
 
             dispatch(receiveGetMaterial(blob));
+            return blob;
         };
 
-        request();
+        return request();
     };
 }
 
@@ -717,9 +746,10 @@ export function fetchRobokassa(typeOfSub, user_id) {
             });
             const json = await response.json();
             dispatch(receiveRobokassa(json));
+            return json;
         };
 
-        request();
+        return request();
     }
 }
 
@@ -736,5 +766,13 @@ export function receiveRobokassa(response) {
     return {
         type: RECEIVE_ROBOKASSA,
         payload: response,
+    }
+}
+
+export function handleMenuMobile(state)
+{
+    return {
+        type: HANDLE_MENU_MOBILE,
+        payload: state,
     }
 }

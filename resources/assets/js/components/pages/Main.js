@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import HeaderContainer from '../../containers/HeaderContainer';
-import Footer from "./Footer";
+import Footer from "../Footer";
 import {LIBRARY_LINK, REGISTRATION_LINK, SUB_LINK} from "../../consts/pageLinks";
 
 export default class Main extends Component {
@@ -18,7 +18,7 @@ export default class Main extends Component {
         {
             subjectsHtml = subjects.map((subject) => {
                 return (
-                    <Link to={"lib"} key={subject.id}>
+                    <Link to={"lib/" + subject.subject} key={subject.id}>
                         <li id={subject.id} onClick={() => this.props.sortBooks(subject.id)} className='mainSubject'>
                             {subject.subject}
                         </li>

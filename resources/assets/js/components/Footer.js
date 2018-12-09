@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
-import {CONTACT_LINK, LIBRARY_LINK, SUB_LINK} from "../../consts/pageLinks";
+import {CONTACT_LINK, LIBRARY_LINK, SUB_LINK} from "../consts/pageLinks";
 
 export default class Footer extends Component {
     render() {

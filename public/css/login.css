@@ -552,16 +552,20 @@
     border-radius: 4px;
 }
 
+.navigation nav a
+{
+    color: white;
+}
+
+.navigation nav a:hover
+{
+    color: #009393;
+}
+
 .navigation nav
 {
     padding-top: 2vh;
     padding-bottom: 2vh;
-    display: none;
-}
-
-.navigation nav ul li:hover
-{
-    background: #545454;
 }
 
 .navigation nav ul li
@@ -760,7 +764,7 @@
     color: black;
 }
 
-.objectOfBook input:hover, .bookObject input:hover, .aHeader:hover
+.objectOfBook a:hover, .bookObject input:hover, .aHeader:hover
 {
     text-decoration: underline;
 }
@@ -1140,7 +1144,7 @@ input[type=submit]:hover
     margin-top: 50px;
 }
 
-.objectOfBook input:hover
+.objectOfBook a:hover
 {
     cursor: pointer;
 }
@@ -1321,15 +1325,6 @@ input[type=submit]:hover
     border: none;
     font-family: 'Century Gothic';
     color: #009393;
-}
-
-.object input[type="submit"]
-{
-    font-family: 'Century Gothic';
-    background: none;
-    border: none;
-    font-size: 19px;
-    font-weight: normal;
 }
 
 .objectOfBook
@@ -1732,16 +1727,11 @@ body
     color: #212121;
 }
 
-.subjectSelected
-{
-    color: #009393;
-    text-decoration: underline;
-}
-
 .loginResponse,
 .emailResponse,
 .fillResponse,
-.passResponse
+.passResponse,
+.contactResponse
 {
     color: #FF4847;
 }
@@ -1893,6 +1883,27 @@ body
 {
     display: inline-flex;
     align-items: center;
+}
+
+.subjectSelected, .objectLink
+{
+    background: none;
+    border: none;
+    font-size: 19px;
+    font-weight: normal;
+    font-family: 'Century Gothic';
+}
+
+.subjectSelected
+{
+    color: #009393;
+    text-decoration: none;
+}
+
+.objectLink
+{
+    color: black;
+    text-decoration: none;
 }
 
 
@@ -2357,7 +2368,7 @@ body
         width: 86vw;
     }
 
-    .objectOfBook input
+    .objectOfBook a
     {
         font-size: 6vw;
     }

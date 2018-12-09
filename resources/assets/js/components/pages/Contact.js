@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import HeaderContainer from "../../containers/HeaderContainer";
-import Footer from "./Footer";
+import Footer from "../Footer";
 import {contactNameHandleChange} from "../../actions";
 
 export default class Contact extends Component {
@@ -53,7 +53,7 @@ export default class Contact extends Component {
                     <input onClick={() => this.contactSubmit()} className="submit" type="submit" name="sendInf" value="Связаться с нами"/>
                 </section>
 
-                <section className="response">
+                <section className="response contactResponse">
                     {errorResponseText}
                 </section>
             </section>

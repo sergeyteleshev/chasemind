@@ -13,11 +13,14 @@ export default class Header extends Component {
         {
             this.props.fetchLoginViaRememberToken(rememberToken);
         }
-
-        if(apiToken)
+        else if(apiToken)
         {
-            // this.props.fetchLoginViaApiToken(apiToken);
+            this.props.fetchLoginViaApiToken(apiToken);
         }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
     }
 
     render() {
@@ -54,6 +57,25 @@ export default class Header extends Component {
             );
         }
 
+        let menuMobile = null;
+
+        if(this.props.isMenuMobileOpened)
+        {
+            menuMobile = <section className="navigation">
+                <section className="navigationWrapper">
+                    <nav>
+                        <ul>
+                            <Link to={MAIN_LINK}><li>Главная</li></Link>
+                            <Link to={SUB_LINK}><li>Подписка</li></Link>
+                            <Link to={"https://vk.com/sergeyteleshev"}><li>Блог</li></Link>
+                            <Link to={LIBRARY_LINK}><li>Библиотека</li></Link>
+                            <Link to={CONTACT_LINK}><li>Контакты</li></Link>
+                        </ul>
+                    </nav>
+                </section>
+            </section>
+        }
+
         return (
             <div>
                 <section className="menu">
@@ -72,7 +94,7 @@ export default class Header extends Component {
                                 <nav className="nav">
                                     <ul>
                                         <Link to={SUB_LINK}><li>Подписка</li></Link>
-                                        <li><a target={"_blank"} href="https://vk.com/sergeyteleshev">Блог</a></li>
+                                        <Link to={"https://vk.com/sergeyteleshev"}><li>Блог</li></Link>
                                         <Link to={LIBRARY_LINK}><li>Библиотека</li></Link>
                                         <Link to={CONTACT_LINK}><li>Контакты</li></Link>
                                     </ul>
@@ -87,7 +109,7 @@ export default class Header extends Component {
                 <section className="menuTest">
                     <section className="menuTestWrapper">
                         <section className="menuTestImg">
-                            <img src="/img/menu_sandwich.svg"/>
+                            <img onClick={() => this.props.handleMenuMobile(!this.props.isMenuMobileOpened)} src="/img/menu_sandwich.svg"/>
                         </section>
 
                         <section className="menuTestVar">
@@ -96,19 +118,7 @@ export default class Header extends Component {
                     </section>
                 </section>
 
-                <section className="navigation">
-                    <section className="navigationWrapper">
-                        <nav>
-                            <ul>
-                                <Link to={MAIN_LINK}><li>Главная</li></Link>
-                                <Link to={SUB_LINK}><li>Подписка</li></Link>
-                                <li><a target={"_blank"} href="https://vk.com/sergeyteleshev">Блог</a></li>
-                                <Link to={LIBRARY_LINK}><li>Библиотека</li></Link>
-                                <Link to={CONTACT_LINK}><li>Контакты</li></Link>
-                            </ul>
-                        </nav>
-                    </section>
-                </section>
+                {menuMobile}
             </div>
         );
     }

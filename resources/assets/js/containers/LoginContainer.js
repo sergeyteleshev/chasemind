@@ -5,7 +5,6 @@ import {
     loginInputHandleChange,
     passwordInputHandleChange,
     rememberMeHandleChange,
-    showLoginFormErrorResponse
 } from "../actions";
 
 const mapStateToProps = (state) => {

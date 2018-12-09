@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
-import Footer from "./Footer";
+import Footer from "../Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
 import {LOGIN_LINK, REGISTRATION_LINK, SUB_LINK} from "../../consts/pageLinks";
 

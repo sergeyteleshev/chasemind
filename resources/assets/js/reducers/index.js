@@ -8,7 +8,7 @@ import {
     EMAIL_HANDLE_CHANGE,
     GET_MATERIAL_RECEIVE,
     GET_MATERIAL_REQUEST,
-    GET_MATERIAL_SUBMIT, HIDE_BOOK_MODAL_WINDOW, HIDE_SUB_MODAL_WINDOW, LOGIN_ERROR,
+    GET_MATERIAL_SUBMIT, HANDLE_MENU_MOBILE, HIDE_BOOK_MODAL_WINDOW, HIDE_SUB_MODAL_WINDOW, LOGIN_ERROR,
     LOGIN_HANDLE_CHANGE,
     LOGIN_INPUT_HANDLE_CHANGE,
     OPEN_CURRENT_BOOK,
@@ -32,7 +32,6 @@ import {
     SORT_BOOKS,
     SUBMIT_REGISTER
 } from "../actions/index";
-import {LOGIN_FORM_ERROR_RESPONSE} from "../actions";
 
 const initialStateBooks = {
     libBooks: {},
@@ -58,7 +57,7 @@ const initialStateAuth = {
     user: {},
     loginInput: '',
     passwordInput: '',
-    remember: false,
+    remember: true,
     authorized: false,
     loginFormErrorResponse: false,
     isLoginInputChecking: false,
@@ -86,6 +85,10 @@ const initialStateModalWindows = {
 const initialStateSub = {
     isRobokassaLoading: false,
     robokassaResponse: {},
+};
+
+const initialStateMenuMobile = {
+    isMenuMobileOpened: false,
 };
 
 function Books(state = initialStateBooks, action) {
@@ -345,7 +348,7 @@ function ModalWindows(state = initialStateModalWindows, action) {
     }
 }
 
-function Sub(state = initialStateBooks, action) {
+function Sub(state = initialStateSub, action) {
     switch(action.type) {
         case REQUEST_ROBOKASSA:
             return Object.assign({}, state, {
@@ -364,5 +367,17 @@ function Sub(state = initialStateBooks, action) {
     }
 }
 
-const storeApp = combineReducers({Books, Auth, Email, ModalWindows, Sub});
+function MenuMobile(state = initialStateMenuMobile, action) {
+    switch(action.type) {
+        case HANDLE_MENU_MOBILE:
+            return Object.assign({}, state, {
+                isMenuMobileOpened: action.payload,
+            });
+
+        default:
+            return state;
+    }
+}
+
+const storeApp = combineReducers({Books, Auth, Email, ModalWindows, Sub, MenuMobile});
 export default storeApp;

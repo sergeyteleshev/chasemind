@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Footer from "./Footer";
+import Footer from "../Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
 import {Link} from "react-router-dom";
 import {LOGIN_LINK, REGISTRATION_LINK} from "../../consts/pageLinks";

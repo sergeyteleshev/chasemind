@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
-import Footer from "./Footer";
+import Footer from "../Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
 import {Link} from "react-router-dom";
+import {LIBRARY_LINK} from "../../consts/pageLinks";
 
 export default class Library extends Component {
     componentWillMount()
     {
-        this.props.fetchBooks();
-        this.props.fetchSubjects();
+        const sortBooksFromUrl = async () => {
+            let books = await this.props.fetchBooks();
+            const subjects = await this.props.fetchSubjects();
+            let { subject } = this.props.match.params;
 
+            if(subjects.length > 0)
+            {
+                subjects.map((subjectMap) => {
+                    console.log(subjectMap);
+                    if(subjectMap.subject.toLowerCase() === subject.toLowerCase())
+                    {
+                        this.props.sortBooks(subjectMap.id);
+                    }
+                });
+            }
+        };
 
-        //todo сделать круто со слагом чтобы сортировало книги
-        // const { subject } = this.props.match.params;
-        // let {subjects} = this.props;
-        //
-        // if(Object.keys(subjects) > 0)
-        // {
-        //     subjects.map((subjectMap) => {
-        //         if(subjectMap.subject.toLowerCase() === subject.toLowerCase())
-        //         {
-        //             this.props.sortBooks(subjectMap.id);
-        //         }
-        //     });
-        // }
+        sortBooksFromUrl();
+    }
+
+    sortBooks(subject)
+    {
+        this.props.sortBooks(subject.id);
     }
 
     renderBooks()
@@ -71,7 +78,7 @@ export default class Library extends Component {
                 {
                     return (
                         <section className='object'>
-                            <input className={subjectSelectedClassName} onClick={() => this.props.sortBooks(subject.id)} type='submit' key={subject.id} id={subject.id} value={subject.subject}/>
+                            <Link to={LIBRARY_LINK + "/" + subject.subject} className={subjectSelectedClassName} onClick={() => this.sortBooks(subject)} key={subject.id} id={subject.id}>{subject.subject}</Link>
                         </section>
                     );
                 }
@@ -79,7 +86,7 @@ export default class Library extends Component {
                 {
                     return (
                         <section className='object'>
-                            <input onClick={() => this.props.sortBooks(subject.id)} type='submit' key={subject.id} id={subject.id} value={subject.subject}/>
+                            <Link className={"objectLink"} to={LIBRARY_LINK + "/" + subject.subject} onClick={() => this.sortBooks(subject)} key={subject.id} id={subject.id}>{subject.subject}</Link>
                         </section>
                     );
                 }
@@ -116,9 +123,9 @@ export default class Library extends Component {
                         <section className='object'>
                             {
                                 this.props.sortId === 0 ?
-                                    <input className={subjectSelectedClassName} onClick={() => this.props.sortBooks(0)} type='submit' key={0} id={0} value={"Все"}/>
+                                    <Link to={LIBRARY_LINK} className={subjectSelectedClassName} onClick={() => this.sortBooks({id: 0, subject: "Все"})} type='submit' key={0} id={0}>Все</Link>
                                         :
-                                    <input onClick={() => this.props.sortBooks(0)} type='submit' key={0} id={0} value={"Все"}/>
+                                    <Link className={"objectLink"} to={LIBRARY_LINK} onClick={() => this.sortBooks({id: 0, subject: "Все"})} type='submit' key={0} id={0}>Все</Link>
                             }
                         </section>
                         {subjects}

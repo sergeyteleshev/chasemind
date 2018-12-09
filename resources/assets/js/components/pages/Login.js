@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link, Redirect} from "react-router-dom";
-import Footer from "./Footer";
+import Footer from "../Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
 import {LIBRARY_LINK, REGISTRATION_LINK} from "../../consts/pageLinks";
 
@@ -27,9 +27,11 @@ export default class Login extends Component {
 
             if(!this.props.authorized && this.props.isLoginLoading === false && this.props.isLoginFetchDone === true && Object.keys(this.props.user).length === 0)
             {
-                this.setState({
-                    loginResponse: "Неверный логин или пароль",
-                });
+                setInterval(() => {
+                    this.setState({
+                        loginResponse: "Неверный логин или пароль",
+                    });
+                }, 1000);
             }
         }
     }

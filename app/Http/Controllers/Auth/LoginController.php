@@ -61,6 +61,9 @@ class LoginController extends Controller
             $response['error'] = 'invalid data';
         }
 
+        $_COOKIE['api_token'] = $response['api_token'];
+        $_COOKIE['remember_token'] = $response['remember_token'];
+
         return $response;
     }
 
@@ -134,6 +137,23 @@ class LoginController extends Controller
         {
             $response['status'] = "ok";
             $response['remember_token'] = $request->input('remember_token');
+        }
+        else
+        {
+            $response['error'] = 'invalid data';
+        }
+
+        return $response;
+    }
+
+    public function loginViaApiToken(Request $request)
+    {
+        $response = User::where('api_token', $request->input('api_token'))->first();
+
+        if($response)
+        {
+            $response['status'] = "ok";
+            $response['api_token'] = $request->input('api_token');
         }
         else
         {

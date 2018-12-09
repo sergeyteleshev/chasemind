@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch) => {
         openCurrentBook: (book) => dispatch(openCurrentBook(book)),
         fetchSubjects: () => dispatch(fetchSubjects()),
         sortBooks: (id) => dispatch(sortBooks(id)),
+
     }
 };
 
