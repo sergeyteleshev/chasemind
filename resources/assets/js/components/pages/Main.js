@@ -18,7 +18,7 @@ export default class Main extends Component {
         {
             subjectsHtml = subjects.map((subject) => {
                 return (
-                    <Link to={"lib/" + subject.subject} key={subject.id}>
+                    <Link to={LIBRARY_LINK + "/" + subject.subject.toLowerCase()} key={subject.id}>
                         <li id={subject.id} onClick={() => this.props.sortBooks(subject.id)} className='mainSubject'>
                             {subject.subject}
                         </li>

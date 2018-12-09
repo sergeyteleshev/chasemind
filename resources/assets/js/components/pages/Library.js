@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Footer from "../Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
 import {Link} from "react-router-dom";
-import {LIBRARY_LINK} from "../../consts/pageLinks";
+import {BOOK_LINK, LIBRARY_LINK} from "../../consts/pageLinks";
 
 export default class Library extends Component {
     componentWillMount()
@@ -43,7 +43,7 @@ export default class Library extends Component {
                 if(book.subject === sortId || sortId === 0)
                 {
                     return (
-                        <Link className='newBook' to={"/book/" + book.id} onClick={() => this.props.openCurrentBook(book)} key={book.id}>
+                        <Link className='newBook' to={BOOK_LINK + "/" + book.id} onClick={() => this.props.openCurrentBook(book)} key={book.id}>
                             <section>
                                 <section className='newBookImg'>
                                     <img src={book.imgURL}/>
@@ -78,7 +78,7 @@ export default class Library extends Component {
                 {
                     return (
                         <section className='object'>
-                            <Link to={LIBRARY_LINK + "/" + subject.subject} className={subjectSelectedClassName} onClick={() => this.sortBooks(subject)} key={subject.id} id={subject.id}>{subject.subject}</Link>
+                            <Link to={LIBRARY_LINK + "/" + subject.subject.toLowerCase()} className={subjectSelectedClassName} onClick={() => this.sortBooks(subject)} key={subject.id} id={subject.id}>{subject.subject}</Link>
                         </section>
                     );
                 }
@@ -86,7 +86,7 @@ export default class Library extends Component {
                 {
                     return (
                         <section className='object'>
-                            <Link className={"objectLink"} to={LIBRARY_LINK + "/" + subject.subject} onClick={() => this.sortBooks(subject)} key={subject.id} id={subject.id}>{subject.subject}</Link>
+                            <Link className={"objectLink"} to={LIBRARY_LINK + "/" + subject.subject.toLowerCase()} onClick={() => this.sortBooks(subject)} key={subject.id} id={subject.id}>{subject.subject}</Link>
                         </section>
                     );
                 }

@@ -33,7 +33,7 @@ export default class Footer extends Component {
                             <section className="linksRightPart">
                                 <ul>
                                     <Link to={SUB_LINK}><li>Подписка</li></Link>
-                                    <a href="https://vk.com/chasemind"><li>Блог</li></a>
+                                    <a target={"_blank"} href="https://vk.com/sergeyteleshev"><li>Блог</li></a>
                                     <Link to={LIBRARY_LINK}><li>Библиотека</li></Link>
                                     <Link to={CONTACT_LINK}><li>Контакты</li></Link>
                                 </ul>

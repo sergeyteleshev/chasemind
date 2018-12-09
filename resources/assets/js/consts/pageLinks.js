@@ -1,6 +1,7 @@
-export const REGISTRATION_LINK = "/reg";
-export const LOGIN_LINK = "/login";
-export const SUB_LINK = "/sub";
-export const LIBRARY_LINK = "/lib";
-export const CONTACT_LINK = "/contact";
+export const REGISTRATION_LINK = "/регистрация";
+export const LOGIN_LINK = "/войти";
+export const SUB_LINK = "/подписка";
+export const LIBRARY_LINK = "/библиотека";
+export const CONTACT_LINK = "/контакты";
 export const MAIN_LINK = "/";
+export const BOOK_LINK = "/книга";

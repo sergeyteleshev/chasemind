@@ -67,7 +67,7 @@ export default class Header extends Component {
                         <ul>
                             <Link to={MAIN_LINK}><li>Главная</li></Link>
                             <Link to={SUB_LINK}><li>Подписка</li></Link>
-                            <Link to={"https://vk.com/sergeyteleshev"}><li>Блог</li></Link>
+                            <a target={"_blank"} href={"https://vk.com/sergeyteleshev"}><li>Блог</li></a>
                             <Link to={LIBRARY_LINK}><li>Библиотека</li></Link>
                             <Link to={CONTACT_LINK}><li>Контакты</li></Link>
                         </ul>
@@ -94,7 +94,7 @@ export default class Header extends Component {
                                 <nav className="nav">
                                     <ul>
                                         <Link to={SUB_LINK}><li>Подписка</li></Link>
-                                        <Link to={"https://vk.com/sergeyteleshev"}><li>Блог</li></Link>
+                                        <a target={"_blank"} href={"https://vk.com/sergeyteleshev"}><li>Блог</li></a>
                                         <Link to={LIBRARY_LINK}><li>Библиотека</li></Link>
                                         <Link to={CONTACT_LINK}><li>Контакты</li></Link>
                                     </ul>
