@@ -63,10 +63,10 @@ class UserController extends Controller
                 'daysLeft' => $daysLeft,
             ]);
 
-            return Redirect::to('/lib');
+            return Redirect::to('/');
         }
 
-        return Redirect::to('/sub');
+        return Redirect::to('/');
     }
 
     public function payForSubFail(Request $request)
