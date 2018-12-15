@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import storeApp from '../reducers';
 import { AppContainer } from 'react-hot-loader';
-import Contact from './pages/Contact';
 import Dontwork from './pages/Dontwork';
 
 /*eslint no-unused-vars:0*/
@@ -19,8 +17,8 @@ import MainContainer from "../containers/MainContainer";
 import ContactContainer from "../containers/ContactContainer";
 import SubscriptionContainer from "../containers/SubscriptionContainer";
 import ScrollToTop from "./ScrollToTop";
-import {getCookie} from "../helpers/cookies";
 import {BOOK_LINK, CONTACT_LINK, LIBRARY_LINK, LOGIN_LINK, REGISTRATION_LINK, SUB_LINK} from "../consts/pageLinks";
+import TestContainer from "../containers/TestContainer";
 const history = createHistory();
 const middleware = [thunkMiddleware];
 let store = createStore(storeApp, applyMiddleware(...middleware));
@@ -41,6 +39,7 @@ export default class App extends Component {
                         <Route exact path={SUB_LINK} component={SubscriptionContainer}/>
                         <Route exact path={LOGIN_LINK} component={LoginController}/>
                         <Route exact path={REGISTRATION_LINK} component={RegistrationContainer}/>
+                        <Route exact path={"/test"} component={TestContainer}/>
                     </ScrollToTop>
                 </Router>
             </Provider>

@@ -6,10 +6,10 @@
     "type": "project",
     "require": {
         "php": ">=7.2.0",
+        "google/cloud-text-to-speech": "^0.1.7",
         "laravel/framework": "5.7.13",
         "laravel/passport": "^7.0",
-        "laravel/tinker": "~1.0",
-      "ext-http": "*"
+        "laravel/tinker": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

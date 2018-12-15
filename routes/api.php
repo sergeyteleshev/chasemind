@@ -24,6 +24,7 @@ Route::put('books/{book}', 'BookController@update');
 Route::delete('books/{book}', 'BookController@delete');
 Route::post('getBook', 'BookController@getBookMaterial');
 Route::post('getFileName', 'BookController@getFileName');
+Route::post('getAudio', 'BookController@getAudio');
 
 Route::post('register', 'Auth\RegisterController@create');
 Route::post('login', 'Auth\LoginController@login');
@@ -43,3 +44,4 @@ Route::post('payForSubSuccess', 'UserController@payForSubSuccess');
 Route::post('sub/fail',  'UserController@payForSubFail');
 
 Route::post('checkUserAuth', 'Auth\LoginController@checkUserAuth');
+

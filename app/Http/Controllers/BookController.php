@@ -4,10 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+
+use Google\Cloud\TextToSpeech\V1\AudioConfig;
+use Google\Cloud\TextToSpeech\V1\AudioEncoding;
+use Google\Cloud\TextToSpeech\V1\SsmlVoiceGender;
+use Google\Cloud\TextToSpeech\V1\SynthesisInput;
+use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
+use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
 
 class BookController extends Controller
 {
+    const YANDEX_KEY = "57443385-b5ae-4d9a-9be6-98fc921e18e9";
+
     public function index()
     {
         return Book::all();
@@ -139,4 +150,48 @@ class BookController extends Controller
         return response()->json($filename, 201);
     }
 
+    public function getAudio(Request $request)
+    {
+        // instantiates a client
+        $client = new TextToSpeechClient();
+
+        // sets text to be synthesised
+        $synthesis_input = (new SynthesisInput())
+            ->setText('My name is sergey kekekeke. I live in Russia and love being a stupid programmer');
+
+        // build the voice request, select the language code ("en-US") and the ssml
+        // voice gender
+        $voice = (new VoiceSelectionParams())
+            ->setLanguageCode('en-US')
+            ->setSsmlGender(SsmlVoiceGender::MALE);
+
+        // select the type of audio file you want returned
+        $audioConfig = (new AudioConfig())
+            ->setAudioEncoding(AudioEncoding::MP3);
+
+        // perform text-to-speech request on the text input with selected voice
+        // parameters and audio file type
+        $response = $client->synthesizeSpeech($synthesis_input, $voice, $audioConfig);
+        $audioContent = $response->getAudioContent();
+
+        return response()->json(file_put_contents('chtoo.mp3', $audioContent));
+    }
+
+    public static function convert_from_latin1_to_utf8_recursively($dat)
+    {
+        if (is_string($dat)) {
+            return utf8_encode($dat);
+        } elseif (is_array($dat)) {
+            $ret = [];
+            foreach ($dat as $i => $d) $ret[ $i ] = self::convert_from_latin1_to_utf8_recursively($d);
+
+            return $ret;
+        } elseif (is_object($dat)) {
+            foreach ($dat as $i => $d) $dat->$i = self::convert_from_latin1_to_utf8_recursively($d);
+
+            return $dat;
+        } else {
+            return $dat;
+        }
+    }
 }

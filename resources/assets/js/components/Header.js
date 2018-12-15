@@ -97,6 +97,7 @@ export default class Header extends Component {
                                         <a target={"_blank"} href={"https://vk.com/sergeyteleshev"}><li>Блог</li></a>
                                         <Link to={LIBRARY_LINK}><li>Библиотека</li></Link>
                                         <Link to={CONTACT_LINK}><li>Контакты</li></Link>
+                                        <Link to={"/test"}><li>Тест</li></Link>
                                     </ul>
                                 </nav>
                             </section>

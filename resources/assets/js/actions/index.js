@@ -58,6 +58,9 @@ export const RECEIVE_ROBOKASSA = "RECEIVE_ROBOKASSA";
 
 export const HANDLE_MENU_MOBILE = "HANDLE_MENU_MOBILE";
 
+export const REQUEST_TEXT_TO_SPEECH = "REQUEST_TEXT_TO_SPEECH";
+export const RECEIVE_TEXT_TO_SPEECH ="RECEIVE_TEXT_TO_SPEECH";
+
 export function requestBooks() {
     return {
         type: REQUEST_BOOKS,
@@ -774,5 +777,97 @@ export function handleMenuMobile(state)
     return {
         type: HANDLE_MENU_MOBILE,
         payload: state,
+    }
+}
+
+export function requestTextToSpeech()
+{
+    return {
+        type: REQUEST_TEXT_TO_SPEECH,
+    }
+}
+
+export function receiveTextToSpeech(json)
+{
+    return {
+        type: RECEIVE_TEXT_TO_SPEECH,
+        payload: json,
+    }
+}
+
+export function fetchTextToSpeech(text)
+{
+    let url = "https://tts.voicetech.yandex.net/generate?";
+    let args = {
+        key: "57443385-b5ae-4d9a-9be6-98fc921e18e9",
+        text,
+        format: "mp3",
+        lang: "ru-RU",
+        speaker: "zahar",
+    };
+
+    let str = Object.keys(args).map(function(key) {
+        return key + '=' + args[key];
+    }).join('&');
+
+    url += str;
+
+    console.info(url);
+
+    return dispatch => {
+        dispatch(requestTextToSpeech());
+
+        const request = async () => {
+            const response = await fetch(url, {
+                method: 'GET',
+            });
+
+            const json = await response;
+            dispatch(receiveTextToSpeech(json));
+            console.info(json);
+            return json;
+        };
+
+        return request();
+    }
+}
+
+export function testFunct(text)
+{
+    let payload = {
+        text,
+    };
+
+    return dispatch => {
+        dispatch(requestTextToSpeech());
+
+        const request = async () => {
+            const response = await fetch('/api/getAudio', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const filename = 'output.mp3';
+            const blob = await response.blob();
+            let objectURL = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = objectURL;
+            a.download = filename;
+
+            document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+            a.click();
+            a.remove();
+
+            // dispatch(receiveTextToSpeech(blob));
+            console.info(blob);
+
+            return blob;
+        };
+
+        return request();
     }
 }
