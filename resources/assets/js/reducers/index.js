@@ -27,11 +27,12 @@ import {
     REQUEST_LOGIN, REQUEST_LOGIN_CHECK,
     REQUEST_LOGOUT,
     REQUEST_REGISTER, REQUEST_ROBOKASSA,
-    REQUEST_SUBJECTS, SELECT_CURRENT_BOOK_TYPE,
+    REQUEST_SUBJECTS, REQUEST_UPLOAD_PDF, SELECT_CURRENT_BOOK_TYPE,
     SHOW_BOOK_MODAL_WINDOW, SHOW_SUB_MODAL_WINDOW,
     SORT_BOOKS,
     SUBMIT_REGISTER, UPLOAD_PDF_HANDLE_CHANGE
 } from "../actions/index";
+import {RECEIVE_UPLOAD_PDF} from "../actions";
 
 const initialStateBooks = {
     libBooks: {},
@@ -44,6 +45,8 @@ const initialStateBooks = {
     isBookMaterialLoading: true,
     currentBookTypeSelected: '',
     pdfToUpload: {},
+    pdfUploadResponse: {},
+    isPdfUploading: false,
 };
 
 const initialStateAuth = {
@@ -160,6 +163,18 @@ function Books(state = initialStateBooks, action) {
         case UPLOAD_PDF_HANDLE_CHANGE:
             return Object.assign({}, state, {
                 pdfToUpload: action.payload,
+            });
+
+        case RECEIVE_UPLOAD_PDF:
+            return Object.assign({}, state, {
+                pdfUploadResponse: action.payload,
+                isPdfUploading: false,
+            });
+
+        case REQUEST_UPLOAD_PDF:
+            return Object.assign({}, state, {
+                isPdfUploading: true,
+                pdfUploadResponse: {},
             });
 
         default:

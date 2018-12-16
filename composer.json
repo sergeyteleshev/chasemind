@@ -9,7 +9,8 @@
         "google/cloud-text-to-speech": "^0.1.7",
         "laravel/framework": "5.7.13",
         "laravel/passport": "^7.0",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "smalot/pdfparser": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -29,8 +29,16 @@ class BookController extends Controller
 
         if($pdf)
         {
-            Storage::disk('local')->putFile('public/read', $pdf);
-            return response()->json(["status" => "ok"], 201);
+            $filepath = Storage::disk('local')->putFile('public/read', $pdf);
+            $parser = new \Smalot\PdfParser\Parser();
+            $pdf = $parser->parseFile($pdf);
+            $text = $pdf->getText();
+
+            return response()->json([
+                "status" => "ok",
+                "text" => $text,
+                "filename" => basename($filepath, '.pdf'),
+            ], 201);
         }
 
         return response()->json(["error" => "pdf not found"], 404);
@@ -162,6 +170,19 @@ class BookController extends Controller
         return response()->json($filename, 201);
     }
 
+    private function translit($s) {
+        $s = (string) $s; // преобразуем в строковое значение
+        $s = strip_tags($s); // убираем HTML-теги
+        $s = str_replace(array("\n", "\r"), " ", $s); // убираем перевод каретки
+        $s = preg_replace("/\s+/", ' ', $s); // удаляем повторяющие пробелы
+        $s = trim($s); // убираем пробелы в начале и конце строки
+        $s = function_exists('mb_strtolower') ? mb_strtolower($s) : strtolower($s); // переводим строку в нижний регистр (иногда надо задать локаль)
+        $s = strtr($s, array('а'=>'a','б'=>'b','в'=>'v','г'=>'g','д'=>'d','е'=>'e','ё'=>'e','ж'=>'j','з'=>'z','и'=>'i','й'=>'y','к'=>'k','л'=>'l','м'=>'m','н'=>'n','о'=>'o','п'=>'p','р'=>'r','с'=>'s','т'=>'t','у'=>'u','ф'=>'f','х'=>'h','ц'=>'c','ч'=>'ch','ш'=>'sh','щ'=>'shch','ы'=>'y','э'=>'e','ю'=>'yu','я'=>'ya','ъ'=>'','ь'=>''));
+        $s = preg_replace("/[^0-9a-z-_ ]/i", "", $s); // очищаем строку от недопустимых символов
+        $s = str_replace(" ", "-", $s); // заменяем пробелы знаком минус
+        return $s; // возвращаем результат
+    }
+
     public function getAudio(Request $request)
     {
         // instantiates a client
@@ -170,6 +191,11 @@ class BookController extends Controller
         // sets text to be synthesised
         $synthesis_input = (new SynthesisInput())
             ->setText($request->input('text'));
+
+//        if($synthesis_input)
+//        {
+//            $synthesis_input = $this->translit($synthesis_input->getText());
+//        }
 
         // build the voice request, select the language code ("en-US") and the ssml
         // voice gender
@@ -188,7 +214,7 @@ class BookController extends Controller
 
 //        Storage::disk('local')->putFile('public/listen', base64_decode($audioContent));
 //        return response()->json(Storage::disk('local')->put('public/listen', $audioContent));
-        return response()->json(file_put_contents($request->input('filename'), $audioContent));
+        return response()->json(file_put_contents($request->input('filename') . ".mp3", $audioContent));
     }
 
     public static function convert_from_latin1_to_utf8_recursively($dat)

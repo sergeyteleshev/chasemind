@@ -62,6 +62,8 @@ export const REQUEST_TEXT_TO_SPEECH = "REQUEST_TEXT_TO_SPEECH";
 export const RECEIVE_TEXT_TO_SPEECH ="RECEIVE_TEXT_TO_SPEECH";
 
 export const UPLOAD_PDF_HANDLE_CHANGE = "UPLOAD_PDF_HANDLE_CHANGE";
+export const REQUEST_UPLOAD_PDF = "REQUEST_UPLOAD_PDF";
+export const RECEIVE_UPLOAD_PDF = "RECEIVE_UPLOAD_PDF";
 
 export function requestBooks() {
     return {
@@ -882,13 +884,28 @@ export function uploadPdfHandleChange(event)
     }
 }
 
-export function uploadPdf(pdf)
+export function requestUploadPdf()
+{
+    return {
+        type: REQUEST_UPLOAD_PDF,
+    }
+}
+
+export function receiveUploadPdf(response)
+{
+    return {
+        type: RECEIVE_UPLOAD_PDF,
+        payload: response,
+    }
+}
+
+export function fetchUploadPdf(pdf)
 {
     let formData = new FormData();
     formData.append('pdf', pdf);
 
     return dispatch => {
-        // dispatch(requestTextToSpeech());
+        dispatch(requestUploadPdf());
 
         const request = async () => {
             const response = await fetch('/api/uploadPdf', {
@@ -897,7 +914,12 @@ export function uploadPdf(pdf)
             });
 
             const json = await response.json();
-            // dispatch(receiveTextToSpeech(json));
+            dispatch(receiveUploadPdf(json));
+            if(json.text && json.filename)
+            {
+                dispatch(testFunct(json.text, json.filename));
+            }
+
             return json;
         };
 

@@ -1,11 +1,12 @@
 import {connect} from 'react-redux';
-import {fetchLoginCheck, fetchTextToSpeech, testFunct, uploadPdf, uploadPdfHandleChange} from "../actions";
+import {fetchLoginCheck, fetchTextToSpeech, testFunct, fetchUploadPdf, uploadPdfHandleChange} from "../actions";
 import Test from "../components/pages/Test";
 
 const mapStateToProps = (state) => {
     return {
         isRegisterSubmitted: state.Auth.isRegisterSubmitted,
         pdfToUpload: state.Books.pdfToUpload,
+        pdfUploadResponse: state.Books.pdfUploadResponse,
     }
 };
 
@@ -15,7 +16,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchTextToSpeech: (text) => dispatch(fetchTextToSpeech(text)),
         testFunct: (text, filename) => dispatch(testFunct(text, filename)),
         uploadPdfHandleChange: (event) => dispatch(uploadPdfHandleChange(event)),
-        uploadPdf: (pdf) => dispatch(uploadPdf(pdf)),
+        fetchUploadPdf: (pdf) => dispatch(fetchUploadPdf(pdf)),
     }
 };
 
