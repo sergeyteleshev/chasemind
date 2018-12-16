@@ -25,6 +25,7 @@ Route::delete('books/{book}', 'BookController@delete');
 Route::post('getBook', 'BookController@getBookMaterial');
 Route::post('getFileName', 'BookController@getFileName');
 Route::post('getAudio', 'BookController@getAudio');
+Route::post('uploadPdf', 'BookController@uploadPdf');
 
 Route::post('register', 'Auth\RegisterController@create');
 Route::post('login', 'Auth\LoginController@login');

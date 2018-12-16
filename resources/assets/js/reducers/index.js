@@ -30,7 +30,7 @@ import {
     REQUEST_SUBJECTS, SELECT_CURRENT_BOOK_TYPE,
     SHOW_BOOK_MODAL_WINDOW, SHOW_SUB_MODAL_WINDOW,
     SORT_BOOKS,
-    SUBMIT_REGISTER
+    SUBMIT_REGISTER, UPLOAD_PDF_HANDLE_CHANGE
 } from "../actions/index";
 
 const initialStateBooks = {
@@ -43,6 +43,7 @@ const initialStateBooks = {
     sortId: 0,
     isBookMaterialLoading: true,
     currentBookTypeSelected: '',
+    pdfToUpload: {},
 };
 
 const initialStateAuth = {
@@ -154,6 +155,11 @@ function Books(state = initialStateBooks, action) {
         case SELECT_CURRENT_BOOK_TYPE:
             return Object.assign({}, state, {
                 currentBookTypeSelected: action.payload,
+            });
+
+        case UPLOAD_PDF_HANDLE_CHANGE:
+            return Object.assign({}, state, {
+                pdfToUpload: action.payload,
             });
 
         default:

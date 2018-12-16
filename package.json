@@ -57,6 +57,7 @@
         "http2": "^3.3.7",
         "jsrsasign": "^8.0.12",
         "net": "^1.0.2",
+        "pdfjs-dist": "^2.0.943",
         "react": "latest",
         "react-dom": "latest",
         "react-hot-loader": "^3.1.3",

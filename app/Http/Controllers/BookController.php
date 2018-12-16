@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Response;
 
 use Google\Cloud\TextToSpeech\V1\AudioConfig;
 use Google\Cloud\TextToSpeech\V1\AudioEncoding;
@@ -14,14 +11,29 @@ use Google\Cloud\TextToSpeech\V1\SsmlVoiceGender;
 use Google\Cloud\TextToSpeech\V1\SynthesisInput;
 use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
     const YANDEX_KEY = "57443385-b5ae-4d9a-9be6-98fc921e18e9";
+    const TEXT_TO_SPEECH_MAX_LENGTH = 5000;
 
     public function index()
     {
         return Book::all();
+    }
+
+    public function uploadPdf(Request $request)
+    {
+        $pdf = $request->file('pdf');
+
+        if($pdf)
+        {
+            Storage::disk('local')->putFile('public/read', $pdf);
+            return response()->json(["status" => "ok"], 201);
+        }
+
+        return response()->json(["error" => "pdf not found"], 404);
     }
 
     public function show(Book $book)
@@ -157,7 +169,7 @@ class BookController extends Controller
 
         // sets text to be synthesised
         $synthesis_input = (new SynthesisInput())
-            ->setText('My name is sergey kekekeke. I live in Russia and love being a stupid programmer');
+            ->setText($request->input('text'));
 
         // build the voice request, select the language code ("en-US") and the ssml
         // voice gender
@@ -174,7 +186,9 @@ class BookController extends Controller
         $response = $client->synthesizeSpeech($synthesis_input, $voice, $audioConfig);
         $audioContent = $response->getAudioContent();
 
-        return response()->json(file_put_contents('chtoo.mp3', $audioContent));
+//        Storage::disk('local')->putFile('public/listen', base64_decode($audioContent));
+//        return response()->json(Storage::disk('local')->put('public/listen', $audioContent));
+        return response()->json(file_put_contents($request->input('filename'), $audioContent));
     }
 
     public static function convert_from_latin1_to_utf8_recursively($dat)

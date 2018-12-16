@@ -61,6 +61,8 @@ export const HANDLE_MENU_MOBILE = "HANDLE_MENU_MOBILE";
 export const REQUEST_TEXT_TO_SPEECH = "REQUEST_TEXT_TO_SPEECH";
 export const RECEIVE_TEXT_TO_SPEECH ="RECEIVE_TEXT_TO_SPEECH";
 
+export const UPLOAD_PDF_HANDLE_CHANGE = "UPLOAD_PDF_HANDLE_CHANGE";
+
 export function requestBooks() {
     return {
         type: REQUEST_BOOKS,
@@ -832,10 +834,11 @@ export function fetchTextToSpeech(text)
     }
 }
 
-export function testFunct(text)
+export function testFunct(text, filename)
 {
     let payload = {
         text,
+        filename,
     };
 
     return dispatch => {
@@ -851,21 +854,51 @@ export function testFunct(text)
                 body: JSON.stringify(payload)
             });
 
-            const filename = 'output.mp3';
             const blob = await response.blob();
-            let objectURL = URL.createObjectURL(blob);
-            let a = document.createElement('a');
-            a.href = objectURL;
-            a.download = filename;
+            // let objectURL = URL.createObjectURL(blob);
+            // let a = document.createElement('a');
+            // a.href = objectURL;
+            // a.download = filename;
+            //
+            // document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+            // a.click();
+            // a.remove();
 
-            document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
-            a.click();
-            a.remove();
-
-            // dispatch(receiveTextToSpeech(blob));
+            dispatch(receiveTextToSpeech(blob));
             console.info(blob);
 
             return blob;
+        };
+
+        return request();
+    }
+}
+
+export function uploadPdfHandleChange(event)
+{
+    return {
+        type: UPLOAD_PDF_HANDLE_CHANGE,
+        payload: event.target.files[0],
+    }
+}
+
+export function uploadPdf(pdf)
+{
+    let formData = new FormData();
+    formData.append('pdf', pdf);
+
+    return dispatch => {
+        // dispatch(requestTextToSpeech());
+
+        const request = async () => {
+            const response = await fetch('/api/uploadPdf', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const json = await response.json();
+            // dispatch(receiveTextToSpeech(json));
+            return json;
         };
 
         return request();
