@@ -192,29 +192,53 @@ class BookController extends Controller
         $synthesis_input = (new SynthesisInput())
             ->setText($request->input('text'));
 
-//        if($synthesis_input)
-//        {
-//            $synthesis_input = $this->translit($synthesis_input->getText());
-//        }
+        $synthesis_input_parts = [];
+        $amount_of_part = ceil(strlen($request->input('text')) / self::TEXT_TO_SPEECH_MAX_LENGTH);
+        $current_str_pos = 0;
+        $current_text = "";
 
-        // build the voice request, select the language code ("en-US") and the ssml
-        // voice gender
-        $voice = (new VoiceSelectionParams())
-            ->setLanguageCode('en-US')
-            ->setSsmlGender(SsmlVoiceGender::MALE);
+        if($amount_of_part > 1) {
+            while($amount_of_part > 0)
+            {
+                $current_text = substr($request->input('text'), $current_str_pos, self::TEXT_TO_SPEECH_MAX_LENGTH);
+                $temp_end_of_sentence = "";
+                $i_of_broke = strlen($current_text);
+                for($i = strlen($current_text); $i > 0; $i--)
+                {
+                    if($current_text[$i] != "." || $current_text[$i] != "?" || $current_text[$i] != "!")
+                    {
+                        $temp_end_of_sentence = $current_text[$i] . $temp_end_of_sentence;
+                    }
+                    else
+                    {
+                        $i_of_broke = $i;
+                        break;
+                    }
+                }
 
-        // select the type of audio file you want returned
-        $audioConfig = (new AudioConfig())
-            ->setAudioEncoding(AudioEncoding::MP3);
+                $current_str_pos = $i_of_broke;
+                $amount_of_part--;
+            }
+        }
+        else
+        {
+            // build the voice request, select the language code ("en-US") and the ssml
+            // voice gender
+            $voice = (new VoiceSelectionParams())
+                ->setLanguageCode('en-US')
+                ->setSsmlGender(SsmlVoiceGender::MALE);
 
-        // perform text-to-speech request on the text input with selected voice
-        // parameters and audio file type
-        $response = $client->synthesizeSpeech($synthesis_input, $voice, $audioConfig);
-        $audioContent = $response->getAudioContent();
+            // select the type of audio file you want returned
+            $audioConfig = (new AudioConfig())
+                ->setAudioEncoding(AudioEncoding::MP3);
 
-//        Storage::disk('local')->putFile('public/listen', base64_decode($audioContent));
-//        return response()->json(Storage::disk('local')->put('public/listen', $audioContent));
-        return response()->json(file_put_contents($request->input('filename') . ".mp3", $audioContent));
+            // perform text-to-speech request on the text input with selected voice
+            // parameters and audio file type
+            $response = $client->synthesizeSpeech($synthesis_input, $voice, $audioConfig);
+            $audioContent = $response->getAudioContent();
+
+            return response()->json(file_put_contents($request->input('filename') . ".mp3", $audioContent));
+        }
     }
 
     public static function convert_from_latin1_to_utf8_recursively($dat)
