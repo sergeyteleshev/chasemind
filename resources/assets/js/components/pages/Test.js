@@ -7,8 +7,8 @@ export default class Test extends Component
     submitUploadPdf()
     {
         this.props.fetchUploadPdf(this.props.pdfToUpload);
-
         // this.props.testFunct("Hello world", 'test.mp3');
+        // this.props.fetchTextToSpeech("test text");
     }
 
     render()
@@ -25,7 +25,7 @@ export default class Test extends Component
                         {/*todo как яндекс ответит*/}
                         {/*<input type="submit" value="API" id="linkOnText" onClick={() => this.props.fetchTextToSpeech()}/>*/}
                         <input type="submit" value="отправить" id="linkOnVideo" onClick={() => this.submitUploadPdf()}/>
-                        <p>{this.props.pdfUploadResponse.text? this.props.pdfUploadResponse.text.length : null}</p>
+                        <p>{this.props.pdfUploadResponse.text ? this.props.pdfUploadResponse.text.length : null}</p>
                         <p>{this.props.pdfUploadResponse.text}</p>
                     </section>
                 </section>

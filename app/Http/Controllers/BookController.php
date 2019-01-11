@@ -185,7 +185,8 @@ class BookController extends Controller
 
     public function getAudio(Request $request)
     {
-        // instantiates a client
+        $i_of_broke = 0;
+        //instantiates a client
         $client = new TextToSpeechClient();
 
         // sets text to be synthesised
@@ -200,9 +201,18 @@ class BookController extends Controller
         if($amount_of_part > 1) {
             while($amount_of_part > 0)
             {
-                $current_text = substr($request->input('text'), $current_str_pos, self::TEXT_TO_SPEECH_MAX_LENGTH);
+                //todo нихуя не робит
+                if($current_str_pos < self::TEXT_TO_SPEECH_MAX_LENGTH)
+                {
+                    $current_text = substr($request->input('text'), $current_str_pos, strlen($request->input('text') - $current_str_pos));
+                }
+                else
+                {
+                    $current_text = substr($request->input('text'), $current_str_pos, self::TEXT_TO_SPEECH_MAX_LENGTH);
+                }
+
                 $temp_end_of_sentence = "";
-                $i_of_broke = strlen($current_text);
+                $i_of_broke += strlen($current_text);
                 for($i = strlen($current_text); $i > 0; $i--)
                 {
                     if($current_text[$i] != "." || $current_text[$i] != "?" || $current_text[$i] != "!")
@@ -216,14 +226,17 @@ class BookController extends Controller
                     }
                 }
 
+                $synthesis_input_parts[$i] = $current_text;
                 $current_str_pos = $i_of_broke;
                 $amount_of_part--;
             }
+
+            return response()->json($synthesis_input_parts, 200);
         }
         else
         {
-            // build the voice request, select the language code ("en-US") and the ssml
-            // voice gender
+            //build the voice request, select the language code ("en-US") and the ssml
+            //voice gender
             $voice = (new VoiceSelectionParams())
                 ->setLanguageCode('en-US')
                 ->setSsmlGender(SsmlVoiceGender::MALE);
