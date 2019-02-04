@@ -1407,7 +1407,7 @@ function receiveTextToSpeech(json) {
 function fetchTextToSpeech(text) {
     var _this15 = this;
 
-    var url = "https://tts.voicetech.yandex.net/generate?";
+    var url = "https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize";
     var args = {
         key: "57443385-b5ae-4d9a-9be6-98fc921e18e9",
         text: text,
@@ -1416,11 +1416,11 @@ function fetchTextToSpeech(text) {
         speaker: "zahar"
     };
 
-    var str = Object.keys(args).map(function (key) {
-        return key + '=' + args[key];
-    }).join('&');
-
-    url += str;
+    // let str = Object.keys(args).map(function(key) {
+    //     return key + '=' + args[key];
+    // }).join('&');
+    //
+    // url += str;
 
     console.info(url);
 
@@ -1436,7 +1436,12 @@ function fetchTextToSpeech(text) {
                             case 0:
                                 _context15.next = 2;
                                 return fetch(url, {
-                                    method: 'GET'
+                                    method: 'POST',
+                                    // headers: {
+                                    //     'Accept': 'application/json',
+                                    //     'Content-Type': 'application/json',
+                                    // },
+                                    body: JSON.stringify(args)
                                 });
 
                             case 2:
@@ -67844,8 +67849,9 @@ var Test = function (_Component) {
     _createClass(Test, [{
         key: "submitUploadPdf",
         value: function submitUploadPdf() {
-            this.props.fetchUploadPdf(this.props.pdfToUpload);
-            this.props.testFunct("Hello world", 'test.mp3');
+            //this.props.fetchUploadPdf(this.props.pdfToUpload);
+            // this.props.testFunct("Hello world", 'test.mp3');
+            this.props.fetchTextToSpeech("test text");
         }
     }, {
         key: "render",
@@ -67859,7 +67865,6 @@ var Test = function (_Component) {
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "section",
                     { className: "main" },
-                    "kek",
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "section",
                         { className: "bookButtons" },

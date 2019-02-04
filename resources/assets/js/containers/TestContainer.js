@@ -1,5 +1,12 @@
 import {connect} from 'react-redux';
-import {fetchLoginCheck, fetchTextToSpeech, testFunct, fetchUploadPdf, uploadPdfHandleChange} from "../actions";
+import {
+    fetchLoginCheck,
+    fetchTextToSpeech,
+    testFunct,
+    fetchUploadPdf,
+    uploadPdfHandleChange,
+    fetchTextToSpeechYandex
+} from "../actions";
 import Test from "../components/pages/Test";
 
 const mapStateToProps = (state) => {
@@ -14,6 +21,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchLoginCheck: (name) => dispatch(fetchLoginCheck(name)),
         fetchTextToSpeech: (text) => dispatch(fetchTextToSpeech(text)),
+        fetchTextToSpeechYandex: (text) => dispatch(fetchTextToSpeechYandex(text)),
         testFunct: (text, filename) => dispatch(testFunct(text, filename)),
         uploadPdfHandleChange: (event) => dispatch(uploadPdfHandleChange(event)),
         fetchUploadPdf: (pdf) => dispatch(fetchUploadPdf(pdf)),

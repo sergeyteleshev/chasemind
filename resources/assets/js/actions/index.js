@@ -799,9 +799,35 @@ export function receiveTextToSpeech(json)
     }
 }
 
+export function fetchTextToSpeechYandex(text) {
+    const payload = {
+        text
+    };
+
+    return dispatch => {
+        //dispatch(requestRobokassa());
+
+        const request = async () => {
+            const response = await fetch('/api/getAudioYandex', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+            const json = await response.json();
+            //dispatch(receiveRobokassa(json));
+            return json;
+        };
+
+        return request();
+    }
+}
+
 export function fetchTextToSpeech(text)
 {
-    let url = "https://tts.voicetech.yandex.net/generate?";
+    let url = "https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize";
     let args = {
         key: "57443385-b5ae-4d9a-9be6-98fc921e18e9",
         text,
@@ -810,11 +836,11 @@ export function fetchTextToSpeech(text)
         speaker: "zahar",
     };
 
-    let str = Object.keys(args).map(function(key) {
-        return key + '=' + args[key];
-    }).join('&');
-
-    url += str;
+    // let str = Object.keys(args).map(function(key) {
+    //     return key + '=' + args[key];
+    // }).join('&');
+    //
+    // url += str;
 
     console.info(url);
 
@@ -823,7 +849,12 @@ export function fetchTextToSpeech(text)
 
         const request = async () => {
             const response = await fetch(url, {
-                method: 'GET',
+                method: 'POST',
+                // headers: {
+                //     'Accept': 'application/json',
+                //     'Content-Type': 'application/json',
+                // },
+                body: JSON.stringify(args),
             });
 
             const json = await response;

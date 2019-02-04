@@ -6,9 +6,10 @@ export default class Test extends Component
 {
     submitUploadPdf()
     {
-        this.props.fetchUploadPdf(this.props.pdfToUpload);
+        //this.props.fetchUploadPdf(this.props.pdfToUpload);
         // this.props.testFunct("Hello world", 'test.mp3');
-        // this.props.fetchTextToSpeech("test text");
+        //this.props.fetchTextToSpeech("test text");
+        this.props.fetchTextToSpeechYandex("тест сука");
     }
 
     render()

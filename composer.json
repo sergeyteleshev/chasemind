@@ -10,7 +10,9 @@
         "laravel/framework": "5.7.13",
         "laravel/passport": "^7.0",
         "laravel/tinker": "~1.0",
-        "smalot/pdfparser": "*"
+        "smalot/pdfparser": "*",
+        "ext-curl": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -17,6 +17,8 @@ class BookController extends Controller
 {
     const YANDEX_KEY = "57443385-b5ae-4d9a-9be6-98fc921e18e9";
     const TEXT_TO_SPEECH_MAX_LENGTH = 5000;
+    const FORMAT_PCM = "lpcm";
+    const FORMAT_OPUS = "oggopus";
 
     public function index()
     {
@@ -252,6 +254,44 @@ class BookController extends Controller
 
             return response()->json(file_put_contents($request->input('filename') . ".mp3", $audioContent));
         }
+    }
+
+    public function getAudioYandex()
+    {
+        $token = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwW5bp6GuNEsYr9fYpa4UtTYxqRU79uwHgSMid4jmjHCbkZIJ0rf7WN9WELootPGYTBtsVInZDjv2vQzkRjohT6QjyX7lhG3tocVxZ+XkSimvon67KLebzKlvdwLK0T4tjuijuYpfo/gaE+BVHXhxysvXU4kY1yqa21GdM1Cr4wHTbSIpwQiSaBRqDHhVMsldkaE9nbgL0NzqFOTqNxP2rXBH4BQFo9laNk+X5AfI4hI6MKKPOKoAema5oDQ19q0QKZM9AnWFyJuFoxBnHp/es4kTyOrmwR8tFhCwzJtvhVpMWZEiA1I0iEykNC1U9k69Yg4PmPkOWRwLlTz2cHkP2QIDAQAB'; # IAM-токен
+        $folderId = "b1g8js4v9qfgcc35vhr7"; # Идентификатор каталога
+        $url = "https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize";
+
+        $post = "folderId=${folderId}&text=" . urlencode("тест") . "&lang=ru-RU&sampleRateHertz=48000&format=" . FORMAT_PCM;
+        $headers = ['Authorization: Bearer ' . $token];
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        if ($post !== false) {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+        }
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+
+        $response = curl_exec($ch);
+        if (curl_errno($ch)) {
+            print "Error: " . curl_error($ch);
+        }
+        if (curl_getinfo($ch, CURLINFO_HTTP_CODE) != 200) {
+            $decodedResponse = json_decode($response, true);
+            echo "Error code: " . $decodedResponse["error_code"] . "\r\n";
+            echo "Error message: " . $decodedResponse["error_message"] . "\r\n";
+        } else {
+            file_put_contents("audio.pcm", $response);
+        }
+        curl_close($ch);
     }
 
     public static function convert_from_latin1_to_utf8_recursively($dat)

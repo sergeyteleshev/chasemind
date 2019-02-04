@@ -43,7 +43,8 @@
         "style-loader": "^0.18.2",
         "webextension-polyfill": "^0.3.1",
         "webpack": "^3.0.0",
-        "webpack-dev-server": ">=3.1.11",
+        "webpack-cli": "^3.2.1",
+        "webpack-dev-server": "^2.11.3",
         "worker-loader": "^2.0.0"
     },
     "dependencies": {
