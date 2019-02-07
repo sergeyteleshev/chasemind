@@ -5,8 +5,17 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\User;
 
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Jose\Component\Core\AlgorithmManager;
+use Jose\Component\Core\Converter\StandardConverter;
+use Jose\Component\KeyManagement\JWKFactory;
+use Jose\Component\Signature\JWSBuilder;
+use Jose\Component\Signature\Algorithm\PS256;
+use Jose\Component\Signature\Serializer\CompactSerializer;
+use Lcobucci\JWT\Claim\Factory;
+use Redirect;
 
 class UserController extends Controller
 {
@@ -17,6 +26,71 @@ class UserController extends Controller
     private function infoForPay($login)
     {
         return User::where('name', $login)->first();
+    }
+
+    /**
+     * @param $api_token
+     * @return string
+     * @throws \Exception
+     */
+    public function getJWTtoken($api_token)
+    {
+        $service_account_id = $api_token;
+        $key_id = 'b1gvmob03goohplcf641';
+
+        $jsonConverter = new StandardConverter();
+        $algorithmManager = AlgorithmManager::create([
+            new PS256()
+        ]);
+
+        $jwsBuilder = new JWSBuilder($jsonConverter, $algorithmManager);
+
+        $now = time();
+
+        $claims = [
+            'aud' => 'https://iam.api.cloud.yandex.net/iam/v1/tokens',
+            'iss' => $service_account_id,
+            'iat' => $now,
+            'exp' => $now + 360
+        ];
+
+        $header = [
+            'alg' => 'PS256',
+            'typ' => 'JWT',
+            'kid' => $key_id
+        ];
+
+        $file = Storage::url('app/private/privateKey.pem');
+        try
+        {
+            $key = JWKFactory::createFromKeyFile($file);
+        }
+        catch (\Exception $e)
+        {
+            throw $e;
+        }
+
+        $payload = $jsonConverter->encode($claims);
+
+        // Формирование подписи.
+        $jws = $jwsBuilder
+            ->create()
+            ->withPayload($payload)
+            ->addSignature($key, $header)
+            ->build();
+
+        $serializer = new CompactSerializer($jsonConverter);
+
+        // Формирование JWT.
+        $token = $serializer->serialize($jws);
+
+        return $token;
+    }
+
+    public function getIAMtoken($api_token)
+    {
+        $jwt_token = $this->getJWTtoken($api_token);
+        return $jwt_token;
     }
 
     private function getOrderId()

@@ -811,12 +811,13 @@ export function fetchTextToSpeechYandex(text) {
             const response = await fetch('/api/getAudioYandex', {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify(payload),
             });
             const json = await response.json();
+            console.log(json);
             //dispatch(receiveRobokassa(json));
             return json;
         };

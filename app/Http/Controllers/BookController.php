@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 use Google\Cloud\TextToSpeech\V1\AudioConfig;
@@ -256,13 +258,14 @@ class BookController extends Controller
         }
     }
 
-    public function getAudioYandex()
+    public function getAudioYandex(Request $request)
     {
-        $token = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwW5bp6GuNEsYr9fYpa4UtTYxqRU79uwHgSMid4jmjHCbkZIJ0rf7WN9WELootPGYTBtsVInZDjv2vQzkRjohT6QjyX7lhG3tocVxZ+XkSimvon67KLebzKlvdwLK0T4tjuijuYpfo/gaE+BVHXhxysvXU4kY1yqa21GdM1Cr4wHTbSIpwQiSaBRqDHhVMsldkaE9nbgL0NzqFOTqNxP2rXBH4BQFo9laNk+X5AfI4hI6MKKPOKoAema5oDQ19q0QKZM9AnWFyJuFoxBnHp/es4kTyOrmwR8tFhCwzJtvhVpMWZEiA1I0iEykNC1U9k69Yg4PmPkOWRwLlTz2cHkP2QIDAQAB'; # IAM-токен
+        $token = (new UserController)->getIAMtoken($request->cookie('api_token')); # IAM-токен
+
         $folderId = "b1g8js4v9qfgcc35vhr7"; # Идентификатор каталога
         $url = "https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize";
 
-        $post = "folderId=${folderId}&text=" . urlencode("тест") . "&lang=ru-RU&sampleRateHertz=48000&format=" . FORMAT_PCM;
+        $post = "folderId=${folderId}&text=" . urlencode("Фарту масти ауе") . "&lang=ru-RU&sampleRateHertz=48000&format=" . self::FORMAT_PCM;
         $headers = ['Authorization: Bearer ' . $token];
         $ch = curl_init();
 
@@ -279,7 +282,6 @@ class BookController extends Controller
         }
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-
         $response = curl_exec($ch);
         if (curl_errno($ch)) {
             print "Error: " . curl_error($ch);
@@ -290,8 +292,11 @@ class BookController extends Controller
             echo "Error message: " . $decodedResponse["error_message"] . "\r\n";
         } else {
             file_put_contents("audio.pcm", $response);
+            return response()->json(true);
         }
         curl_close($ch);
+
+        return response()->json(!true);
     }
 
     public static function convert_from_latin1_to_utf8_recursively($dat)
