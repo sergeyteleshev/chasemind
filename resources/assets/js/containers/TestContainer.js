@@ -5,7 +5,7 @@ import {
     testFunct,
     fetchUploadPdf,
     uploadPdfHandleChange,
-    fetchTextToSpeechYandex
+    fetchTextToSpeechYandex, getIAMtoken
 } from "../actions";
 import Test from "../components/pages/Test";
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Footer from "../Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
+import {getIAMtoken} from "../../actions";
 
 export default class Test extends Component
 {

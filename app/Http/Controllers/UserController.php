@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\User;
 
+use App\YaCloud;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +16,7 @@ use Jose\Component\Signature\JWSBuilder;
 use Jose\Component\Signature\Algorithm\PS256;
 use Jose\Component\Signature\Serializer\CompactSerializer;
 use Lcobucci\JWT\Claim\Factory;
+use phpseclib\Crypt\RSA;
 use Redirect;
 
 class UserController extends Controller
@@ -33,10 +35,58 @@ class UserController extends Controller
      * @return string
      * @throws \Exception
      */
+
+    public function testYa()
+    {
+        $tek_time = time();
+        $query = 'SELECT * FROM ya_cloud limit 1';
+
+
+        $result = mysql_query($query);
+        while ($row = mysql_fetch_assoc($result))
+        {
+            $old_time = $row['old_time'];
+            $OAuth_token = $row['OAuth_token'];
+        }
+        mysql_free_result($result);
+
+        $prochlo = $tek_time - $old_time;
+
+        if ($prochlo > 39600) {
+            echo 'Настала пора обновить токен';
+            ob_start();
+            system("curl -X POST -H 'Content-Type: application/json' -d '{\"yandexPassportOauthToken\": \"".$OAuth_token."\"}' https://iam.api.cloud.yandex.net/iam/v1/tokens");
+
+            $content = ob_get_contents();
+            $my_new_array = json_decode($content, true);
+            // var_dump($my_new_array);
+            // echo $my_new_array['iamToken'];
+
+            $zapS_UPDATE = "UPDATE ya_cloud
+                          SET old_time = ".time().", IAM_TOKEN = '".$my_new_array['iamToken']."' 
+                           WHERE id=1";
+            // echo $zapS_UPDATE;
+
+            $result6 = mysql_query($zapS_UPDATE);
+            $url = 'http://obzvon.onetelecom24.ru/tocken.php?key=123545&tocken='.$my_new_array['iamToken'].'';
+            echo $url;
+            $file2 = file_get_contents($url);
+        }
+        else
+        {
+            //echo 'Время обновления не настало';
+        }
+        ////////////////////////////////////// перегенерировали ключи
+        ///
+        ///
+        return 0;
+    }
+
     public function getJWTtoken($api_token)
     {
-        $service_account_id = $api_token;
-        $key_id = 'b1gvmob03goohplcf641';
+        $service_account_id = YaCloud::find(1)['OAuth_token'];
+        //ID ресурса Key, который принадлежит сервисному аккаунту.
+        $key_id = "b1g8js4v9qfgcc35vhr7";
 
         $jsonConverter = new StandardConverter();
         $algorithmManager = AlgorithmManager::create([
@@ -60,10 +110,11 @@ class UserController extends Controller
             'kid' => $key_id
         ];
 
-        $file = Storage::url('app/private/privateKey.pem');
+        $file_key = Storage::get('private/privateKey.pem');
+
         try
         {
-            $key = JWKFactory::createFromKeyFile($file);
+            $key = JWKFactory::createFromKey($file_key);
         }
         catch (\Exception $e)
         {
@@ -87,10 +138,32 @@ class UserController extends Controller
         return $token;
     }
 
-    public function getIAMtoken($api_token)
+    public function getOAuthToken()
     {
-        $jwt_token = $this->getJWTtoken($api_token);
-        return $jwt_token;
+        return YaCloud::find(1)['OAuth_token'];
+    }
+
+    public function getIAMtoken()
+    {
+        $OAuth_token = $this->getOAuthToken();
+        $url = "https://iam.api.cloud.yandex.net/iam/v1/tokens?yandexPassportOauthToken=" . $OAuth_token;
+        $headers = array("Content-Type: application/json", "charset=UTF-8");
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
+
+        $response = json_decode(curl_exec($ch));
+        curl_close($ch);
+
+        return $response->iamToken;
     }
 
     private function getOrderId()

@@ -799,6 +799,28 @@ export function receiveTextToSpeech(json)
     }
 }
 
+export function getOauthToken()
+{
+    return dispatch => {
+        //dispatch(requestRobokassa());
+
+        const request = async () => {
+            const response = await fetch('/api/getOAuthToken', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const json = await response.json();
+            console.log(json);
+            //dispatch(receiveRobokassa(json));
+            return json;
+        };
+
+        return request();
+    }
+}
+
 export function fetchTextToSpeechYandex(text) {
     const payload = {
         text

@@ -45,5 +45,6 @@ Route::post('payForSub', 'UserController@payForSub');
 Route::post('payForSubSuccess', 'UserController@payForSubSuccess');
 Route::post('sub/fail',  'UserController@payForSubFail');
 
+
 Route::post('checkUserAuth', 'Auth\LoginController@checkUserAuth');
 
