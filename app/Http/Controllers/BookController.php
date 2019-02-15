@@ -28,13 +28,11 @@ class BookController extends Controller
         return Book::all();
     }
 
-    public function uploadPdf(Request $request)
+    public function uploadPdf($pdf)
     {
-        $pdf = $request->file('pdf');
-
         if($pdf)
         {
-            $filepath = Storage::disk('local')->putFile('public/read', $pdf);
+            Storage::disk('local')->putFile('public/read', $pdf);
             $parser = new \Smalot\PdfParser\Parser();
             $pdf = $parser->parseFile($pdf);
             $text = $pdf->getText();
@@ -42,7 +40,6 @@ class BookController extends Controller
             return response()->json([
                 "status" => "ok",
                 "text" => $text,
-                "filename" => basename($filepath, '.pdf'),
             ], 201);
         }
 
@@ -73,6 +70,42 @@ class BookController extends Controller
         $response = $book->delete();
 
         return response()->json($response, 204);
+    }
+
+    public function addBook(Request $request)
+    {
+        $title = $request->input('title');
+        $description = $request->input('description');
+        $author = $request->input('author');
+        $slogan = $request->input('slogan');
+        $slogan_eng = $request->input('slogan_eng');
+        $subject = $request->input('subject');
+        $pages_book = $request->input('pages_book');
+        $pages_abstract = $request->input('pages_abstract');
+        $publisher = $request->input('publisher');
+        $image = $request->file('image');
+        $pdf = $request->file('pdf');
+        $book = array(
+            'name' => $title,
+            'desc' => $description,
+            'author' => $author,
+            'slogan' => $slogan,
+            'sloganENG' => $slogan_eng,
+            'subject' => $subject,
+            'imgURL' => $image,
+            'pagesBook' => $pages_book,
+            'pagesAbstract' => $pages_abstract,
+            'publisher' => $publisher,
+        );
+
+        $pdf_text = $this->uploadPdf($pdf);
+
+        if($pdf_text['status'] && $pdf_text['text'])
+        {
+            $db_book = Book::create($book);
+            //todo сюда сделать разбиение текста на части
+            //todo и этот же текст потом надо разбить на смысловые части для майнд мапы
+        }
     }
 
     public function getBookMaterial(Request $request)
@@ -203,6 +236,8 @@ class BookController extends Controller
      */
     public function getAudio(Request $request)
     {
+        $file_path = 'public/listen/' . $request->input('filename');
+
         try
         {
             $client = new TextToSpeechClient();
@@ -238,9 +273,9 @@ class BookController extends Controller
         }
 
         $audioContent = $response->getAudioContent();
-        $filename = Storage::disk('local')->put('public/listen/' . $request->input('filename'), $audioContent);
+        Storage::disk('local')->put($file_path, $audioContent);
 
-        return response()->json($filename);
+        return response()->json($audioContent);
 
     }
 

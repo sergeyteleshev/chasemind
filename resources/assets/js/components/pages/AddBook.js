@@ -30,9 +30,11 @@ export default class AddBook extends Component
 
                     <section className="addBookContainer">
                         <input placeholder={"Заголовок"} className={"inputText"} type={"text"}/>
+                        <input placeholder={"Автор"} className={"inputText"} type={"text"}/>
                         <textarea placeholder={"Описание"} className={"inputText"}/>
                         <textarea placeholder={"Главная цитата"} className={"inputText"}/>
                         <textarea placeholder={"Главная цитата(ENG)"} className={"inputText"}/>
+                        <textarea placeholder={"Издание"} className={"inputText"}/>
                         <input placeholder={"Кол-во страниц оригинала"} className={"inputText"} type={"number"}/>
                         <input placeholder={"Кол-во страниц конспекта"} className={"inputText"} type={"number"}/>
                         <br/>
