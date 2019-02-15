@@ -7,10 +7,10 @@ export default class Test extends Component
 {
     submitUploadPdf()
     {
-        //this.props.fetchUploadPdf(this.props.pdfToUpload);
-        // this.props.testFunct("Hello world", 'test.mp3');
+        // this.props.fetchUploadPdf(this.props.pdfToUpload);
+        this.props.testFunct("Hello world. My name is Sergey. I'm 21 years old. suka blyat", 'test.mp3');
         //this.props.fetchTextToSpeech("test text");
-        this.props.fetchTextToSpeechYandex("тест сука");
+        // this.props.fetchTextToSpeechYandex("тест сука");
     }
 
     render()
@@ -20,8 +20,13 @@ export default class Test extends Component
                 <HeaderContainer/>
 
                 <section className="main">
-                    <section className="bookButtons">
-                        {/*<textarea onChange={(event) => this.props.contactMessageHandleChange(event)} value={this.props.message} className="contactMessage" name="message" resize="none" placeholder="Сообщение"/>*/}
+                    <section className="test">
+                        <input placeholder={"Заголовок книги"} className={"inputText"} type={"text"}/>
+                        <textarea placeholder={"Описание книги"} className={"inputText"}/>
+                        <textarea placeholder={"Главная цитата"} className={"inputText"}/>
+                        <textarea placeholder={"Главная цитата(ENG)"} className={"inputText"}/>
+                        <input placeholder={"Количество страниц оригинала книги"} className={"inputText"} type={"number"}/>
+                        <input placeholder={"Количество страниц конспекта"} className={"inputText"} type={"number"}/>
                         <br/>
                         <input type={"file"} accept="application/pdf" onChange={(event) => this.props.uploadPdfHandleChange(event)}/>
                         {/*todo как яндекс ответит*/}

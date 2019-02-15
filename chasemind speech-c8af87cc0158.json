@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "chasemind-speech",
+  "private_key_id": "c8af87cc01586c4d5e428ff4aa20361285eb5f36",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDA3AEtyuKH3waX\nLsTA6zTWHbFQnf9xP/+Q0uoINsggvIOBG5PSxcVU4Z42l0rd054jVlxqjf+mIKkn\nUtJs/0N6K9HwEecfsXhW2kkOdq6PTNWOVTBBedGABXY/LjO4zZmfoN3JG0szr8ab\nF3FRpdT6lsa1XaKPphb8fItzQU6qJpiPEe/Y6CRyD/w1y5Ktb8TZgBmzb38YScNH\nia1hFIswHvZNn30MRQm+QEPphsB6dFfVo00yG3F6+RK5SFozy8W7iVAuT8edR2p/\n1HWz/RzD8vNaHJdhdGnPhMxZMYoowf4xLs1pYD3CArdeB2bib5vQafS5pBv8CcQa\nEZLx+phlAgMBAAECggEAAPKTxufSSRydaay/JruBHPQ0ZNMB6EqKNOn0YGn0fcSv\nWLkL9uMl3w7kuhvwMDrT8hSAi7163hQXAKx1gDeY20bP10AfRJaYosSby0hl/yo/\nel2MySWSE/Dy7ciKVIQeFxyxOkW6Dtz0OtrYobAQ5dJL06RMIiyMvFzYSo6tlkRs\nFeHYWfx+83CgAtTcqEdIiur45ZTiNN9WaFLvGTwqfTp/psKFQp3H4eOVmX4T0BmE\ndJLlv+SR8EwFWuPuOWG05uoisbjcSJqxMjogMg5TNI5cWsKjquzKmIOR7n5K8Lpm\n8Aw12zqkPVEqdL83/GxWJJkEFrGxSe7WiheGFlPu2QKBgQD0xfut4lmxprl0Sy9V\njasCacWAfcpOChLrmgtbDrgK5jaAz4ovJ/ldHSTuHLQFylHJ56XpydPbFJQ2Gsd4\nly8s28uAqnTG/aMHnH5GiI1lPCDa5suv8tLWzZ3EgHHUKPdMolAEHQe9132v74C+\n7WQlhi1vrh5dDk45E18pRW5qtwKBgQDJtHin3HEVCBj0eQWW2dpeGkBPoFqgjcgc\nUcsaiQIWPGb24IfF1ShL5edFCxend2zYlw0IJT4uW0uyjZSqgaK7XIgPOxEPXBVw\nd8Bh6D1sGNyAgNYhBVJzwisMkQSIqnOBf6Wez+zMRaA9kC0HpUkGPi9A5x/+1DDV\nBQ5+dngpwwKBgQC5HbJFw1XKQSkohmP58/ZNEOlJT9jcREoi3JGSAAO4WnsF1+/N\n0hGJFi2D1zle17AbXpHfyb/rhBjDAmWxEcWfy2qQmFlQ1Smi6/ukJEmrMlo2sy2A\nl8hUo5SZs/piVckRr/+L3Nip/nsTv7JCsw52Qo/CUpCsF9GY4MmrUNM86QKBgBcs\nFYRrTc51vLAxSxQWeQDAkUzUhjTVtPyT5PpqbQPy8n1ANDjlERkPE2+aI6CIlseX\nKtcZuDgJIvwjScYA2Jofuj3NslsKYCgoicB1tsC5ZnOY2YC3pM5JqzppWpT8yAJD\nkNpa1sBs60jHTHUJZwdBk5ooM0PKSsXeK9kZcRqTAoGARfFUBn4fCLAqXkChbEEi\nYC+SMurJjZSj7KmEqCBFiNBzFuYrlznz4Uc0yvUmfinb69s5CnNwbj6ZYxgtJlAO\n5Tf2kiscTHGG/rDwsK7JSRebCbRDfUcepRTDm3aSmgwb1bfkFR0c3mg9/7IY/gUh\n8+xOGgf/IEOTDwKvWj+WVug=\n-----END PRIVATE KEY-----\n",
+  "client_email": "chasemind@chasemind-speech.iam.gserviceaccount.com",
+  "client_id": "113857438772360345985",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/chasemind%40chasemind-speech.iam.gserviceaccount.com"
+}

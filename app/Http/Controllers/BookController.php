@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Book;
-use App\User;
-use http\Env\Response;
+use Google\ApiCore\ApiException;
+use Google\ApiCore\ValidationException;
 use Illuminate\Http\Request;
 
 use Google\Cloud\TextToSpeech\V1\AudioConfig;
@@ -13,8 +13,8 @@ use Google\Cloud\TextToSpeech\V1\SsmlVoiceGender;
 use Google\Cloud\TextToSpeech\V1\SynthesisInput;
 use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class BookController extends Controller
 {
@@ -188,75 +188,60 @@ class BookController extends Controller
         return $s; // возвращаем результат
     }
 
+    public function splitText($text)
+    {
+        $parts = str_split($text, self::TEXT_TO_SPEECH_MAX_LENGTH);
+
+        return $parts;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws ApiException
+     * @throws ValidationException
+     */
     public function getAudio(Request $request)
     {
-        $i_of_broke = 0;
-        //instantiates a client
-        $client = new TextToSpeechClient();
+        try
+        {
+            $client = new TextToSpeechClient();
+        }
+        catch (ValidationException $e)
+        {
+            throw $e;
+        }
 
         // sets text to be synthesised
         $synthesis_input = (new SynthesisInput())
             ->setText($request->input('text'));
 
-        $synthesis_input_parts = [];
-        $amount_of_part = ceil(strlen($request->input('text')) / self::TEXT_TO_SPEECH_MAX_LENGTH);
-        $current_str_pos = 0;
-        $current_text = "";
+        //build the voice request, select the language code ("en-US") and the ssml
+        //voice gender
+        $voice = (new VoiceSelectionParams())
+            ->setLanguageCode('en-US')
+            ->setSsmlGender(SsmlVoiceGender::MALE);
 
-        if($amount_of_part > 1) {
-            while($amount_of_part > 0)
-            {
-                //todo нихуя не робит
-                if($current_str_pos < self::TEXT_TO_SPEECH_MAX_LENGTH)
-                {
-                    $current_text = substr($request->input('text'), $current_str_pos, strlen($request->input('text') - $current_str_pos));
-                }
-                else
-                {
-                    $current_text = substr($request->input('text'), $current_str_pos, self::TEXT_TO_SPEECH_MAX_LENGTH);
-                }
+        // select the type of audio file you want returned
+        $audioConfig = (new AudioConfig())
+            ->setAudioEncoding(AudioEncoding::MP3);
 
-                $temp_end_of_sentence = "";
-                $i_of_broke += strlen($current_text);
-                for($i = strlen($current_text); $i > 0; $i--)
-                {
-                    if($current_text[$i] != "." || $current_text[$i] != "?" || $current_text[$i] != "!")
-                    {
-                        $temp_end_of_sentence = $current_text[$i] . $temp_end_of_sentence;
-                    }
-                    else
-                    {
-                        $i_of_broke = $i;
-                        break;
-                    }
-                }
-
-                $synthesis_input_parts[$i] = $current_text;
-                $current_str_pos = $i_of_broke;
-                $amount_of_part--;
-            }
-
-            return response()->json($synthesis_input_parts, 200);
-        }
-        else
+        // perform text-to-speech request on the text input with selected voice
+        // parameters and audio file type
+        try
         {
-            //build the voice request, select the language code ("en-US") and the ssml
-            //voice gender
-            $voice = (new VoiceSelectionParams())
-                ->setLanguageCode('en-US')
-                ->setSsmlGender(SsmlVoiceGender::MALE);
-
-            // select the type of audio file you want returned
-            $audioConfig = (new AudioConfig())
-                ->setAudioEncoding(AudioEncoding::MP3);
-
-            // perform text-to-speech request on the text input with selected voice
-            // parameters and audio file type
-            $response = $client->synthesizeSpeech($synthesis_input, $voice, $audioConfig);
-            $audioContent = $response->getAudioContent();
-
-            return response()->json(file_put_contents($request->input('filename') . ".mp3", $audioContent));
+            $response = $client->synthesizeSpeech($synthesis_input, $voice, $audioConfig, []);
         }
+        catch (ApiException $e)
+        {
+            throw $e;
+        }
+
+        $audioContent = $response->getAudioContent();
+        $filename = Storage::disk('local')->put('public/listen/' . $request->input('filename'), $audioContent);
+
+        return response()->json($filename);
+
     }
 
     public function getAudioYandex(Request $request)
