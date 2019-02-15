@@ -1758,6 +1758,32 @@ body
     font-size: 18px;
 }
 
+.submitButton
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 240px;
+    background : #009393;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    font-size: 20px;
+    font-family: 'Century Gothic';
+}
+
+.fileInput
+{
+    margin: 10px auto;
+    font-family: 'Century Gothic';
+}
+
+.labelInput
+{
+    font-family: 'Century Gothic';
+}
+
 .formContact
 {
     padding: 2% 0;
@@ -1786,14 +1812,24 @@ body
     margin: 4%;
 }
 
+.addBookContainer
+{
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+}
+
 .inputText
 {
     border-radius: 5px;
     border: 1px solid #009393;
     font-size: 16px;
     font-family: 'Century Gothic';
-    padding: 2%;
-    margin: 4%;
+    padding: 5px;
+    margin-top: 20px;
     width: 250px;
 }
 

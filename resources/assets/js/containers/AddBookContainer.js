@@ -7,7 +7,7 @@ import {
     uploadPdfHandleChange,
     fetchTextToSpeechYandex, getIAMtoken
 } from "../actions";
-import Test from "../components/pages/Test";
+import AddBook from "../components/pages/AddBook";
 
 const mapStateToProps = (state) => {
     return {
@@ -28,6 +28,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-const TestContainer = connect(mapStateToProps, mapDispatchToProps)(Test);
+const AddBookContainer = connect(mapStateToProps, mapDispatchToProps)(AddBook);
 
-export default TestContainer;
+export default AddBookContainer;

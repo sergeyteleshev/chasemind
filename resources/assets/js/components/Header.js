@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import {Link, Redirect} from "react-router-dom";
 import {getCookie} from "../helpers/cookies";
-import {CONTACT_LINK, LIBRARY_LINK, LOGIN_LINK, MAIN_LINK, REGISTRATION_LINK, SUB_LINK} from "../consts/pageLinks";
+import {
+    ADD_BOOK,
+    CONTACT_LINK,
+    LIBRARY_LINK,
+    LOGIN_LINK,
+    MAIN_LINK,
+    REGISTRATION_LINK,
+    SUB_LINK
+} from "../consts/pageLinks";
 
 export default class Header extends Component {
     componentWillMount()
@@ -97,7 +105,7 @@ export default class Header extends Component {
                                         <a target={"_blank"} href={"https://vk.com/sergeyteleshev"}><li>Блог</li></a>
                                         <Link to={LIBRARY_LINK}><li>Библиотека</li></Link>
                                         <Link to={CONTACT_LINK}><li>Контакты</li></Link>
-                                        <Link to={"/test"}><li>Добавить книгу</li></Link>
+                                        <Link to={ADD_BOOK}><li>Добавить книгу</li></Link>
                                     </ul>
                                 </nav>
                             </section>

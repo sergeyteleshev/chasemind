@@ -17,8 +17,16 @@ import MainContainer from "../containers/MainContainer";
 import ContactContainer from "../containers/ContactContainer";
 import SubscriptionContainer from "../containers/SubscriptionContainer";
 import ScrollToTop from "./ScrollToTop";
-import {BOOK_LINK, CONTACT_LINK, LIBRARY_LINK, LOGIN_LINK, REGISTRATION_LINK, SUB_LINK} from "../consts/pageLinks";
-import TestContainer from "../containers/TestContainer";
+import {
+    ADD_BOOK,
+    BOOK_LINK,
+    CONTACT_LINK,
+    LIBRARY_LINK,
+    LOGIN_LINK,
+    REGISTRATION_LINK,
+    SUB_LINK
+} from "../consts/pageLinks";
+import AddBookContainer from "../containers/AddBookContainer";
 const history = createHistory();
 const middleware = [thunkMiddleware];
 let store = createStore(storeApp, applyMiddleware(...middleware));
@@ -39,7 +47,7 @@ export default class App extends Component {
                         <Route exact path={SUB_LINK} component={SubscriptionContainer}/>
                         <Route exact path={LOGIN_LINK} component={LoginController}/>
                         <Route exact path={REGISTRATION_LINK} component={RegistrationContainer}/>
-                        <Route exact path={"/test"} component={TestContainer}/>
+                        <Route exact path={ADD_BOOK} component={AddBookContainer}/>
                     </ScrollToTop>
                 </Router>
             </Provider>

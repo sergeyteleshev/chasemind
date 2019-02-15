@@ -3,7 +3,7 @@ import Footer from "../Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
 import {getIAMtoken} from "../../actions";
 
-export default class Test extends Component
+export default class AddBook extends Component
 {
     submitUploadPdf()
     {
@@ -20,18 +20,27 @@ export default class Test extends Component
                 <HeaderContainer/>
 
                 <section className="main">
-                    <section className="test">
-                        <input placeholder={"Заголовок книги"} className={"inputText"} type={"text"}/>
-                        <textarea placeholder={"Описание книги"} className={"inputText"}/>
+                    <section className="path">
+                        • > Добавить книгу
+                    </section>
+
+                    <section className="headerLib">
+                        Добавить книгу.
+                    </section>
+
+                    <section className="addBookContainer">
+                        <input placeholder={"Заголовок"} className={"inputText"} type={"text"}/>
+                        <textarea placeholder={"Описание"} className={"inputText"}/>
                         <textarea placeholder={"Главная цитата"} className={"inputText"}/>
                         <textarea placeholder={"Главная цитата(ENG)"} className={"inputText"}/>
-                        <input placeholder={"Количество страниц оригинала книги"} className={"inputText"} type={"number"}/>
-                        <input placeholder={"Количество страниц конспекта"} className={"inputText"} type={"number"}/>
+                        <input placeholder={"Кол-во страниц оригинала"} className={"inputText"} type={"number"}/>
+                        <input placeholder={"Кол-во страниц конспекта"} className={"inputText"} type={"number"}/>
                         <br/>
-                        <input type={"file"} accept="application/pdf" onChange={(event) => this.props.uploadPdfHandleChange(event)}/>
+                        <label className={"labelInput"}>Pdf-коспекта: <input className={"fileInput"} type={"file"} accept="application/pdf" onChange={(event) => this.props.uploadPdfHandleChange(event)}/></label>
+                        <label className={"labelInput"}>Обложка: <input className={"fileInput"} type={"file"} accept="image/png"/></label>
                         {/*todo как яндекс ответит*/}
                         {/*<input type="submit" value="API" id="linkOnText" onClick={() => this.props.fetchTextToSpeech()}/>*/}
-                        <input type="submit" value="отправить" id="linkOnVideo" onClick={() => this.submitUploadPdf()}/>
+                        <input className={"submitButton"} type="submit" value="отправить" id="linkOnVideo" onClick={() => this.submitUploadPdf()}/>
                         <p>{this.props.pdfUploadResponse.text ? this.props.pdfUploadResponse.text.length : null}</p>
                         <p>{this.props.pdfUploadResponse.text}</p>
                     </section>
