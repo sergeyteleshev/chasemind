@@ -30,7 +30,7 @@ import {
     REQUEST_SUBJECTS, REQUEST_UPLOAD_PDF, SELECT_CURRENT_BOOK_TYPE,
     SHOW_BOOK_MODAL_WINDOW, SHOW_SUB_MODAL_WINDOW,
     SORT_BOOKS,
-    SUBMIT_REGISTER, UPLOAD_PDF_HANDLE_CHANGE
+    SUBMIT_REGISTER, TEXT_INPUT_HANDLE_CHANGE, UPLOAD_PDF_HANDLE_CHANGE
 } from "../actions/index";
 import {RECEIVE_UPLOAD_PDF} from "../actions";
 
@@ -44,9 +44,6 @@ const initialStateBooks = {
     sortId: 0,
     isBookMaterialLoading: true,
     currentBookTypeSelected: '',
-    pdfToUpload: {},
-    pdfUploadResponse: {},
-    isPdfUploading: false,
 };
 
 const initialStateAuth = {
@@ -93,6 +90,21 @@ const initialStateSub = {
 
 const initialStateMenuMobile = {
     isMenuMobileOpened: false,
+};
+
+const initialStateAddBook = {
+    title: "",
+    author: "",
+    desc: "",
+    slogan: "",
+    sloganENG: "",
+    publisher: "",
+    pagesOriginal: "",
+    pagesAbstract: "",
+    imgURL: "",
+    pdfToUpload: {},
+    pdfUploadResponse: {},
+    isPdfUploading: false,
 };
 
 function Books(state = initialStateBooks, action) {
@@ -158,23 +170,6 @@ function Books(state = initialStateBooks, action) {
         case SELECT_CURRENT_BOOK_TYPE:
             return Object.assign({}, state, {
                 currentBookTypeSelected: action.payload,
-            });
-
-        case UPLOAD_PDF_HANDLE_CHANGE:
-            return Object.assign({}, state, {
-                pdfToUpload: action.payload,
-            });
-
-        case RECEIVE_UPLOAD_PDF:
-            return Object.assign({}, state, {
-                pdfUploadResponse: action.payload,
-                isPdfUploading: false,
-            });
-
-        case REQUEST_UPLOAD_PDF:
-            return Object.assign({}, state, {
-                isPdfUploading: true,
-                pdfUploadResponse: {},
             });
 
         default:
@@ -369,6 +364,34 @@ function ModalWindows(state = initialStateModalWindows, action) {
     }
 }
 
+
+function AddBookReducer(state = initialStateAddBook, action) {
+    switch (action.type) {
+        case TEXT_INPUT_HANDLE_CHANGE:
+            return Object.assign({}, state, action.payload);
+
+        case UPLOAD_PDF_HANDLE_CHANGE:
+            return Object.assign({}, state, {
+                pdfToUpload: action.payload,
+            });
+
+        case RECEIVE_UPLOAD_PDF:
+            return Object.assign({}, state, {
+                pdfUploadResponse: action.payload,
+                isPdfUploading: false,
+            });
+
+        case REQUEST_UPLOAD_PDF:
+            return Object.assign({}, state, {
+                isPdfUploading: true,
+                pdfUploadResponse: {},
+            });
+
+        default:
+            return state;
+    }
+}
+
 function Sub(state = initialStateSub, action) {
     switch(action.type) {
         case REQUEST_ROBOKASSA:
@@ -400,5 +423,5 @@ function MenuMobile(state = initialStateMenuMobile, action) {
     }
 }
 
-const storeApp = combineReducers({Books, Auth, Email, ModalWindows, Sub, MenuMobile});
+const storeApp = combineReducers({Books, Auth, Email, ModalWindows, Sub, MenuMobile, AddBookReducer});
 export default storeApp;

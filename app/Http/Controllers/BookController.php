@@ -14,7 +14,6 @@ use Google\Cloud\TextToSpeech\V1\SynthesisInput;
 use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
 use Illuminate\Support\Facades\Storage;
-use PhpParser\Node\Expr\Cast\Object_;
 
 class BookController extends Controller
 {
@@ -75,16 +74,16 @@ class BookController extends Controller
     public function addBook(Request $request)
     {
         $title = $request->input('title');
-        $description = $request->input('description');
+        $description = $request->input('desc');
         $author = $request->input('author');
         $slogan = $request->input('slogan');
-        $slogan_eng = $request->input('slogan_eng');
+        $slogan_eng = $request->input('sloganENG');
         $subject = $request->input('subject');
-        $pages_book = $request->input('pages_book');
-        $pages_abstract = $request->input('pages_abstract');
+        $pages_book = $request->input('pagesOriginal');
+        $pages_abstract = $request->input('pagesAbstract');
         $publisher = $request->input('publisher');
-        $image = $request->file('image');
-        $pdf = $request->file('pdf');
+        $imageURL = $request->input('imageURL');
+        $pdf = $request->file('pdfToUpload');
         $book = array(
             'name' => $title,
             'desc' => $description,
@@ -92,7 +91,7 @@ class BookController extends Controller
             'slogan' => $slogan,
             'sloganENG' => $slogan_eng,
             'subject' => $subject,
-            'imgURL' => $image,
+            'imgURL' => $imageURL,
             'pagesBook' => $pages_book,
             'pagesAbstract' => $pages_abstract,
             'publisher' => $publisher,

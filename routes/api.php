@@ -25,6 +25,7 @@ Route::post('getFileName', 'BookController@getFileName');
 Route::post('getAudio', 'BookController@getAudio');
 Route::post('uploadPdf', 'BookController@uploadPdf');
 Route::post('getAudioYandex', 'BookController@getAudioYandex');
+Route::post('addBook', 'BookController@addBook');
 
 Route::post('register', 'Auth\RegisterController@create');
 Route::post('login', 'Auth\LoginController@login');

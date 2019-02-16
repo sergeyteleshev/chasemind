@@ -1,5 +1,7 @@
 import {deleteCookie, getCookie, setCookie} from "../helpers/cookies";
 
+export const TEXT_INPUT_HANDLE_CHANGE = "TEXT_INPUT_HANDLE_CHANGE";
+
 export const REQUEST_BOOKS = "REQUEST_BOOKS";
 export const RECEIVE_BOOKS = "RECEIVE_BOOKS";
 export const REQUEST_BOOK = "REQUEST_BOOKS";
@@ -890,18 +892,15 @@ export function fetchTextToSpeech(text)
     }
 }
 
-export function testFunct(text, filename)
+export function addBook(book)
 {
-    let payload = {
-        text,
-        filename,
-    };
+    const payload = {...book};
 
     return dispatch => {
         dispatch(requestTextToSpeech());
 
         const request = async () => {
-            const response = await fetch('/api/getAudio', {
+            const response = await fetch('/api/addBook', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -910,7 +909,11 @@ export function testFunct(text, filename)
                 body: JSON.stringify(payload)
             });
 
-            const blob = await response.blob();
+            // const blob = await response.blob();
+            // const json = await response.json();
+            //
+            // console.log(blob);
+            // console.log(json);
             // let objectURL = URL.createObjectURL(blob);
             // let a = document.createElement('a');
             // a.href = objectURL;
@@ -919,11 +922,11 @@ export function testFunct(text, filename)
             // document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
             // a.click();
             // a.remove();
-
-            dispatch(receiveTextToSpeech(blob));
-            console.info(blob);
-
-            return blob;
+            //
+            // dispatch(receiveTextToSpeech(blob));
+            // console.info(blob);
+            //
+            // return blob;
         };
 
         return request();
@@ -978,5 +981,16 @@ export function fetchUploadPdf(pdf)
         };
 
         return request();
+    }
+}
+
+export function textInputHandleChange(propertyName, event)
+{
+    let textInputData = [];
+
+    textInputData[propertyName] = event.target.value;
+    return {
+        type: TEXT_INPUT_HANDLE_CHANGE,
+        payload: textInputData,
     }
 }
