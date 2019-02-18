@@ -22,6 +22,7 @@ const mapStateToProps = (state) => {
         pdfToUpload: state.AddBookReducer.pdfToUpload,
         pdfUploadResponse: state.AddBookReducer.pdfUploadResponse,
         isPdfUploading: state.AddBookReducer.isPdfUploading,
+        subject: state.AddBookReducer.subject,
     }
 };
 

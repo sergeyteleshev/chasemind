@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Book;
 use Google\ApiCore\ApiException;
 use Google\ApiCore\ValidationException;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 
 use Google\Cloud\TextToSpeech\V1\AudioConfig;
@@ -27,22 +28,24 @@ class BookController extends Controller
         return Book::all();
     }
 
-    public function uploadPdf($pdf)
+    public function uploadPdf($pdf, $title)
     {
-        if($pdf)
+        $file_content = file_get_contents($pdf);
+        if($file_content)
         {
-            Storage::disk('local')->putFile('public/read', $pdf);
+            $filepath = Storage::disk('local')->putFileAs('public/read', $pdf, $title . " (Читать).pdf");
             $parser = new \Smalot\PdfParser\Parser();
-            $pdf = $parser->parseFile($pdf);
-            $text = $pdf->getText();
+            $pdf_parsed = $parser->parseFile($pdf);
+            $text = $pdf_parsed->getText();
 
-            return response()->json([
+            return array(
                 "status" => "ok",
                 "text" => $text,
-            ], 201);
+                "filepath" => $filepath
+            );
         }
 
-        return response()->json(["error" => "pdf not found"], 404);
+        return array("error" => "pdf not found");
     }
 
     public function show(Book $book)
@@ -82,8 +85,11 @@ class BookController extends Controller
         $pages_book = $request->input('pagesOriginal');
         $pages_abstract = $request->input('pagesAbstract');
         $publisher = $request->input('publisher');
-        $imageURL = $request->input('imageURL');
+        $imageURL = $request->input('imgURL');
         $pdf = $request->file('pdfToUpload');
+
+        $pdfUploaded = $this->uploadPdf($pdf, $title);
+
         $book = array(
             'name' => $title,
             'desc' => $description,
@@ -93,18 +99,16 @@ class BookController extends Controller
             'subject' => $subject,
             'imgURL' => $imageURL,
             'pagesBook' => $pages_book,
-            'pagesAbstract' => $pages_abstract,
+            'pagesAbstarct' => $pages_abstract,
             'publisher' => $publisher,
+            'linkOnText' => $pdfUploaded['filepath'],
+            'linkOnAudio' => '',
+            'linkOnVideo' => '',
         );
 
-        $pdf_text = $this->uploadPdf($pdf);
+        $db_book = Book::create($book);
 
-        if($pdf_text['status'] && $pdf_text['text'])
-        {
-            $db_book = Book::create($book);
-            //todo сюда сделать разбиение текста на части
-            //todo и этот же текст потом надо разбить на смысловые части для майнд мапы
-        }
+        return response()->json($db_book);
     }
 
     public function getBookMaterial(Request $request)

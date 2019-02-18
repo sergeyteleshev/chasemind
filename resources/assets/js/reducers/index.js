@@ -105,6 +105,7 @@ const initialStateAddBook = {
     pdfToUpload: {},
     pdfUploadResponse: {},
     isPdfUploading: false,
+    subject: 0,
 };
 
 function Books(state = initialStateBooks, action) {

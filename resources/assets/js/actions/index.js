@@ -875,10 +875,10 @@ export function fetchTextToSpeech(text)
         const request = async () => {
             const response = await fetch(url, {
                 method: 'POST',
-                // headers: {
-                //     'Accept': 'application/json',
-                //     'Content-Type': 'application/json',
-                // },
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify(args),
             });
 
@@ -894,7 +894,19 @@ export function fetchTextToSpeech(text)
 
 export function addBook(book)
 {
-    const payload = {...book};
+    let formData = new FormData(book);
+
+    const bookKeys = Object.keys(book);
+    bookKeys.map((item) => {
+        formData.append(item, book[item]);
+    });
+
+    const options = { content: formData };
+
+    console.log(book);
+    console.log(formData);
+
+    const payload = {...book, formData};
 
     return dispatch => {
         dispatch(requestTextToSpeech());
@@ -902,11 +914,12 @@ export function addBook(book)
         const request = async () => {
             const response = await fetch('/api/addBook', {
                 method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
+                // headers: {
+                //     // 'Accept': 'application/json',
+                //     // 'Content-Type': 'application/json',
+                //     'Content-Type': 'multipart/form-data'
+                // },
+                body: formData,
             });
 
             // const blob = await response.blob();
@@ -974,7 +987,7 @@ export function fetchUploadPdf(pdf)
             dispatch(receiveUploadPdf(json));
             if(json.text && json.filename)
             {
-                dispatch(testFunct(json.text, json.filename));
+                //dispatch(testFunct(json.text, json.filename));
             }
 
             return json;

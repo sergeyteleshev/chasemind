@@ -7,6 +7,7 @@ export default class AddBook extends Component
     submitUploadBook()
     {
         console.log(this.props.pdfToUpload);
+
         const book = {
             title: this.props.title,
             author: this.props.author,
@@ -17,10 +18,11 @@ export default class AddBook extends Component
             pagesOriginal: this.props.pagesOriginal,
             pagesAbstract: this.props.pagesAbstract,
             imageURL: this.props.imgURL,
-            pdfToUpload: {...this.props.pdfToUpload},
+            pdfToUpload: this.props.pdfToUpload,
+            subject: this.props.subject,
         };
 
-        this.props.addBook(book);
+        this.props.addBook({...book});
 
         // this.props.fetchTextToSpeech("test text");
         // this.props.fetchTextToSpeechYandex("тест сука");
@@ -33,7 +35,7 @@ export default class AddBook extends Component
             <div>
                 <HeaderContainer/>
 
-                <section className="main">
+                <section className={"main"}>
                     <section className="path">
                         • > Добавить книгу
                     </section>
@@ -42,11 +44,6 @@ export default class AddBook extends Component
                         Добавить книгу.
                     </section>
 
-                    imgURL
-                    pdfToUpload
-                    pdfUploadResponse
-                    isPdfUploading
-
                     <section className="addBookContainer">
                         <input value={this.props.title} onChange={(event) => this.props.textInputHandleChange('title', event)} placeholder={"Заголовок"} className={"inputText"} type={"text"}/>
                         <input value={this.props.author} onChange={(event) => this.props.textInputHandleChange('author', event)} placeholder={"Автор"} className={"inputText"} type={"text"}/>
@@ -54,6 +51,7 @@ export default class AddBook extends Component
                         <textarea value={this.props.slogan} onChange={(event) => this.props.textInputHandleChange('slogan', event)} placeholder={"Главная цитата"} className={"inputText"}/>
                         <textarea value={this.props.sloganENG} onChange={(event) => this.props.textInputHandleChange('sloganENG', event)} placeholder={"Главная цитата(ENG)"} className={"inputText"}/>
                         <textarea value={this.props.publisher} onChange={(event) => this.props.textInputHandleChange('publisher', event)} placeholder={"Издание"} className={"inputText"}/>
+                        <input value={this.props.subject} onChange={(event) => this.props.textInputHandleChange('subject', event)} placeholder={"Тематика"} className={"inputText"} type={"number"}/>
                         <input value={this.props.pagesOriginal} onChange={(event) => this.props.textInputHandleChange('pagesOriginal', event)} placeholder={"Кол-во страниц оригинала"} className={"inputText"} type={"number"}/>
                         <input value={this.props.pagesAbstract} onChange={(event) => this.props.textInputHandleChange('pagesAbstract', event)} placeholder={"Кол-во страниц конспекта"} className={"inputText"} type={"number"}/>
                         <input className={"inputText"} value={this.props.imgURL} onChange={(event) => this.props.textInputHandleChange('imgURL', event)} placeholder={"url обложки"} type={"text"}/>
