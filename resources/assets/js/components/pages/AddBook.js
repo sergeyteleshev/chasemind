@@ -16,8 +16,8 @@ export default class AddBook extends Component
             sloganENG: this.props.sloganENG,
             publisher: this.props.publisher,
             pagesOriginal: this.props.pagesOriginal,
-            pagesAbstract: this.props.pagesAbstract,
-            imageURL: this.props.imgURL,
+            pagesAbstarct: this.props.pagesAbstarct,
+            imgURL: this.props.imgURL,
             pdfToUpload: this.props.pdfToUpload,
             subject: this.props.subject,
         };
@@ -53,7 +53,7 @@ export default class AddBook extends Component
                         <textarea value={this.props.publisher} onChange={(event) => this.props.textInputHandleChange('publisher', event)} placeholder={"Издание"} className={"inputText"}/>
                         <input value={this.props.subject} onChange={(event) => this.props.textInputHandleChange('subject', event)} placeholder={"Тематика"} className={"inputText"} type={"number"}/>
                         <input value={this.props.pagesOriginal} onChange={(event) => this.props.textInputHandleChange('pagesOriginal', event)} placeholder={"Кол-во страниц оригинала"} className={"inputText"} type={"number"}/>
-                        <input value={this.props.pagesAbstract} onChange={(event) => this.props.textInputHandleChange('pagesAbstract', event)} placeholder={"Кол-во страниц конспекта"} className={"inputText"} type={"number"}/>
+                        <input value={this.props.pagesAbstarct} onChange={(event) => this.props.textInputHandleChange('pagesAbstarct', event)} placeholder={"Кол-во страниц конспекта"} className={"inputText"} type={"number"}/>
                         <input className={"inputText"} value={this.props.imgURL} onChange={(event) => this.props.textInputHandleChange('imgURL', event)} placeholder={"url обложки"} type={"text"}/>
                         <br/>
                         <label className={"labelInput"}>Pdf-коспекта: <input className={"fileInput"} type={"file"} accept="application/pdf" onChange={(event) => this.props.uploadPdfHandleChange(event)}/></label>

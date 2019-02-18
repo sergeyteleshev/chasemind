@@ -901,12 +901,8 @@ export function addBook(book)
         formData.append(item, book[item]);
     });
 
-    const options = { content: formData };
-
     console.log(book);
     console.log(formData);
-
-    const payload = {...book, formData};
 
     return dispatch => {
         dispatch(requestTextToSpeech());
@@ -914,11 +910,6 @@ export function addBook(book)
         const request = async () => {
             const response = await fetch('/api/addBook', {
                 method: 'POST',
-                // headers: {
-                //     // 'Accept': 'application/json',
-                //     // 'Content-Type': 'application/json',
-                //     'Content-Type': 'multipart/form-data'
-                // },
                 body: formData,
             });
 

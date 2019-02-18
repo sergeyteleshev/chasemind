@@ -100,7 +100,7 @@ const initialStateAddBook = {
     sloganENG: "",
     publisher: "",
     pagesOriginal: "",
-    pagesAbstract: "",
+    pagesAbstarct: "",
     imgURL: "",
     pdfToUpload: {},
     pdfUploadResponse: {},

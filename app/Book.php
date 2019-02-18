@@ -9,7 +9,7 @@ class Book extends Model
     protected $fillable = [
         'name', 'desc', 'author', 'slogan', 'sloganENG',
         'rating', 'subject', 'amountOfDownloads', 'imgURL',
-        'pagesBook', 'pagesAbstract', 'publisher', 'linkOnText',
+        'pagesBook', 'pagesAbstarct', 'publisher', 'linkOnText',
         'linkOnAudio', 'linkOnVideo', 'linkOnDemoText', 'linkOnDemoAudio',
         'linkOnDemoVideo', 'type', 'amountOfDownloadsDemo'
     ];

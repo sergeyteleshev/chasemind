@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
         sloganENG: state.AddBookReducer.sloganENG,
         publisher: state.AddBookReducer.publisher,
         pagesOriginal: state.AddBookReducer.pagesOriginal,
-        pagesAbstract: state.AddBookReducer.pagesAbstract,
+        pagesAbstarct: state.AddBookReducer.pagesAbstarct,
         imgURL: state.AddBookReducer.imgURL,
         pdfToUpload: state.AddBookReducer.pdfToUpload,
         pdfUploadResponse: state.AddBookReducer.pdfUploadResponse,

@@ -15,6 +15,7 @@ use Google\Cloud\TextToSpeech\V1\SynthesisInput;
 use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
 use Illuminate\Support\Facades\Storage;
+use PHPMP3;
 
 class BookController extends Controller
 {
@@ -33,7 +34,7 @@ class BookController extends Controller
         $file_content = file_get_contents($pdf);
         if($file_content)
         {
-            $filepath = Storage::disk('local')->putFileAs('public/read', $pdf, $title . " (Читать).pdf");
+            $filepath = Storage::disk('local')->putFileAs('public/read', $pdf, $title . "(Читать).pdf");
             $parser = new \Smalot\PdfParser\Parser();
             $pdf_parsed = $parser->parseFile($pdf);
             $text = $pdf_parsed->getText();
@@ -74,6 +75,18 @@ class BookController extends Controller
         return response()->json($response, 204);
     }
 
+    public function compileToOneMp3($files)
+    {
+        $mp3 = "";
+
+        foreach($files as $file)
+        {
+            $mp3 .= $file;
+        }
+
+        return $mp3;
+    }
+
     public function addBook(Request $request)
     {
         $title = $request->input('title');
@@ -83,12 +96,23 @@ class BookController extends Controller
         $slogan_eng = $request->input('sloganENG');
         $subject = $request->input('subject');
         $pages_book = $request->input('pagesOriginal');
-        $pages_abstract = $request->input('pagesAbstract');
+        $pages_abstract = $request->input('pagesAbstarct');
         $publisher = $request->input('publisher');
         $imageURL = $request->input('imgURL');
         $pdf = $request->file('pdfToUpload');
+        $files = [];
 
         $pdfUploaded = $this->uploadPdf($pdf, $title);
+        $audioFilePath = 'public/listen/' . $title . '(СЛУШАТЬ).mp3';
+        $texts = $this->splitText($pdfUploaded['text']);
+
+        foreach($texts as $text)
+        {
+            $files[] = $this->getAudioGoogle($text)['content'];
+        }
+
+        $compiledTo = $this->compileToOneMp3($files);
+        Storage::disk('local')->put($audioFilePath, $compiledTo);
 
         $book = array(
             'name' => $title,
@@ -102,8 +126,7 @@ class BookController extends Controller
             'pagesAbstarct' => $pages_abstract,
             'publisher' => $publisher,
             'linkOnText' => $pdfUploaded['filepath'],
-            'linkOnAudio' => '',
-            'linkOnVideo' => '',
+            'linkOnAudio' => $audioFilePath,
         );
 
         $db_book = Book::create($book);
@@ -211,36 +234,43 @@ class BookController extends Controller
         return response()->json($filename, 201);
     }
 
-    private function translit($s) {
-        $s = (string) $s; // преобразуем в строковое значение
-        $s = strip_tags($s); // убираем HTML-теги
-        $s = str_replace(array("\n", "\r"), " ", $s); // убираем перевод каретки
-        $s = preg_replace("/\s+/", ' ', $s); // удаляем повторяющие пробелы
-        $s = trim($s); // убираем пробелы в начале и конце строки
-        $s = function_exists('mb_strtolower') ? mb_strtolower($s) : strtolower($s); // переводим строку в нижний регистр (иногда надо задать локаль)
-        $s = strtr($s, array('а'=>'a','б'=>'b','в'=>'v','г'=>'g','д'=>'d','е'=>'e','ё'=>'e','ж'=>'j','з'=>'z','и'=>'i','й'=>'y','к'=>'k','л'=>'l','м'=>'m','н'=>'n','о'=>'o','п'=>'p','р'=>'r','с'=>'s','т'=>'t','у'=>'u','ф'=>'f','х'=>'h','ц'=>'c','ч'=>'ch','ш'=>'sh','щ'=>'shch','ы'=>'y','э'=>'e','ю'=>'yu','я'=>'ya','ъ'=>'','ь'=>''));
-        $s = preg_replace("/[^0-9a-z-_ ]/i", "", $s); // очищаем строку от недопустимых символов
-        $s = str_replace(" ", "-", $s); // заменяем пробелы знаком минус
-        return $s; // возвращаем результат
-    }
-
     public function splitText($text)
     {
         $parts = str_split($text, self::TEXT_TO_SPEECH_MAX_LENGTH);
+//        $compiledParts = "";
+//        $prevPart = "";
+//
+//        for($i = count($parts); $i > 0; $i--)
+//        {
+//            $part = $parts[$i];
+//            $sentence = "";
+//
+//            if($part[$i] !== '!' || $part[$i] !== '.' || $part[$i] !== '?')
+//            {
+//                $sentence .= $parts[$i];
+//            }
+//            else
+//            {
+//
+//                break;
+//            }
+//
+//
+//            $compiledParts .= $part;
+//        }
 
         return $parts;
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param $text
+     * @param $filename
+     * @return array
      * @throws ApiException
      * @throws ValidationException
      */
-    public function getAudio(Request $request)
+    public function getAudioGoogle($text)
     {
-        $file_path = 'public/listen/' . $request->input('filename');
-
         try
         {
             $client = new TextToSpeechClient();
@@ -252,7 +282,7 @@ class BookController extends Controller
 
         // sets text to be synthesised
         $synthesis_input = (new SynthesisInput())
-            ->setText($request->input('text'));
+            ->setText($text);
 
         //build the voice request, select the language code ("en-US") and the ssml
         //voice gender
@@ -276,10 +306,8 @@ class BookController extends Controller
         }
 
         $audioContent = $response->getAudioContent();
-        Storage::disk('local')->put($file_path, $audioContent);
 
-        return response()->json($audioContent);
-
+        return ['response' => true, 'content' => $audioContent];
     }
 
     public function getAudioYandex(Request $request)
