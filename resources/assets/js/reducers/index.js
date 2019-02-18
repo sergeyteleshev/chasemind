@@ -32,7 +32,7 @@ import {
     SORT_BOOKS,
     SUBMIT_REGISTER, TEXT_INPUT_HANDLE_CHANGE, UPLOAD_PDF_HANDLE_CHANGE
 } from "../actions/index";
-import {RECEIVE_UPLOAD_PDF} from "../actions";
+import {RECEIVE_ADD_BOOK, RECEIVE_UPLOAD_PDF, REQUEST_ADD_BOOK} from "../actions";
 
 const initialStateBooks = {
     libBooks: {},
@@ -106,6 +106,8 @@ const initialStateAddBook = {
     pdfUploadResponse: {},
     isPdfUploading: false,
     subject: 0,
+    isAddBookLoading: false,
+    addedBook: {},
 };
 
 function Books(state = initialStateBooks, action) {
@@ -381,6 +383,11 @@ function AddBookReducer(state = initialStateAddBook, action) {
                 pdfUploadResponse: action.payload,
                 isPdfUploading: false,
             });
+
+        case REQUEST_ADD_BOOK:
+            return {...state, isAddBookLoading: true};
+        case RECEIVE_ADD_BOOK:
+            return {...state, isAddBookLoading: false, addedBook: action.payload};
 
         case REQUEST_UPLOAD_PDF:
             return Object.assign({}, state, {

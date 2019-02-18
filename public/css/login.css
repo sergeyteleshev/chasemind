@@ -1585,6 +1585,14 @@ input[type=submit]:hover
     margin: 0 auto;
 }
 
+
+.loader
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .mainWrapper
 {
     min-height: 80vh;

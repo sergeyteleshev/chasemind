@@ -23,6 +23,8 @@ const mapStateToProps = (state) => {
         pdfUploadResponse: state.AddBookReducer.pdfUploadResponse,
         isPdfUploading: state.AddBookReducer.isPdfUploading,
         subject: state.AddBookReducer.subject,
+        isAddBookLoading: state.AddBookReducer.isAddBookLoading,
+        addedBook: state.AddBookReducer.addedBook,
     }
 };
 

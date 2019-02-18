@@ -61,6 +61,10 @@ export default class AddBook extends Component
                         <p>{this.props.pdfUploadResponse.text ? this.props.pdfUploadResponse.text.length : null}</p>
                         <p>{this.props.pdfUploadResponse.text}</p>
                     </section>
+
+                    <section className={"loader"}>
+                        {this.props.isAddBookLoading ? <img width={90} height={90} src={"https://loading.io/spinners/coolors/lg.palette-rotating-ring-loader.gif"}/> : null}
+                    </section>
                 </section>
 
                 <Footer/>

@@ -34,7 +34,7 @@ class BookController extends Controller
         $file_content = file_get_contents($pdf);
         if($file_content)
         {
-            $filepath = Storage::disk('local')->putFileAs('public/read', $pdf, $title . "(Читать).pdf");
+            $filepath = Storage::disk('local')->putFileAs('public/read', $pdf, $title . "(ЧИТАТЬ).pdf");
             $parser = new \Smalot\PdfParser\Parser();
             $pdf_parsed = $parser->parseFile($pdf);
             $text = $pdf_parsed->getText();
@@ -140,7 +140,7 @@ class BookController extends Controller
         $type = $request->input('type');
         $book = Book::findOrFail($id);
         $filename = ""; //тут не убирать. оно и так работает
-        $file_path_from_public = 'files/';
+        $file_path_from_public = '';
 
         if($type == 'read' && $book)
         {
@@ -148,7 +148,7 @@ class BookController extends Controller
         }
         else if($type == 'listen' && $book)
         {
-            $file_path_from_public += $book->linkOnAudio;
+            $file_path_from_public .= $book->linkOnAudio;
         }
         else if($type == 'watch' && $book)
         {
@@ -176,8 +176,10 @@ class BookController extends Controller
                 return response()->json(["error" => "unknown error"], 500);
         }
 
+        $test = Storage::disk('local')->get($file_path_from_public);
+
         if(is_string($file_path_from_public))
-            return response()->download(public_path($file_path_from_public), $filename, $request->header());
+            return response()->download(Storage::disk('local')->path($file_path_from_public), $filename, $request->header());
         else
             return response()->json(["error" => "file not found"], 404);
     }

@@ -67,6 +67,9 @@ export const UPLOAD_PDF_HANDLE_CHANGE = "UPLOAD_PDF_HANDLE_CHANGE";
 export const REQUEST_UPLOAD_PDF = "REQUEST_UPLOAD_PDF";
 export const RECEIVE_UPLOAD_PDF = "RECEIVE_UPLOAD_PDF";
 
+export const REQUEST_ADD_BOOK = "REQUEST_ADD_BOOK";
+export const RECEIVE_ADD_BOOK = "RECEIVE_ADD_BOOK";
+
 export function requestBooks() {
     return {
         type: REQUEST_BOOKS,
@@ -672,7 +675,14 @@ export function fetchGetMaterial(bookId, type, demo = false) {
             return blob;
         };
 
-        return request();
+        try {
+            return request();
+        }
+        catch (e) {
+            receiveGetMaterial(null);
+        }
+
+
     };
 }
 
@@ -793,6 +803,21 @@ export function requestTextToSpeech()
     }
 }
 
+export function requestAddBook()
+{
+    return {
+        type: REQUEST_ADD_BOOK,
+    }
+}
+
+export function receiveAddBook(book)
+{
+    return {
+        type: RECEIVE_ADD_BOOK,
+        payload: book,
+    }
+}
+
 export function receiveTextToSpeech(json)
 {
     return {
@@ -905,32 +930,15 @@ export function addBook(book)
     console.log(formData);
 
     return dispatch => {
-        dispatch(requestTextToSpeech());
-
         const request = async () => {
+            dispatch(requestAddBook());
             const response = await fetch('/api/addBook', {
                 method: 'POST',
                 body: formData,
             });
 
-            // const blob = await response.blob();
-            // const json = await response.json();
-            //
-            // console.log(blob);
-            // console.log(json);
-            // let objectURL = URL.createObjectURL(blob);
-            // let a = document.createElement('a');
-            // a.href = objectURL;
-            // a.download = filename;
-            //
-            // document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
-            // a.click();
-            // a.remove();
-            //
-            // dispatch(receiveTextToSpeech(blob));
-            // console.info(blob);
-            //
-            // return blob;
+            const json = await response.json();
+            dispatch(receiveAddBook(json));
         };
 
         return request();
