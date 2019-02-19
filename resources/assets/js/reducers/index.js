@@ -105,7 +105,7 @@ const initialStateAddBook = {
     pdfToUpload: {},
     pdfUploadResponse: {},
     isPdfUploading: false,
-    subject: 0,
+    subject: "",
     isAddBookLoading: false,
     addedBook: {},
 };

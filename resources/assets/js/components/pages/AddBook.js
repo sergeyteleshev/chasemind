@@ -31,6 +31,36 @@ export default class AddBook extends Component
 
     render()
     {
+        let addBookContainer = null;
+
+        if(Object.keys(this.props.addedBook).length === 0)
+        {
+            addBookContainer = <section className="addBookContainer">
+                <input value={this.props.title} onChange={(event) => this.props.textInputHandleChange('title', event)} placeholder={"Заголовок"} className={"inputText"} type={"text"}/>
+                <input value={this.props.author} onChange={(event) => this.props.textInputHandleChange('author', event)} placeholder={"Автор"} className={"inputText"} type={"text"}/>
+                <textarea value={this.props.desc} onChange={(event) => this.props.textInputHandleChange('desc', event)} placeholder={"Описание"} className={"inputText"}/>
+                <textarea value={this.props.slogan} onChange={(event) => this.props.textInputHandleChange('slogan', event)} placeholder={"Главная цитата"} className={"inputText"}/>
+                <textarea value={this.props.sloganENG} onChange={(event) => this.props.textInputHandleChange('sloganENG', event)} placeholder={"Главная цитата(ENG)"} className={"inputText"}/>
+                <textarea value={this.props.publisher} onChange={(event) => this.props.textInputHandleChange('publisher', event)} placeholder={"Издание"} className={"inputText"}/>
+                <input value={this.props.subject} onChange={(event) => this.props.textInputHandleChange('subject', event)} placeholder={"Тематика"} className={"inputText"} type={"number"}/>
+                <input value={this.props.pagesOriginal} onChange={(event) => this.props.textInputHandleChange('pagesOriginal', event)} placeholder={"Кол-во страниц оригинала"} className={"inputText"} type={"number"}/>
+                <input value={this.props.pagesAbstarct} onChange={(event) => this.props.textInputHandleChange('pagesAbstarct', event)} placeholder={"Кол-во страниц конспекта"} className={"inputText"} type={"number"}/>
+                <input className={"inputText"} value={this.props.imgURL} onChange={(event) => this.props.textInputHandleChange('imgURL', event)} placeholder={"url обложки"} type={"text"}/>
+                <br/>
+                <label className={"labelInput"}>Pdf-коспекта: <input className={"fileInput"} type={"file"} accept="application/pdf" onChange={(event) => this.props.uploadPdfHandleChange(event)}/></label>
+                <input className={"submitButton"} type="submit" value="отправить" id="linkOnVideo" onClick={() => this.submitUploadBook()}/>
+                <p>{this.props.pdfUploadResponse.text ? this.props.pdfUploadResponse.text.length : null}</p>
+                <p>{this.props.pdfUploadResponse.text}</p>
+            </section>;
+        }
+        else
+        {
+            addBookContainer = <section className="addBookContainer">
+                <p className={"bookAddContainerResponse"}>Конспекты загружены!</p>
+            </section>;
+        }
+
+
         return (
             <div>
                 <HeaderContainer/>
@@ -44,23 +74,7 @@ export default class AddBook extends Component
                         Добавить книгу.
                     </section>
 
-                    <section className="addBookContainer">
-                        <input value={this.props.title} onChange={(event) => this.props.textInputHandleChange('title', event)} placeholder={"Заголовок"} className={"inputText"} type={"text"}/>
-                        <input value={this.props.author} onChange={(event) => this.props.textInputHandleChange('author', event)} placeholder={"Автор"} className={"inputText"} type={"text"}/>
-                        <textarea value={this.props.desc} onChange={(event) => this.props.textInputHandleChange('desc', event)} placeholder={"Описание"} className={"inputText"}/>
-                        <textarea value={this.props.slogan} onChange={(event) => this.props.textInputHandleChange('slogan', event)} placeholder={"Главная цитата"} className={"inputText"}/>
-                        <textarea value={this.props.sloganENG} onChange={(event) => this.props.textInputHandleChange('sloganENG', event)} placeholder={"Главная цитата(ENG)"} className={"inputText"}/>
-                        <textarea value={this.props.publisher} onChange={(event) => this.props.textInputHandleChange('publisher', event)} placeholder={"Издание"} className={"inputText"}/>
-                        <input value={this.props.subject} onChange={(event) => this.props.textInputHandleChange('subject', event)} placeholder={"Тематика"} className={"inputText"} type={"number"}/>
-                        <input value={this.props.pagesOriginal} onChange={(event) => this.props.textInputHandleChange('pagesOriginal', event)} placeholder={"Кол-во страниц оригинала"} className={"inputText"} type={"number"}/>
-                        <input value={this.props.pagesAbstarct} onChange={(event) => this.props.textInputHandleChange('pagesAbstarct', event)} placeholder={"Кол-во страниц конспекта"} className={"inputText"} type={"number"}/>
-                        <input className={"inputText"} value={this.props.imgURL} onChange={(event) => this.props.textInputHandleChange('imgURL', event)} placeholder={"url обложки"} type={"text"}/>
-                        <br/>
-                        <label className={"labelInput"}>Pdf-коспекта: <input className={"fileInput"} type={"file"} accept="application/pdf" onChange={(event) => this.props.uploadPdfHandleChange(event)}/></label>
-                        <input className={"submitButton"} type="submit" value="отправить" id="linkOnVideo" onClick={() => this.submitUploadBook()}/>
-                        <p>{this.props.pdfUploadResponse.text ? this.props.pdfUploadResponse.text.length : null}</p>
-                        <p>{this.props.pdfUploadResponse.text}</p>
-                    </section>
+                    {addBookContainer}
 
                     <section className={"loader"}>
                         {this.props.isAddBookLoading ? <img width={90} height={90} src={"https://loading.io/spinners/coolors/lg.palette-rotating-ring-loader.gif"}/> : null}

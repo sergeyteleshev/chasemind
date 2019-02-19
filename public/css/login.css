@@ -1585,6 +1585,12 @@ input[type=submit]:hover
     margin: 0 auto;
 }
 
+.bookAddContainerResponse
+{
+    margin-top: 40px;
+    font-family: 'Century Gothic';
+    font-size: 16px;
+}
 
 .loader
 {
