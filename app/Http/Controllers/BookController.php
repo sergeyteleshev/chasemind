@@ -15,6 +15,7 @@ use Google\Cloud\TextToSpeech\V1\SynthesisInput;
 use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
 use Illuminate\Support\Facades\Storage;
+use function Sodium\add;
 
 class BookController extends Controller
 {
@@ -37,13 +38,10 @@ class BookController extends Controller
         $specialSign = "~";
         $openTitle = "[";
         $closeTitle = "]";
+        $titles = [];
         $mindMap = [];
         $countLevel = 0;
-        $isAddingTitle = false;
-        $whileCounter = 0;
         $currentTitle = "";
-        $titleStartPosition = 0;
-        $titleEndPosition = 0;
         $currentTitleIndex = 0;
 
         for($i = 0; $i < strlen($text); $i++)
@@ -56,16 +54,50 @@ class BookController extends Controller
 
                 while($text[$whileCounter] !== $specialSign)
                 {
+                    if($text[$whileCounter] === $openTitle)
+                        $countLevel++;
+
                     $currentTitle .= $text[$whileCounter++];
                 }
 
+                $currentTitle .= $text[$whileCounter++];
                 $titleEndPosition = $whileCounter;
-                $mindMap[$currentTitleIndex]['content'] = $currentTitle;
-                $mindMap[$currentTitleIndex]['startPosition'] = $titleStartPosition;
-                $mindMap[$currentTitleIndex]['endPosition'] = $titleEndPosition;
+                $titles[$currentTitleIndex]['content'] = $currentTitle;
+                $titles[$currentTitleIndex]['startPosition'] = $titleStartPosition;
+                $titles[$currentTitleIndex]['endPosition'] = $titleEndPosition;
+                $titles[$currentTitleIndex]['countLevel'] = $countLevel;
+
+                $countLevel = 0;
                 $i = $titleStartPosition + 1;
                 $currentTitle = "";
                 $currentTitleIndex++;
+            }
+        }
+
+        $mindMap = $this->addChilds($titles);
+
+        return $mindMap;
+    }
+
+    private function addChilds($titles)
+    {
+        $mindMap = [];
+
+        for($i = 0; $i < count($titles); $i++)
+        {
+            $childCount = 0;
+            for($j = 0; $j < count($titles); $j++)
+            {
+                if(
+                    $titles[$i]['countLevel'] === $titles[$j]['countLevel'] - 1 &&
+                    $titles[$i]['startPosition'] < $titles[$j]['startPosition'] &&
+                    $titles[$i]['endPosition'] < $titles[$j]['endPosition']
+                )
+                {
+                    $mindMap[$i] = $titles[$i];
+                    $mindMap[$i]['childs'][$childCount] = $titles[$j];
+                    $childCount++;
+                }
             }
         }
 
