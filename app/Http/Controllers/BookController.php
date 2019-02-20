@@ -15,7 +15,6 @@ use Google\Cloud\TextToSpeech\V1\SynthesisInput;
 use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
 use Illuminate\Support\Facades\Storage;
-use PHPMP3;
 
 class BookController extends Controller
 {
@@ -27,6 +26,50 @@ class BookController extends Controller
     public function index()
     {
         return Book::all();
+    }
+
+    /**
+     * @param String $text
+     * @return array
+     */
+    private function convertTextToMindMap(String $text)
+    {
+        $specialSign = "~";
+        $openTitle = "[";
+        $closeTitle = "]";
+        $mindMap = [];
+        $countLevel = 0;
+        $isAddingTitle = false;
+        $whileCounter = 0;
+        $currentTitle = "";
+        $titleStartPosition = 0;
+        $titleEndPosition = 0;
+        $currentTitleIndex = 0;
+
+        for($i = 0; $i < strlen($text); $i++)
+        {
+            if(($i !== strlen($text) - 1) && $text[$i] === $specialSign && $text[$i + 1] === $openTitle)
+            {
+                $titleStartPosition = $i;
+                $currentTitle .= $text[$i];
+                $whileCounter = ++$i;
+
+                while($text[$whileCounter] !== $specialSign)
+                {
+                    $currentTitle .= $text[$whileCounter++];
+                }
+
+                $titleEndPosition = $whileCounter;
+                $mindMap[$currentTitleIndex]['content'] = $currentTitle;
+                $mindMap[$currentTitleIndex]['startPosition'] = $titleStartPosition;
+                $mindMap[$currentTitleIndex]['endPosition'] = $titleEndPosition;
+                $i = $titleStartPosition + 1;
+                $currentTitle = "";
+                $currentTitleIndex++;
+            }
+        }
+
+        return $mindMap;
     }
 
     public function uploadPdf($pdf, $title)
@@ -103,6 +146,7 @@ class BookController extends Controller
         $files = [];
 
         $pdfUploaded = $this->uploadPdf($pdf, $title);
+        $pasedPpfText = $this->convertTextToMindMap($pdfUploaded['text']);
         $audioFilePath = 'public/listen/' . $title . '(СЛУШАТЬ).mp3';
         $texts = $this->splitText($pdfUploaded['text']);
 
