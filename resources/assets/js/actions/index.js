@@ -70,6 +70,9 @@ export const RECEIVE_UPLOAD_PDF = "RECEIVE_UPLOAD_PDF";
 export const REQUEST_ADD_BOOK = "REQUEST_ADD_BOOK";
 export const RECEIVE_ADD_BOOK = "RECEIVE_ADD_BOOK";
 
+export const REQUEST_MIND_MAP_DATA = "REQUEST_MIND_MAP_DATA";
+export const RECEIVE_MIND_MAP_DATA = "RECEIVE_MIND_MAP_DATA";
+
 export function requestBooks() {
     return {
         type: REQUEST_BOOKS,
@@ -110,6 +113,37 @@ export function fetchBooks() {
             const response = await fetch('/api/books');
             const json = await response.json();
             dispatch(receiveBooks(json));
+            return json;
+        };
+
+        return request();
+    }
+}
+
+export function requestMindMapData()
+{
+    return {
+        type: REQUEST_MIND_MAP_DATA,
+    }
+}
+
+export function receiveMindMapData(json)
+{
+    return {
+        type: RECEIVE_MIND_MAP_DATA,
+        payload: json,
+    }
+}
+
+export function fetchMindMapData(id)
+{
+    return dispatch => {
+        dispatch(requestMindMapData());
+
+        const request = async () => {
+            const response = await fetch('/api/getMindMapData/' + id);
+            const json = await response.json();
+            dispatch(receiveMindMapData(json));
             return json;
         };
 

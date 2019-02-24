@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Book;
 use Google\ApiCore\ApiException;
 use Google\ApiCore\ValidationException;
-use Illuminate\Http\File;
 use Illuminate\Http\Request;
 
 use Google\Cloud\TextToSpeech\V1\AudioConfig;
@@ -15,7 +14,6 @@ use Google\Cloud\TextToSpeech\V1\SynthesisInput;
 use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
 use Illuminate\Support\Facades\Storage;
-use function Sodium\add;
 
 class BookController extends Controller
 {
@@ -47,6 +45,13 @@ class BookController extends Controller
         }
 
         return array("error" => "pdf not found");
+    }
+
+    public function getMindMapData(Book $book)
+    {
+        $jsonFile = Storage::disk('local')->get($book['linkOnVideo']);
+
+        return response()->json($jsonFile);
     }
 
     public function show(Book $book)
@@ -106,6 +111,7 @@ class BookController extends Controller
         $pdfUploaded = $this->uploadPdf($pdf, $title);
         $abstractStructure = $abstractParser->getStructure($pdfUploaded['text']);
         $audioFilePath = 'public/listen/' . $title . '(СЛУШАТЬ).mp3';
+        $jsonFilePath = 'public/watch/' . $title . '.json';
         $texts = $this->splitText($pdfUploaded['text']);
 
         foreach($texts as $text)
@@ -115,6 +121,7 @@ class BookController extends Controller
 
         $compiledTo = $this->compileToOneMp3($files);
         Storage::disk('local')->put($audioFilePath, $compiledTo);
+        Storage::disk('local')->put($jsonFilePath, json_encode($abstractStructure));
 
         $book = array(
             'name' => $title,
@@ -129,6 +136,7 @@ class BookController extends Controller
             'publisher' => $publisher,
             'linkOnText' => $pdfUploaded['filepath'],
             'linkOnAudio' => $audioFilePath,
+            'linkOnVideo' => $jsonFilePath,
         );
 
         $db_book = Book::create($book);

@@ -18,7 +18,7 @@ import {
     RECEIVE_BOOK,
     RECEIVE_BOOKS, RECEIVE_EMAIL_CHECK,
     RECEIVE_LOGIN, RECEIVE_LOGIN_CHECK,
-    RECEIVE_LOGOUT,
+    RECEIVE_LOGOUT, RECEIVE_MIND_MAP_DATA,
     RECEIVE_REGISTER, RECEIVE_ROBOKASSA,
     RECEIVE_SUBJECTS,
     REMEMBER_ME_HANDLE_CHANGE,
@@ -32,7 +32,7 @@ import {
     SORT_BOOKS,
     SUBMIT_REGISTER, TEXT_INPUT_HANDLE_CHANGE, UPLOAD_PDF_HANDLE_CHANGE
 } from "../actions/index";
-import {RECEIVE_ADD_BOOK, RECEIVE_UPLOAD_PDF, REQUEST_ADD_BOOK} from "../actions";
+import {RECEIVE_ADD_BOOK, RECEIVE_UPLOAD_PDF, REQUEST_ADD_BOOK, REQUEST_MIND_MAP_DATA} from "../actions";
 
 const initialStateBooks = {
     libBooks: {},
@@ -44,6 +44,8 @@ const initialStateBooks = {
     sortId: 0,
     isBookMaterialLoading: true,
     currentBookTypeSelected: '',
+    isMindMapLoading: true,
+    mindMapData: {},
 };
 
 const initialStateAuth = {
@@ -116,6 +118,12 @@ function Books(state = initialStateBooks, action) {
             return Object.assign({}, state, {
                 isLibLoading: true,
             });
+
+        case REQUEST_MIND_MAP_DATA:
+            return {...state, isMindMapLoading: true};
+
+        case RECEIVE_MIND_MAP_DATA:
+            return {...state, isMindMapLoading: false, mindMapData: action.payload};
 
         case RECEIVE_BOOKS:
             return Object.assign({}, state, {

@@ -57,6 +57,7 @@
         "fs": "0.0.1-security",
         "history": "^4.7.2",
         "http2": "^3.3.7",
+        "jsmind": "^0.4.6",
         "jsrsasign": "^8.0.12",
         "net": "^1.0.2",
         "pdfjs-dist": "^2.0.943",

@@ -5,26 +5,22 @@ import {Link} from "react-router-dom";
 import {BOOK_LINK, LIBRARY_LINK} from "../../consts/pageLinks";
 
 export default class Library extends Component {
-    componentWillMount()
+    componentDidMount()
     {
-        const sortBooksFromUrl = async () => {
-            let books = await this.props.fetchBooks();
-            const subjects = await this.props.fetchSubjects();
-            let { subject } = this.props.match.params;
+        this.props.fetchBooks();
+        const subjects = this.props.fetchSubjects();
+        let { subject } = this.props.match.params;
 
-            if(subjects.length > 0)
-            {
-                subjects.map((subjectMap) => {
-                    console.log(subjectMap);
-                    if(subjectMap.subject.toLowerCase() === subject.toLowerCase())
-                    {
-                        this.props.sortBooks(subjectMap.id);
-                    }
-                });
-            }
-        };
-
-        sortBooksFromUrl();
+        if(subjects.length > 0)
+        {
+            subjects.map((subjectMap) => {
+                console.log(subjectMap);
+                if(subjectMap.subject.toLowerCase() === subject.toLowerCase())
+                {
+                    this.props.sortBooks(subjectMap.id);
+                }
+            });
+        }
     }
 
     sortBooks(subject)

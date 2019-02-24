@@ -22,11 +22,12 @@ import {
     BOOK_LINK,
     CONTACT_LINK,
     LIBRARY_LINK,
-    LOGIN_LINK,
+    LOGIN_LINK, MIND_MAP,
     REGISTRATION_LINK,
     SUB_LINK
 } from "../consts/pageLinks";
 import AddBookContainer from "../containers/AddBookContainer";
+import MindMapContainer from "../containers/MindMapContainer";
 const history = createHistory();
 const middleware = [thunkMiddleware];
 let store = createStore(storeApp, applyMiddleware(...middleware));
@@ -48,6 +49,7 @@ export default class App extends Component {
                         <Route exact path={LOGIN_LINK} component={LoginController}/>
                         <Route exact path={REGISTRATION_LINK} component={RegistrationContainer}/>
                         <Route exact path={ADD_BOOK} component={AddBookContainer}/>
+                        <Route exact path={MIND_MAP + '/:id'} name={"mindMap"} component={MindMapContainer}/>
                     </ScrollToTop>
                 </Router>
             </Provider>

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import Footer from "../Footer";
 import HeaderContainer from "../../containers/HeaderContainer";
-import {LOGIN_LINK, REGISTRATION_LINK, SUB_LINK} from "../../consts/pageLinks";
+import {LOGIN_LINK, MIND_MAP, REGISTRATION_LINK, SUB_LINK} from "../../consts/pageLinks";
+import Redirect from "react-router-dom/es/Redirect";
 
 export default class Book extends Component {
     componentWillMount()
@@ -18,9 +19,15 @@ export default class Book extends Component {
 
     getMaterial(bookId, type, demo = false)
     {
+
         this.props.selectCurrentBookType(type);
 
-        if(this.props.authorized && this.props.user.daysLeft > 0)
+
+        if(type.toLowerCase() === "watch" && this.props.authorized && this.props.user.daysLeft > 0)
+        {
+            this.props.history.push(MIND_MAP + "/" + bookId);
+        }
+        else if(this.props.authorized && this.props.user.daysLeft > 0)
         {
             return this.props.getMaterialSubmit(bookId, type, demo);
         }

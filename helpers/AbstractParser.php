@@ -10,6 +10,7 @@ class AbstractParser
 {
     const START_SYMBOL = '~';
     const LEVEL_SYMBOL = '[';
+    const END_SYMBOL = ']';
 
     protected $nodes;
 
@@ -20,7 +21,7 @@ class AbstractParser
         static $lastLevel = 1;
         $currentChar = $string[$i];
         while ($currentChar) {
-            if ($currentChar === '~') {
+            if ($currentChar === self::START_SYMBOL) {
                 $currentNode = array();
                 $currentLevel = 0;
                 $currentChar = $string[++$i];
@@ -30,8 +31,8 @@ class AbstractParser
                 }
                 $currentNode['level'] = $currentLevel;
                 $content = '';
-                while ($currentChar !== '~') {
-                    if($currentChar !== ']') {
+                while ($currentChar !== self::START_SYMBOL) {
+                    if($currentChar !== self::END_SYMBOL) {
                         $content .= $currentChar;
                     }
                     $currentChar = $string[++$i];

@@ -6,3 +6,4 @@ export const CONTACT_LINK = "/контакты";
 export const MAIN_LINK = "/";
 export const BOOK_LINK = "/книга";
 export const ADD_BOOK = "/добавить_книгу";
+export const MIND_MAP = "/майнд_карта";
