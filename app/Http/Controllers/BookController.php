@@ -29,81 +29,6 @@ class BookController extends Controller
         return Book::all();
     }
 
-    /**
-     * @param String $text
-     * @return array
-     */
-    private function convertTextToMindMap(String $text)
-    {
-        $specialSign = "~";
-        $openTitle = "[";
-        $closeTitle = "]";
-        $titles = [];
-        $mindMap = [];
-        $countLevel = 0;
-        $currentTitle = "";
-        $currentTitleIndex = 0;
-
-        for($i = 0; $i < strlen($text); $i++)
-        {
-            if(($i !== strlen($text) - 1) && $text[$i] === $specialSign && $text[$i + 1] === $openTitle)
-            {
-                $titleStartPosition = $i;
-                $currentTitle .= $text[$i];
-                $whileCounter = ++$i;
-
-                while($text[$whileCounter] !== $specialSign)
-                {
-                    if($text[$whileCounter] === $openTitle)
-                        $countLevel++;
-
-                    $currentTitle .= $text[$whileCounter++];
-                }
-
-                $currentTitle .= $text[$whileCounter++];
-                $titleEndPosition = $whileCounter;
-                $titles[$currentTitleIndex]['content'] = $currentTitle;
-                $titles[$currentTitleIndex]['startPosition'] = $titleStartPosition;
-                $titles[$currentTitleIndex]['endPosition'] = $titleEndPosition;
-                $titles[$currentTitleIndex]['countLevel'] = $countLevel;
-
-                $countLevel = 0;
-                $i = $titleStartPosition + 1;
-                $currentTitle = "";
-                $currentTitleIndex++;
-            }
-        }
-
-        $mindMap = $this->addChilds($titles);
-
-        return $mindMap;
-    }
-
-    private function addChilds($titles)
-    {
-        $mindMap = [];
-
-        for($i = 0; $i < count($titles); $i++)
-        {
-            $childCount = 0;
-            for($j = 0; $j < count($titles); $j++)
-            {
-                if(
-                    $titles[$i]['countLevel'] === $titles[$j]['countLevel'] - 1 &&
-                    $titles[$i]['startPosition'] < $titles[$j]['startPosition'] &&
-                    $titles[$i]['endPosition'] < $titles[$j]['endPosition']
-                )
-                {
-                    $mindMap[$i] = $titles[$i];
-                    $mindMap[$i]['childs'][$childCount] = $titles[$j];
-                    $childCount++;
-                }
-            }
-        }
-
-        return $mindMap;
-    }
-
     public function uploadPdf($pdf, $title)
     {
         $file_content = file_get_contents($pdf);
@@ -164,6 +89,7 @@ class BookController extends Controller
 
     public function addBook(Request $request)
     {
+        $abstractParser = new \AbstractParser();
         $title = $request->input('title');
         $description = $request->input('desc');
         $author = $request->input('author');
@@ -178,7 +104,7 @@ class BookController extends Controller
         $files = [];
 
         $pdfUploaded = $this->uploadPdf($pdf, $title);
-        $pasedPpfText = $this->convertTextToMindMap($pdfUploaded['text']);
+        $abstractStructure = $abstractParser->getStructure($pdfUploaded['text']);
         $audioFilePath = 'public/listen/' . $title . '(СЛУШАТЬ).mp3';
         $texts = $this->splitText($pdfUploaded['text']);
 
@@ -342,7 +268,6 @@ class BookController extends Controller
 
     /**
      * @param $text
-     * @param $filename
      * @return array
      * @throws ApiException
      * @throws ValidationException
