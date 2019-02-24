@@ -24,12 +24,13 @@ class AbstractParser
             if ($currentChar === self::START_SYMBOL) {
                 $currentNode = array();
                 $currentLevel = 0;
+                $currentLineStart = $i;
                 $currentChar = $string[++$i];
                 while ($currentChar === "[") {
                     $currentChar = $string[++$i];
                     $currentLevel++;
                 }
-                $currentNode['level'] = $currentLevel;
+                $currentNode['depth'] = $currentLevel;
                 $content = '';
                 while ($currentChar !== self::START_SYMBOL) {
                     if($currentChar !== self::END_SYMBOL) {
@@ -37,8 +38,9 @@ class AbstractParser
                     }
                     $currentChar = $string[++$i];
                 }
-                $currentNode['content'] = $content;
+                $currentNode['name'] = $content;
                 $currentNode['id'] = $id++;
+                $currentNode['line'] = $currentLineStart;
                 if (!$this->nodes) {
                     $this->nodes = array();
                     array_push($this->nodes, $currentNode);
@@ -75,7 +77,7 @@ class AbstractParser
         $currentParent = &$this->nodes;
         if($level !== 1) {
             $currentParent = &$this->nodes[count($this->nodes) - 1];
-            while (isset($currentParent['children']) && $currentParent['level'] !== $level - 1) {
+            while (isset($currentParent['children']) && $currentParent['depth'] !== $level - 1) {
                 /* смотрим только левую часть графа */
                 $currentParent = &$currentParent['children'][count($currentParent['children']) - 1];
                 if(!isset($currentParent['children'])) {
@@ -99,35 +101,3 @@ class AbstractParser
         }
     }
 }
-
-//$test1 = '~[1]~';
-//
-//$test2 = '~[1]~
-//    ~[[2]]~';
-//
-//$test3 = '~[1]~
-//    ~[[2]]~
-//    ~[[[3]]]~';
-//
-//
-//$test4 = '~[1]~
-//    ~[[2]]~
-//    ~[[2]]~';
-//
-//$test5 = '~[1]~
-//    ~[[2]]~
-//    ~[[[3]]]~
-//    ~[[4]]~';
-//
-//$test6 = '~[1]~
-//    ~[[2]]~
-//    ~[[[3]]]~
-//    ~[[4]]~
-//    ~[[[5]]]~';
-//
-//$test7 = '~[1]~~[2]~~[3]~~[4]~';
-//
-//$parser = new Parser();
-//$graph = $parser->getStructure($test7);
-//echo print_r($graph);
-

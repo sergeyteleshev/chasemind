@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {fetchMindMapData} from "../actions";
-import MindMap from "../components/pages/MindMap";
+import MindMapComponent from "../components/pages/MindMapComponent";
 
 const mapStateToProps = (state) => {
     return {
@@ -21,6 +21,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-const MindMapContainer = connect(mapStateToProps, mapDispatchToProps)(MindMap);
+const MindMapContainer = connect(mapStateToProps, mapDispatchToProps)(MindMapComponent);
 
 export default MindMapContainer;
