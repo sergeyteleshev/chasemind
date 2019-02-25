@@ -116,6 +116,9 @@ class BookController extends Controller
 
         foreach($texts as $text)
         {
+            $text = str_replace(\AbstractParser::START_SYMBOL,'', $text);
+            $text = str_replace(\AbstractParser::END_SYMBOL,'', $text);
+            $text = str_replace(\AbstractParser::LEVEL_SYMBOL,'', $text);
             $files[] = $this->getAudioGoogle($text)['content'];
         }
 

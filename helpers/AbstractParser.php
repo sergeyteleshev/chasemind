@@ -8,9 +8,9 @@
 
 class AbstractParser
 {
-    const START_SYMBOL = '~';
-    const LEVEL_SYMBOL = '[';
-    const END_SYMBOL = ']';
+    public const START_SYMBOL = '~';
+    public const LEVEL_SYMBOL = '[';
+    public const END_SYMBOL = ']';
 
     protected $nodes;
 

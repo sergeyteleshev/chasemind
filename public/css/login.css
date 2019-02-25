@@ -1587,7 +1587,7 @@ input[type=submit]:hover
 
 .mindMapContainer
 {
-    height: 100vh;
+    height: 70vh;
 }
 
 svg#mindmap {
